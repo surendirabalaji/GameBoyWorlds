@@ -768,21 +768,37 @@ class HarvestMoon3Parser(BaseHarvestMoonStateParser):
             ("item_potato_seeds_below", 63, 40, 17, 39),
             ("screen_top_half", 0, 0, 160, 65),
             ("screen_bottom_half", 0, 75, 160, 65),
+            ("item_storage_sign_below", 70, 40, 20, 40),
+            ("item_storage_sign_left", 70, 55, 35, 25),
+            ("item_storage_sign_right", 55, 55, 30, 25),
+            ("item_morning_market_sign_left", 128, 55, 31, 27),
+            ("npc_kirk_above", 65, 55, 25, 40),
+            ("npc_kirk_mainland_right", 55, 45, 30, 25),
+            ("npc_kirk_mainland_below", 70, 40, 15, 40),
+            ("npc_joe_left", 125, 55, 34, 25),
             ("npc_lukia_right", 38, 55, 34, 25),
             ("dialogue_box_upper_border", 0, 96, 160, 8),
             ("npc_lucus_above", 70, 55, 19, 40),
             ("npc_lucus_left", 70, 55, 34, 25),
             ("npc_lucus_right", 55, 55, 34, 25),
             ("npc_lyla_right", 54, 55, 34, 25),
-            ("item_meal_set_above", 80, 56, 17, 39),
-            ("item_meal_set_below", 80, 40, 17, 39),
+            ("item_meal_set_empty_1", 80, 40, 30, 15),
+            ("item_meal_set_empty_2", 80, 80, 30, 15),
             ("item_coffee_above", 72, 55, 15, 39),
             ("item_coffee_below", 72, 40, 13, 30),
-            ("item_turnip_1", 75, 80, 10, 13),
-            ("item_turnip_2", 75, 80, 10, 13),
             ("entrance", 40, 65, 80, 80),
+            ("top_entrance", 45, 0, 70, 40),
             ("outside_chicken_coop", 45, 40, 45, 35),
             ("outside_hot_spring", 45, 40, 45, 35),
+            ("item_tea_above", 70, 55, 17, 41),
+            ("item_tea_below", 70, 40, 17, 39),
+            ("item_asparagus_seeds_above", 72, 55, 17, 41),
+            ("item_asparagus_seeds_below", 72, 40, 17, 39),
+            ("item_right_cow_stall_block", 115, 25, 45, 25),
+            ("item_right_cow_stall_block_below", 115, 25, 45, 50),
+            ("item_ferry_sign_above", 70, 60, 16, 45),
+            ("item_ferry_sign_left", 70, 60, 30, 28),
+            ("item_fireplace_below", 105, 40, 15, 40),
         ]
         override_multi_targets = {
             "dialogue_bottom_right": [
@@ -791,6 +807,13 @@ class HarvestMoon3Parser(BaseHarvestMoonStateParser):
             ],
             "dialogue_box_bottom": [
                 "reading_secret_garden_sign",
+                "reading_storage_sign",
+                "reading_morning_market_sign",
+                "reading_ferry_sign",
+                "found_secret_savings",
+                "select_tea",
+                "select_asparagus_seeds",
+                "select_coffee",
                 "select_turnip_seeds",
                 "select_turnip_seeds_portion",
                 "select_potato_seeds",
@@ -798,12 +821,44 @@ class HarvestMoon3Parser(BaseHarvestMoonStateParser):
                 "bought_turnip_seeds",
                 "bought_potato_seeds",
                 "select_meal_set",
+                "farm_label",
+                "village_label",
+                "grassland_label",
+                "forest_label",
+                "cliff_label",
+                "mountain_label",
                 "shopping_mall_label",
                 "farmers_union_label",
                 "aquarium_label",
                 "theatre_label",
             ],
+            "item_storage_sign_below": [
+                "next_to_storage_sign_up",
+            ],
+            "item_storage_sign_left": [
+                "next_to_storage_sign_right",
+            ],
+            "item_storage_sign_right": [
+                "next_to_storage_sign_left",
+            ],
+            "item_morning_market_sign_left": [
+                "next_to_morning_market_sign_right",
+            ],
+            "npc_kirk_above": [
+                "next_to_kirk_down",
+            ],
+            "npc_kirk_mainland_right": [
+                "next_to_kirk_mainland_left",
+            ],
+            "npc_kirk_mainland_below": [
+                "next_to_kirk_mainland_up",
+            ],
+            "npc_joe_left": [
+                "next_to_joe_right",
+            ],
             "dialogue_box_upper_border": [
+                "speaking_to_kirk_village",
+                "speaking_to_joe",
                 "speaking_to_lukia",
                 "speaking_to_lucus",
                 "speaking_to_lyla",
@@ -846,24 +901,60 @@ class HarvestMoon3Parser(BaseHarvestMoonStateParser):
                 "outside_chicken_coop_right",
                 "outside_chicken_coop_up",
             ],
-            # "item_meal_set_above": [
-            #     "next_to_meal_set_down",
-            # ],
-            # "item_meal_set_below": [
-            #     "next_to_meal_set_up",
-            # ],
-            # "item_coffee_above": [
-            #     "next_to_coffee_down",
-            # ],
-            # "item_coffee_below": [
-            #     "next_to_coffee_up",
-            # ],
+            "item_meal_set_empty_1": [
+                "bought_meal_set_1",
+            ],
+            "item_meal_set_empty_2": [
+                "bought_meal_set_2",
+            ],
+            "item_coffee_above": [
+                "next_to_coffee_down",
+            ],
+            "item_coffee_below": [
+                "next_to_coffee_up",
+            ],
+            "top_entrance": [
+                "village_entrance",
+            ],
             "entrance": [
+                "village_ferry_entrance",
+                "farm_entrance",
+                "grassland_entrance",
+                "forest_entrance",
+                "cliff_entrance",
+                "mountain_entrance",
                 "shopping_mall_entrance",
                 "farmers_union_entrance",
                 "aquarium_entrance",
                 "theatre_entrance",
                 "hot_spring_entrance",
+            ],
+            "item_tea_above": [
+                "next_to_tea_down",
+            ],
+            "item_tea_below": [
+                "next_to_tea_up",
+            ],
+            "item_asparagus_seeds_above": [
+                "next_to_asparagus_seeds_down",
+            ],
+            "item_asparagus_seeds_below": [
+                "next_to_asparagus_seeds_up",
+            ],
+            "item_right_cow_stall_block": [
+                "filled_right_cow_stall_block",
+            ],
+            "item_right_cow_stall_block_below": [
+                "next_to_right_cow_stall_block_up",
+            ],
+            "item_ferry_sign_above": [
+                "next_to_ferry_sign_down",
+            ],
+            "item_ferry_sign_left": [
+                "next_to_ferry_sign_right",
+            ],
+            "item_fireplace_below": [
+                "next_to_fireplace_up",
             ],
             "outside_hot_spring": [
                 "outside_hot_spring_left",
