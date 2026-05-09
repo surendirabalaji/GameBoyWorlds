@@ -176,6 +176,122 @@ class OutsideMalkinsSubgoal(RegionMatchSubGoal):
     _TARGET_NAME = "outside_malkins"
 
 
+# ============================================================
+# Flourish & Blotts split tasks
+# ============================================================
+
+class EnterFlourishBlottsTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterPhilosophersStoneParser
+    _TERMINATION_NAMED_REGION = "inside_flourish_blotts_area"
+    _TERMINATION_TARGET_NAME = "inside_flourish_blotts"
+
+
+class OutsideFlourishBlottsSubgoal(RegionMatchSubGoal):
+    NAME = "outside_flourish_blotts"
+    _NAMED_REGION = "outside_flourish_blotts_area"
+    _TARGET_NAME = "outside_flourish_blotts"
+
+
+class BuyBooksTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterPhilosophersStoneParser
+    _TERMINATION_NAMED_REGION = "books_received_area"
+    _TERMINATION_TARGET_NAME = "books_received"
+
+
+class TalkToFlourishClerkSubgoal(RegionMatchSubGoal):
+    NAME = "talk_to_flourish_clerk"
+    _NAMED_REGION = "dialogue_box_full"
+    _TARGET_NAME = "talk_to_flourish_clerk"
+
+
+# ============================================================
+# Apothecary split tasks
+# ============================================================
+
+class EnterApothecaryTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterPhilosophersStoneParser
+    _TERMINATION_NAMED_REGION = "inside_apothecary_area"
+    _TERMINATION_TARGET_NAME = "inside_apothecary"
+
+
+class BuyPotionKitTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterPhilosophersStoneParser
+    _TERMINATION_NAMED_REGION = "apothecary_purchase_area"
+    _TERMINATION_TARGET_NAME = "confirm_apothecary_purchase"
+
+
+class OutsideApothecarySubgoal(RegionMatchSubGoal):
+    NAME = "outside_apothecary"
+    _NAMED_REGION = "outside_apothecary_area"
+    _TARGET_NAME = "outside_apothecary"
+
+
+class ApothecaryBuyMenuOpenSubgoal(RegionMatchSubGoal):
+    NAME = "apothecary_buy_menu_open"
+    _NAMED_REGION = "apothecary_menu_area"
+    _TARGET_NAME = "apothecary_buy_menu_open"
+
+
+# ============================================================
+# Cauldron shop tasks
+# ============================================================
+
+class EnterCauldronShopTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterPhilosophersStoneParser
+    _TERMINATION_NAMED_REGION = "inside_cauldron_shop_area"
+    _TERMINATION_TARGET_NAME = "inside_cauldron_shop"
+
+
+class BuyCauldronTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterPhilosophersStoneParser
+    _TERMINATION_NAMED_REGION = "cauldron_purchase_area"
+    _TERMINATION_TARGET_NAME = "confirm_cauldron_purchase"
+
+
+class OutsideCauldronShopSubgoal(RegionMatchSubGoal):
+    NAME = "outside_cauldron_shop"
+    _NAMED_REGION = "outside_cauldron_shop_area"
+    _TARGET_NAME = "outside_cauldron_shop"
+
+
+class CauldronBuyMenuOpenSubgoal(RegionMatchSubGoal):
+    NAME = "cauldron_buy_menu_open"
+    _NAMED_REGION = "cauldron_menu_area"
+    _TARGET_NAME = "cauldron_buy_menu_open"
+
+
+# ============================================================
+# Sugarplums Sweets filler tasks
+# ============================================================
+
+class EnterSugarplumsTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterPhilosophersStoneParser
+    _TERMINATION_NAMED_REGION = "inside_sugarplums_area"
+    _TERMINATION_TARGET_NAME = "inside_sugarplums"
+
+
+class OpenSugarplumsBuyMenuTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterPhilosophersStoneParser
+    _TERMINATION_NAMED_REGION = "sugarplums_menu_area"
+    _TERMINATION_TARGET_NAME = "sugarplums_buy_menu_open"
+
+
+class OutsideSugarplumsSubgoal(RegionMatchSubGoal):
+    NAME = "outside_sugarplums"
+    _NAMED_REGION = "outside_sugarplums_area"
+    _TARGET_NAME = "outside_sugarplums"
+
+
+# ============================================================
+# Talk to Hagrid in Diagon Alley
+# ============================================================
+
+class TalkToHagridDiagonTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterPhilosophersStoneParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_full"
+    _TERMINATION_TARGET_NAME = "hagrid_diagon_dialogue"
+
+
 class InsideMalkinsSubgoal(RegionMatchSubGoal):
     NAME = "inside_malkins"
     _NAMED_REGION = "inside_malkins_area"
@@ -260,3 +376,61 @@ class EnterBattleCosTerminateMetric(RegionMatchTerminationMetric, TerminationMet
     REQUIRED_PARSER = HarryPotterChamberOfSecretsParser
     _TERMINATION_NAMED_REGION = "battle_menu_cos_area"
     _TERMINATION_TARGET_NAME = "in_battle_cos"
+
+
+# ============================================================
+# Burrow room navigation tasks (CoS)
+# ============================================================
+
+class EnterPercyRoomTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterChamberOfSecretsParser
+    _TERMINATION_NAMED_REGION = "percy_room_area"
+    _TERMINATION_TARGET_NAME = "inside_percy_room"
+
+
+class EnterGinnyRoomTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterChamberOfSecretsParser
+    _TERMINATION_NAMED_REGION = "ginny_room_area"
+    _TERMINATION_TARGET_NAME = "inside_ginny_room"
+
+
+class EnterParentsRoomTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterChamberOfSecretsParser
+    _TERMINATION_NAMED_REGION = "parents_room_area"
+    _TERMINATION_TARGET_NAME = "inside_parents_room"
+
+
+class EnterFredGeorgeRoomTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterChamberOfSecretsParser
+    _TERMINATION_NAMED_REGION = "fred_george_room_area"
+    _TERMINATION_TARGET_NAME = "inside_fred_george_room"
+
+
+class EnterRonsRoomTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterChamberOfSecretsParser
+    _TERMINATION_NAMED_REGION = "rons_room_area"
+    _TERMINATION_TARGET_NAME = "inside_rons_room"
+
+
+class TalkToRonBurrowTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterChamberOfSecretsParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_full"
+    _TERMINATION_TARGET_NAME = "talk_to_ron_burrow"
+
+
+class EnterKitchenBurrowTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterChamberOfSecretsParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_full"
+    _TERMINATION_TARGET_NAME = "talk_to_mom_kitchen"
+
+
+class EnterBurrowGardenTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = HarryPotterChamberOfSecretsParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_full"
+    _TERMINATION_TARGET_NAME = "talk_to_ron_garden"
+
+
+class OutsideGardenDoorSubgoal(RegionMatchSubGoal):
+    NAME = "outside_garden_door"
+    _NAMED_REGION = "garden_door_area"
+    _TARGET_NAME = "outside_garden_door"

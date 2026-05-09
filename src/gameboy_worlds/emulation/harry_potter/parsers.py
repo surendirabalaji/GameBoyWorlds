@@ -108,11 +108,24 @@ class HarryPotterChamberOfSecretsParser(_BaseHarryPotterParser):
         ("burrow_arrival_dialogue_area", *DIALOGUE_BOX_REGION),
         ("mrs_weasley_dialogue_area", *DIALOGUE_BOX_REGION),
         ("battle_menu_cos_area", 102, 120, 57, 23),
+        # -- Burrow room navigation tasks --
+        ("percy_room_area", 16, 0, 52, 80),         # termination: inside_percy_room
+        ("ginny_room_area", 74, 0, 36, 57),         # termination: inside_ginny_room
+        ("parents_room_area", 97, 0, 60, 65),       # termination: inside_parents_room
+        ("fred_george_room_area", 16, 32, 16, 84),  # termination: inside_fred_george_room
+        ("rons_room_area", 137, 0, 22, 71),         # termination: inside_rons_room
+        # -- Burrow kitchen / garden quest tasks --
+        ("garden_door_area", 80, 24, 10, 8),        # subgoal: outside_garden_door
     ]
 
     MULTI_TARGETS = {
         "dobby_bed_area": [
             "find_dobby",
+        ],
+        "dialogue_box_full": [
+            "talk_to_ron_burrow",
+            "talk_to_mom_kitchen",
+            "talk_to_ron_garden",
         ],
         "dobby_dialogue_area": [
             "dobby_dialogue_started",
@@ -135,18 +148,39 @@ class HarryPotterChamberOfSecretsParser(_BaseHarryPotterParser):
         "battle_menu_cos_area": [
             "in_battle_cos",
         ],
+        # -- Burrow room navigation tasks --
+        "percy_room_area": [
+            "inside_percy_room",
+        ],
+        "ginny_room_area": [
+            "inside_ginny_room",
+        ],
+        "parents_room_area": [
+            "inside_parents_room",
+        ],
+        "fred_george_room_area": [
+            "inside_fred_george_room",
+        ],
+        "rons_room_area": [
+            "inside_rons_room",
+        ],
+        "garden_door_area": [
+            "outside_garden_door",
+        ],
     }
 
 
 class HarryPotterPhilosophersStoneParser(_BaseHarryPotterParser):
     VARIANT = "harry_potter_philosophers_stone"
+    DIALOGUE_BOX_REGION = (0, 112, 158, 8)
+    """Shared PS dialogue box coordinates in (x, y, width, height) form."""
 
     REGIONS = [
         ("potions_shop_shelf", 7, 26, 105, 21),
     ]
 
     MULTI_TARGET_REGIONS = [
-        ("dialogue_box_full", 31, 111, 129, 10),
+        ("dialogue_box_full", *DIALOGUE_BOX_REGION),
         ("ollivanders_area", 80, 16, 63, 40),
         ("ollivanders_entrance", 70, 21, 23, 21),
         ("wand_dialogue_area", 19, 43, 31, 46),
@@ -172,9 +206,31 @@ class HarryPotterPhilosophersStoneParser(_BaseHarryPotterParser):
         ("inside_malkins_area", 121, 29, 16, 16),      # termination: inside_malkins
         ("robes_menu_area", 0, 0, 143, 29),            # termination: malkins_buy_menu_open
         ("robes_purchase_area", 31, 25, 80, 6),        # confirmation prompt: confirm_robes_purchase
+        # -- Flourish & Blotts split-task assets --
+        ("outside_flourish_blotts_area", 93, 21, 21, 19),  # subgoal: outside_flourish_blotts
+        ("inside_flourish_blotts_area", 54, 16, 91, 49),   # termination: inside_flourish_blotts
+        ("books_received_area", 45, 110, 68, 32),          # termination: books_received
+        # -- Apothecary split-task assets --
+        ("outside_apothecary_area", 95, 31, 20, 18),    # subgoal: outside_apothecary
+        ("inside_apothecary_area", 94, 14, 49, 20),     # termination: inside_apothecary
+        ("apothecary_menu_area", 0, 0, 157, 30),    # terminations: apothecary_buy_menu_open, selected_apothecary_item
+        ("apothecary_purchase_area", 16, 0, 131, 86),   # termination: confirm_apothecary_purchase
+        # -- Cauldron shop assets --
+        ("outside_cauldron_shop_area", 57, 20, 22, 20),     # subgoal: outside_cauldron_shop
+        ("inside_cauldron_shop_area", 17, 2, 54, 20),      # termination: inside_cauldron_shop
+        ("cauldron_menu_area", 0, 0, 115, 32),          # subgoal: cauldron_buy_menu_open
+        ("cauldron_purchase_area", 31, 24, 78, 7),      # termination: confirm_cauldron_purchase
+        # -- Sugarplums Sweets filler tasks --
+        ("outside_sugarplums_area", 55, 22, 22, 20),    # subgoal: outside_sugarplums
+        ("inside_sugarplums_area", 25, 30, 75, 35),     # termination: inside_sugarplums
+        ("sugarplums_menu_area", 0, 0, 130, 30),        # termination: sugarplums_buy_menu_open
     ]
 
     MULTI_TARGETS = {
+        "dialogue_box_full": [
+            "talk_to_flourish_clerk",
+            "hagrid_diagon_dialogue",
+        ],
         "ollivanders_area": [
             "ollivanders_interior",
         ],
@@ -240,5 +296,51 @@ class HarryPotterPhilosophersStoneParser(_BaseHarryPotterParser):
         ],
         "robes_purchase_area": [
             "confirm_robes_purchase",
+        ],
+        # -- Flourish & Blotts split-task assets --
+        "outside_flourish_blotts_area": [
+            "outside_flourish_blotts",
+        ],
+        "inside_flourish_blotts_area": [
+            "inside_flourish_blotts",
+        ],
+        "books_received_area": [
+            "books_received",
+        ],
+        # -- Apothecary split-task assets --
+        "outside_apothecary_area": [
+            "outside_apothecary",
+        ],
+        "inside_apothecary_area": [
+            "inside_apothecary",
+        ],
+        "apothecary_menu_area": [
+            "apothecary_buy_menu_open",
+        ],
+        "apothecary_purchase_area": [
+            "confirm_apothecary_purchase",
+        ],
+        # -- Cauldron shop assets --
+        "outside_cauldron_shop_area": [
+            "outside_cauldron_shop",
+        ],
+        "inside_cauldron_shop_area": [
+            "inside_cauldron_shop",
+        ],
+        "cauldron_menu_area": [
+            "cauldron_buy_menu_open",
+        ],
+        "cauldron_purchase_area": [
+            "confirm_cauldron_purchase",
+        ],
+        # -- Sugarplums Sweets filler tasks --
+        "outside_sugarplums_area": [
+            "outside_sugarplums",
+        ],
+        "inside_sugarplums_area": [
+            "inside_sugarplums",
+        ],
+        "sugarplums_menu_area": [
+            "sugarplums_buy_menu_open",
         ],
     }

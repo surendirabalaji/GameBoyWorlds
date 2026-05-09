@@ -32,6 +32,27 @@ from gameboy_worlds.emulation.harry_potter.test_metrics import (
     SelectRobesTerminateMetric,
     ConfirmRobesPurchaseTerminateMetric,
     OutsideMalkinsSubgoal,
+    # Flourish & Blotts split tasks
+    EnterFlourishBlottsTerminateMetric,
+    OutsideFlourishBlottsSubgoal,
+    BuyBooksTerminateMetric,
+    TalkToFlourishClerkSubgoal,
+    # Apothecary tasks
+    EnterApothecaryTerminateMetric,
+    BuyPotionKitTerminateMetric,
+    OutsideApothecarySubgoal,
+    ApothecaryBuyMenuOpenSubgoal,
+    # Cauldron shop tasks
+    EnterCauldronShopTerminateMetric,
+    BuyCauldronTerminateMetric,
+    OutsideCauldronShopSubgoal,
+    CauldronBuyMenuOpenSubgoal,
+    # Sugarplums Sweets filler tasks
+    EnterSugarplumsTerminateMetric,
+    OpenSugarplumsBuyMenuTerminateMetric,
+    OutsideSugarplumsSubgoal,
+    # Talk to Hagrid in Diagon Alley
+    TalkToHagridDiagonTerminateMetric,
     # CoS Task 1
     FindDobbyTerminateMetric,
     FindDobbySubgoal,
@@ -45,6 +66,16 @@ from gameboy_worlds.emulation.harry_potter.test_metrics import (
     OutsideBurrowAfterCutsceneSubgoal,
     # CoS Task 5
     EnterBattleCosTerminateMetric,
+    # Burrow room navigation tasks (CoS)
+    EnterPercyRoomTerminateMetric,
+    EnterGinnyRoomTerminateMetric,
+    EnterParentsRoomTerminateMetric,
+    EnterFredGeorgeRoomTerminateMetric,
+    EnterRonsRoomTerminateMetric,
+    TalkToRonBurrowTerminateMetric,
+    EnterKitchenBurrowTerminateMetric,
+    EnterBurrowGardenTerminateMetric,
+    OutsideGardenDoorSubgoal,
 )
 
 
@@ -156,6 +187,56 @@ class ConfirmRobesPurchaseTestTracker(HarryPotterTestTracker):
     SUBGOAL_METRIC = DummySubGoalMetric
 
 
+# Flourish & Blotts split tasks
+class EnterFlourishBlottsTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = EnterFlourishBlottsTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([OutsideFlourishBlottsSubgoal])
+
+
+class BuyBooksTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BuyBooksTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([TalkToFlourishClerkSubgoal])
+
+
+# Apothecary tasks
+class EnterApothecaryTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = EnterApothecaryTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([OutsideApothecarySubgoal])
+
+
+class BuyPotionKitTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BuyPotionKitTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([ApothecaryBuyMenuOpenSubgoal])
+
+
+# Cauldron shop tasks
+class EnterCauldronShopTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = EnterCauldronShopTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([OutsideCauldronShopSubgoal])
+
+
+class BuyCauldronTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BuyCauldronTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([CauldronBuyMenuOpenSubgoal])
+
+
+# Sugarplums Sweets filler tasks
+class EnterSugarplumsTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = EnterSugarplumsTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([OutsideSugarplumsSubgoal])
+
+
+class OpenSugarplumsBuyMenuTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = OpenSugarplumsBuyMenuTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+# Talk to Hagrid in Diagon Alley
+class TalkToHagridDiagonTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = TalkToHagridDiagonTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
 # CoS Task 1
 class FindDobbyTestTracker(HarryPotterTestTracker):
     TERMINATION_TRUNCATION_METRIC = FindDobbyTerminateMetric
@@ -184,3 +265,44 @@ class EnterBurrowTestTracker(HarryPotterTestTracker):
 class EnterBattleCosTestTracker(HarryPotterTestTracker):
     TERMINATION_TRUNCATION_METRIC = EnterBattleCosTerminateMetric
     SUBGOAL_METRIC = DummySubGoalMetric
+
+
+# Burrow room navigation tasks (CoS)
+class EnterPercyRoomTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = EnterPercyRoomTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class EnterGinnyRoomTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = EnterGinnyRoomTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class EnterParentsRoomTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = EnterParentsRoomTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class EnterFredGeorgeRoomTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = EnterFredGeorgeRoomTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class EnterRonsRoomTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = EnterRonsRoomTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class TalkToRonBurrowTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = TalkToRonBurrowTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class EnterKitchenBurrowTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = EnterKitchenBurrowTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class EnterBurrowGardenTestTracker(HarryPotterTestTracker):
+    TERMINATION_TRUNCATION_METRIC = EnterBurrowGardenTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([OutsideGardenDoorSubgoal])
