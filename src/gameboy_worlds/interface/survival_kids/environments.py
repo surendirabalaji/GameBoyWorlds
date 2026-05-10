@@ -1,4 +1,4 @@
-from gameboy_worlds.emulation.survival_kids_1.trackers import SurvivalKidsTracker
+from gameboy_worlds.emulation.survival_kids.trackers import SurvivalKidsTracker
 from gameboy_worlds.interface.environment import DummyEnvironment
 
 

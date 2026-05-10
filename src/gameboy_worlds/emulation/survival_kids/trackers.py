@@ -1,7 +1,7 @@
-"""State trackers for Survival Kids 1."""
+"""State trackers for Survival Kids."""
 
 from gameboy_worlds.emulation.tracker import StateTracker
-from gameboy_worlds.emulation.survival_kids_1.base_metrics import (
+from gameboy_worlds.emulation.survival_kids.base_metrics import (
     CoreSurvivalKidsMetrics,
     SurvivalKidsExploreMetrics,
     SurvivalKidsVitalMetrics,
@@ -18,3 +18,4 @@ class SurvivalKidsVitalsTracker(SurvivalKidsTracker):
     def start(self):
         super().start()
         self.metric_classes.extend([SurvivalKidsVitalMetrics])
+

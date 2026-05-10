@@ -1,5 +1,5 @@
 """
-Survival Kids 1 (GBC, 1999 Konami) game state parser.
+Survival Kids game state parsers.
 """
 
 import os
@@ -109,3 +109,13 @@ class SurvivalKidsParser(StateParser):
 
     def __repr__(self) -> str:
         return f"<SurvivalKidsParser(variant={self.VARIANT})>"
+
+
+class SurvivalKids2Parser(SurvivalKidsParser):
+    """Game state parser for Survival Kids 2 (GBC)."""
+
+    VARIANT = "survival_kids_2"
+
+    def __repr__(self) -> str:
+        return f"<SurvivalKids2Parser(variant={self.VARIANT})>"
+

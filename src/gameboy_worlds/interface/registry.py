@@ -30,8 +30,7 @@ from gameboy_worlds.interface.hamtaro import registry as hamtaro_registry
 from gameboy_worlds.interface.harvest_moon import registry as harvest_moon_registry
 from gameboy_worlds.interface.harry_potter import registry as harry_potter_registry
 from gameboy_worlds.interface.bomberman import registry as bomberman_registry
-from gameboy_worlds.interface.survival_kids_1 import registry as survival_kids_1_registry
-from gameboy_worlds.interface.survival_kids_2 import registry as survival_kids_2_registry
+from gameboy_worlds.interface.survival_kids import registry as survival_kids_registry
 
 _project_parameters = load_parameters()
 
@@ -44,8 +43,7 @@ _game_registries = [
     harvest_moon_registry,
     harry_potter_registry,
     bomberman_registry,
-    survival_kids_1_registry,
-    survival_kids_2_registry,
+    survival_kids_registry,
 ]
 
 AVAILABLE_ENVIRONMENTS: Dict[str, Dict[str, Type[Environment]]] = {}

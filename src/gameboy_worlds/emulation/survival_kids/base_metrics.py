@@ -1,11 +1,11 @@
-"""Base metric groups for Survival Kids 1."""
+"""Base metric groups for Survival Kids."""
 
 from typing import Any, Dict, Optional, Set
 
 import numpy as np
 
 from gameboy_worlds.emulation.tracker import MetricGroup
-from gameboy_worlds.emulation.survival_kids_1.parsers import (
+from gameboy_worlds.emulation.survival_kids.parsers import (
     AgentState,
     SurvivalKidsParser,
 )
@@ -177,3 +177,4 @@ class SurvivalKidsVitalMetrics(MetricGroup):
             "times_starving": self._times_starving,
             "times_dehydrated": self._times_dehydrated,
         }
+
