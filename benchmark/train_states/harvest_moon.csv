@@ -8,7 +8,7 @@ harvest_moon_1,farming,Tending to crops at various stages,"water_turnips"
 harvest_moon_1,lost_bird_mission,Mission to help friend find lost bird,"lost_bird"
 harvest_moon_1,earthquake_event,After an earthquake event,"earthquake"
 harvest_moon_1,harvest_spirit,Interaction with harvest spirit,"picked_apple"
-harvest_moon_1,picinic,Attending a picinic event,picinic
+harvest_moon_1,picnic,Attending a picnic event,picnic
 harvest_moon_2,on_farm,On the farm,"wandering,outside_barns, outside_home"
 harvest_moon_2,at_home,Inside the farmhouse,at_home
 harvest_moon_2,shopping_area,In the shopping area,"shopping_area, shopping_area_left,shopping_area_low"
