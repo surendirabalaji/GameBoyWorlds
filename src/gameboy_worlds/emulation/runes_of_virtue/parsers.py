@@ -189,22 +189,39 @@ class RunesOfVirtue1StateParser(RunesOfVirtueStateParser):
     - menu_indicator: A region (y=30-50, x=20-60) that is uniformly white when the
       inventory/status menu is open (triggered by START), and contains game world
       content during normal gameplay.
+    - dialog_indicator: A multi-target dialogue box region shared by NPC dialogue
+      targets with the same screen coordinates.
     """
 
     REGIONS = [
         ("menu_indicator", 20, 30, 40, 20),
-        ("king_dialog_indicator", 5, 100, 115, 40),
-        ("chuckles_dialog_indicator", 5, 90, 115, 40),
-        ("gnu_gnu_1_dialog_indicator", 5, 90, 115, 40),
-        ("gnu_gnu_2_dialog_indicator", 5, 90, 115, 40),
-        ("sherry_dialog_indicator", 5, 90, 115, 40),
-        ("cave_of_deceit_indicator", 0, 0, 100, 70),
-        ("telescope_view_indicator", 40, 40, 80, 60),
-        ("death_screen_indicator", 60, 100, 30, 30),
     ]
     """ Additional named screen regions specific to Runes of Virtue 1.
     - menu_indicator: A patch above the dialogue box that goes white when the inventory/status menu opens. Open the START menu to capture this.
     """
+
+    MULTI_TARGET_REGIONS = [
+        ("king_dialog_indicator", 5, 100, 115, 40),
+        ("dialog_indicator", 5, 90, 115, 40),
+        ("cave_of_deceit_indicator", 0, 0, 100, 70),
+        ("telescope_view_indicator", 40, 40, 80, 60),
+        ("death_screen_indicator", 60, 100, 30, 30),
+    ]
+    """ Additional multi-target named screen regions specific to Runes of Virtue 1. """
+
+    MULTI_TARGETS = {
+        "king_dialog_indicator": ["king_dialog"],
+        "dialog_indicator": [
+            "chuckles_dialog",
+            "gnu_gnu_1_dialog",
+            "gnu_gnu_2_dialog",
+            "sherry_dialog",
+        ],
+        "cave_of_deceit_indicator": ["cave_of_deceit"],
+        "telescope_view_indicator": ["telescope_view"],
+        "death_screen_indicator": ["death_screen"],
+    }
+    """ Multi-target names for Runes of Virtue 1 regions. """
 
     def __init__(
         self,
@@ -217,31 +234,41 @@ class RunesOfVirtue1StateParser(RunesOfVirtueStateParser):
         regions = _get_proper_regions(
             override_regions=override_regions, base_regions=self.REGIONS
         )
+        multi_target_regions = _get_proper_regions(
+            override_regions=override_multi_target_regions,
+            base_regions=self.MULTI_TARGET_REGIONS,
+        )
+        multi_targets = {k: list(v) for k, v in self.MULTI_TARGETS.items()}
+        for key in override_multi_targets:
+            if key in multi_targets:
+                multi_targets[key].extend(override_multi_targets[key])
+            else:
+                multi_targets[key] = list(override_multi_targets[key])
         super().__init__(
             variant="runes_of_virtue_1",
             pyboy=pyboy,
             parameters=parameters,
             additional_named_screen_region_details=regions,
-            additional_multi_target_named_screen_region_details=override_multi_target_regions,
-            override_multi_targets=override_multi_targets,
+            additional_multi_target_named_screen_region_details=multi_target_regions,
+            override_multi_targets=multi_targets,
         )
 
-    _DIALOG_INDICATORS = (
-        "king_dialog_indicator",
-        "chuckles_dialog_indicator",
-        "gnu_gnu_1_dialog_indicator",
-        "gnu_gnu_2_dialog_indicator",
-        "sherry_dialog_indicator",
+    _DIALOG_TARGETS = (
+        ("king_dialog_indicator", "king_dialog"),
+        ("dialog_indicator", "chuckles_dialog"),
+        ("dialog_indicator", "gnu_gnu_1_dialog"),
+        ("dialog_indicator", "gnu_gnu_2_dialog"),
+        ("dialog_indicator", "sherry_dialog"),
     )
-    """ Named screen regions that, when matching their captured target, indicate an NPC dialogue overlay is visible. """
+    """ Multi-target screen regions that indicate an NPC dialogue overlay is visible. """
 
     def is_in_menu(self, current_screen: np.ndarray) -> bool:
         return self.named_region_matches_target(current_screen, "menu_indicator")
 
     def is_in_dialogue(self, current_screen: np.ndarray) -> bool:
         return any(
-            self.named_region_matches_target(current_screen, name)
-            for name in self._DIALOG_INDICATORS
+            self.named_region_matches_multi_target(current_screen, name, target_name)
+            for name, target_name in self._DIALOG_TARGETS
         )
 
 
@@ -252,17 +279,27 @@ class RunesOfVirtue2StateParser(RunesOfVirtueStateParser):
     Screen regions:
     - menu_indicator: A first-pass region matching the RoV1 menu detector. Recapture
       this for RoV2 before relying on the task.
-    - book_open_indicator: Full-screen target for the opened-book screen. This can be
+    - book_open_indicator: Full-screen multi-target for the opened-book screen. This can be
       narrowed after the capture is verified against the ROM.
-    - nystul_dialog_indicator: The left dialogue panel when speaking to Nystul.
+    - nystul_dialog_indicator: The left multi-target dialogue panel when speaking to Nystul.
     """
 
     REGIONS: List[Tuple[str, int, int, int, int]] = [
         ("menu_indicator", 20, 30, 40, 20),
+    ]
+    """ Additional named screen regions specific to Runes of Virtue 2. """
+
+    MULTI_TARGET_REGIONS: List[Tuple[str, int, int, int, int]] = [
         ("book_open_indicator", 0, 0, 160, 144),
         ("nystul_dialog_indicator", 5, 5, 135, 136),
     ]
-    """ Additional named screen regions specific to Runes of Virtue 2. """
+    """ Additional multi-target named screen regions specific to Runes of Virtue 2. """
+
+    MULTI_TARGETS = {
+        "book_open_indicator": ["book_open"],
+        "nystul_dialog_indicator": ["nystul_dialog"],
+    }
+    """ Multi-target names for Runes of Virtue 2 regions. """
 
     def __init__(
         self,
@@ -275,17 +312,27 @@ class RunesOfVirtue2StateParser(RunesOfVirtueStateParser):
         regions = _get_proper_regions(
             override_regions=override_regions, base_regions=self.REGIONS
         )
+        multi_target_regions = _get_proper_regions(
+            override_regions=override_multi_target_regions,
+            base_regions=self.MULTI_TARGET_REGIONS,
+        )
+        multi_targets = {k: list(v) for k, v in self.MULTI_TARGETS.items()}
+        for key in override_multi_targets:
+            if key in multi_targets:
+                multi_targets[key].extend(override_multi_targets[key])
+            else:
+                multi_targets[key] = list(override_multi_targets[key])
         super().__init__(
             variant="runes_of_virtue_2",
             pyboy=pyboy,
             parameters=parameters,
             additional_named_screen_region_details=regions,
-            additional_multi_target_named_screen_region_details=override_multi_target_regions,
-            override_multi_targets=override_multi_targets,
+            additional_multi_target_named_screen_region_details=multi_target_regions,
+            override_multi_targets=multi_targets,
         )
 
-    _DIALOG_INDICATORS = ("nystul_dialog_indicator",)
-    """ Named screen regions that indicate an NPC dialogue overlay is visible. """
+    _DIALOG_TARGETS = (("nystul_dialog_indicator", "nystul_dialog"),)
+    """ Multi-target screen regions that indicate an NPC dialogue overlay is visible. """
 
     def is_in_menu(self, current_screen: np.ndarray) -> bool:
         if "menu_indicator" not in self.named_screen_regions:
@@ -294,6 +341,6 @@ class RunesOfVirtue2StateParser(RunesOfVirtueStateParser):
 
     def is_in_dialogue(self, current_screen: np.ndarray) -> bool:
         return any(
-            self.named_region_matches_target(current_screen, name)
-            for name in self._DIALOG_INDICATORS
+            self.named_region_matches_multi_target(current_screen, name, target_name)
+            for name, target_name in self._DIALOG_TARGETS
         )
