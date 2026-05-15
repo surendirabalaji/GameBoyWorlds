@@ -21,3 +21,6 @@ harvest_moon_3_rom_data_path: "harvest_moon/harvest_moon_3/"
 bomberman_pocket_rom_data_path: "bomberman/bomberman_pocket/"
 bomberman_quest_rom_data_path: "bomberman/bomberman_quest/"
 bomberman_max_rom_data_path: "bomberman/bomberman_max/"
+
+survival_kids_1_rom_data_path: "survival_kids/survival_kids_1/"
+survival_kids_2_rom_data_path: "survival_kids/survival_kids_2/"

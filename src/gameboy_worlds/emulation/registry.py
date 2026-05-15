@@ -32,7 +32,7 @@ from gameboy_worlds.emulation.harvest_moon import registry as harvest_moon_regis
 from gameboy_worlds.emulation.runes_of_virtue import registry as runes_of_virtue_registry
 from gameboy_worlds.emulation.harry_potter import registry as harry_potter_registry
 from gameboy_worlds.emulation.bomberman import registry as bomberman_registry
-
+from gameboy_worlds.emulation.survival_kids import registry as survival_kids_registry
 
 _game_registries = [
     hamtaro_registry,
@@ -41,6 +41,7 @@ _game_registries = [
     sword_of_hope_registry,
     deja_vu_registry,
     harvest_moon_registry,
+    survival_kids_registry,
     runes_of_virtue_registry,
     harry_potter_registry,
     bomberman_registry,
