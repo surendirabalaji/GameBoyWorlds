@@ -207,7 +207,7 @@ class HighLevelAction(ABC):
 
     @staticmethod
     @abstractmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name(**kwargs) -> str:
         """
         Returns a human readable name for the high level action with the given parameters.
 
@@ -294,9 +294,9 @@ class LowLevelAction(HighLevelAction):
         return [{"low_level_action": action} for action in LowLevelActions]
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name(low_level_action: LowLevelActions) -> str:
         action = (
-            str(kwargs["low_level_action"])
+            str(low_level_action)
             .replace("LowLevelActions.PRESS_ARROW_", "")
             .replace("LowLevelActions.PRESS_BUTTON_", "")
         )
@@ -352,9 +352,9 @@ class LowLevelPlayAction(HighLevelAction):
         return [{"low_level_action": action} for action in self.allowed_actions]
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name(low_level_action: LowLevelActions) -> str:
         action = (
-            str(kwargs["low_level_action"])
+            str(low_level_action)
             .replace("LowLevelActions.PRESS_ARROW_", "")
             .replace("LowLevelActions.PRESS_BUTTON_", "")
         )
@@ -425,6 +425,5 @@ class RandomPlayAction(HighLevelAction):
         return [{"kind": "move"}, {"kind": "press"}]
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        kind = kwargs["kind"]
+    def get_action_name(kind: str) -> str:
         return kind

@@ -106,8 +106,8 @@ class MoveAction(HighLevelAction):
         return transition_state_dicts, action_success
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"Move {kwargs['direction']} {kwargs['steps']}"
+    def get_action_name(direction: str, steps: int) -> str:
+        return f"Move {direction} {steps}"
 
 
 class OpenInventoryAction(SingleHighLevelAction):
@@ -127,7 +127,7 @@ class OpenInventoryAction(SingleHighLevelAction):
         return [report], 1 if state == IN_INVENTORY else 0
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "OpenInventory"
 
 
@@ -148,7 +148,7 @@ class CloseInventoryAction(SingleHighLevelAction):
         return [report], 1 if state != IN_INVENTORY else 0
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "CloseInventory"
 
 
@@ -169,7 +169,7 @@ class SkipDialogueAction(SingleHighLevelAction):
         return [report], 0 if state != IN_DIALOGUE else 1
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "SkipDialogue"
 
 
@@ -190,7 +190,7 @@ class InteractAction(SingleHighLevelAction):
         return [report], 1 if state != FREE_ROAM else 0
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "Interact"
 
 
@@ -214,5 +214,5 @@ class UseOtherInventoryItemAction(SingleHighLevelAction):
         return [report], 0
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "UseOtherInventoryItem"

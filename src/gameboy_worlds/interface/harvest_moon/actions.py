@@ -72,7 +72,7 @@ class PassDialogueAction(SingleHighLevelAction):
         return [report], action_success
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "PassDialogue"
 
 
@@ -129,7 +129,7 @@ class InteractAction(SingleHighLevelAction):
         ], action_success  # 0 means something maybe happened. 1 means def happened.
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "Interact"
 
 
@@ -344,8 +344,8 @@ class MoveStepsAction(BaseMovementAction):
         return super().is_valid(**kwargs)
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"Move {kwargs['direction']} {kwargs['steps']}"
+    def get_action_name(direction: str, steps: int) -> str:
+        return f"Move {direction} {steps}"
 
 
 class MoveGridAction(BaseMovementAction):
@@ -429,6 +429,6 @@ class MoveGridAction(BaseMovementAction):
         return super().is_valid()
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"MoveGrid ({kwargs['x_steps']}, {kwargs['y_steps']})"
+    def get_action_name(x_steps: int, y_steps: int) -> str:
+        return f"MoveGrid ({x_steps}, {y_steps})"
 

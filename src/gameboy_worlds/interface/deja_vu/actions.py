@@ -37,7 +37,7 @@ class TickUntilStable(SingleHighLevelAction):
         return [self._state_tracker.report()], -1
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "TickUntilStable"
 
 
@@ -64,7 +64,7 @@ class MoveCursor(SingleHighLevelAction):
         return [self._state_tracker.report()], 0 if frame_changed(prev, curr) else -1
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name(**kwargs) -> str:
         return f"MoveCursor {kwargs.get('direction', '')}"
 
 
@@ -104,8 +104,8 @@ class MoveGrid(HighLevelAction):
         return reports, 0
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"MoveGrid ({kwargs['x_steps']}, {kwargs['y_steps']})"
+    def get_action_name(x_steps: int, y_steps: int) -> str:
+        return f"MoveGrid ({x_steps}, {y_steps})"
 
 
 class OpenButtonMenu(SingleHighLevelAction):
@@ -123,7 +123,7 @@ class OpenButtonMenu(SingleHighLevelAction):
         return [self._state_tracker.report()], 0
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "OpenButtonMenu"
 
 
@@ -142,7 +142,7 @@ class CloseButtonMenu(SingleHighLevelAction):
         return [self._state_tracker.report()], 0
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "CloseButtonMenu"
 
 
@@ -161,7 +161,7 @@ class SelectMenuOption(SingleHighLevelAction):
         return [self._state_tracker.report()], 0
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "SelectMenuOption"
 
 
@@ -180,7 +180,7 @@ class AdvanceDialogue(SingleHighLevelAction):
         return [self._state_tracker.report()], 0
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "AdvanceDialogue"
 
 
@@ -238,7 +238,7 @@ class InteractAction(SingleHighLevelAction):
         return [self._state_tracker.report()], action_success
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "Interact"
 
 
@@ -491,8 +491,8 @@ class MoveStepsAction(BaseMovementAction):
         return super().is_valid(**kwargs)
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"Move {kwargs['direction']} {kwargs['steps']}"
+    def get_action_name(direction: str, steps: int) -> str:
+        return f"Move {direction} {steps}"
 
 
 class MoveGridAction(BaseMovementAction):
@@ -555,8 +555,8 @@ class MoveGridAction(BaseMovementAction):
         return super().is_valid()
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"MoveGrid ({kwargs['x_steps']}, {kwargs['y_steps']})"
+    def get_action_name(x_steps: int, y_steps: int) -> str:
+        return f"MoveGrid ({x_steps}, {y_steps})"
 
 
 class MenuAction(HighLevelAction):
@@ -614,8 +614,8 @@ class MenuAction(HighLevelAction):
         return [self._state_tracker.report()], action_success
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"Menu {kwargs['menu_action']}"
+    def get_action_name(menu_action: str) -> str:
+        return f"Menu {menu_action}"
 
 
 class OpenMenuAction(HighLevelAction):
@@ -691,8 +691,8 @@ class OpenMenuAction(HighLevelAction):
         return state_reports, -1
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"OpenMenu {kwargs['option']}"
+    def get_action_name(option: str) -> str:
+        return f"OpenMenu {option}"
 
 
 class PuzzleAction(HighLevelAction):
@@ -750,5 +750,5 @@ class PuzzleAction(HighLevelAction):
         return [self._state_tracker.report()], action_success
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"Puzzle {kwargs['puzzle_action']}"
+    def get_action_name(puzzle_action: str) -> str:
+        return f"Puzzle {puzzle_action}"

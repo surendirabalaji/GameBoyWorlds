@@ -64,7 +64,7 @@ class PassDialogueAction(SingleHighLevelAction):
         return [report], action_success
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "PassDialogue"
 
 
@@ -111,7 +111,7 @@ class InteractAction(SingleHighLevelAction):
         return [report], action_success
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "Interact"
 
 
@@ -155,7 +155,7 @@ class OpenMenuAction(SingleHighLevelAction):
         return [report], action_success
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "OpenMenu"
 
 
@@ -325,8 +325,8 @@ class MoveStepsAction(BaseMovementAction):
         return super().is_valid(**kwargs)
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"Move {kwargs['direction']} {kwargs['steps']}"
+    def get_action_name(direction: str, steps: int) -> str:
+        return f"Move {direction} {steps}"
 
 
 class MenuAction(HighLevelAction):
@@ -397,5 +397,5 @@ class MenuAction(HighLevelAction):
         return [self._state_tracker.report()], action_success
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"Menu {kwargs['menu_action']}"
+    def get_action_name(menu_action: str) -> str:
+        return f"Menu {menu_action}"

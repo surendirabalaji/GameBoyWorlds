@@ -96,8 +96,8 @@ class _MoveAction(HighLevelAction):
         return transition_state_dicts, action_success
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"Move {kwargs['direction']} {kwargs['steps']}"
+    def get_action_name(direction: str, steps: int) -> str:
+        return f"Move {direction} {steps}"
 
 
 class _MetricGatedSingleAction(SingleHighLevelAction):
@@ -140,7 +140,7 @@ class BombermanMaxPlaceBombAction(_MetricGatedSingleAction):
     _REQUIRED_METRICS_FALSE = [MAX_MENU_METRIC, MAX_BATTLE_METRIC]
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "PlaceBomb"
 
 
@@ -151,7 +151,7 @@ class BombermanMaxKickBombAction(_MetricGatedSingleAction):
     _REQUIRED_METRICS_FALSE = [MAX_MENU_METRIC, MAX_BATTLE_METRIC]
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "KickBomb"
 
 
@@ -167,7 +167,7 @@ class BombermanMaxOpenMenuAction(_MetricGatedSingleAction):
         return [report], 0 if self._state_tracker.get_episode_metric(MAX_MENU_METRIC) else -1
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "OpenMenu"
 
 
@@ -183,7 +183,7 @@ class BombermanMaxCloseMenuAction(_MetricGatedSingleAction):
         return [report], 0 if not self._state_tracker.get_episode_metric(MAX_MENU_METRIC) else -1
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "CloseMenu"
 
 
@@ -225,8 +225,8 @@ class BombermanMaxNavigateMenuAction(SingleHighLevelAction):
         return [report], 0 if frame_changed(previous, frames[-1]) else -1
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"NavigateMenu {kwargs['menu_action']}"
+    def get_action_name(menu_action: str) -> str:
+        return f"NavigateMenu {menu_action}"
 
 
 class BombermanMaxBattleAction(SingleHighLevelAction):
@@ -266,8 +266,8 @@ class BombermanMaxBattleAction(SingleHighLevelAction):
         return [report], 0 if frame_changed(previous, frames[-1]) else -1
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"Battle {kwargs['battle_action']}"
+    def get_action_name(battle_action: str) -> str:
+        return f"Battle {battle_action}"
 
 
 class BombermanPocketMoveAction(_MoveAction):
@@ -287,7 +287,7 @@ class BombermanPocketJumpAction(_MetricGatedSingleAction):
     _REQUIRED_METRICS_FALSE = [POCKET_MENU_METRIC]
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "Jump"
 
 
@@ -298,7 +298,7 @@ class BombermanPocketPlaceBombAction(_MetricGatedSingleAction):
     _REQUIRED_METRICS_FALSE = [POCKET_MENU_METRIC]
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "PlaceBomb"
 
 
@@ -314,7 +314,7 @@ class BombermanPocketOpenPauseMenuAction(_MetricGatedSingleAction):
         return [report], 0 if self._state_tracker.get_episode_metric(POCKET_MENU_METRIC) else -1
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "OpenPauseMenu"
 
 
@@ -330,7 +330,7 @@ class BombermanPocketClosePauseMenuAction(_MetricGatedSingleAction):
         return [report], 0 if not self._state_tracker.get_episode_metric(POCKET_MENU_METRIC) else -1
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "ClosePauseMenu"
 
 
@@ -353,7 +353,7 @@ class BombermanQuestPlaceBombAction(_MetricGatedSingleAction):
     _REQUIRED_METRICS_FALSE = [QUEST_MENU_METRIC, QUEST_BATTLE_METRIC]
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "PlaceBomb"
 
 
@@ -364,7 +364,7 @@ class BombermanQuestUseBButtonItemAction(_MetricGatedSingleAction):
     _REQUIRED_METRICS_FALSE = [QUEST_MENU_METRIC, QUEST_BATTLE_METRIC]
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "UseBButtonItem"
 
 
@@ -380,7 +380,7 @@ class BombermanQuestOpenMenuAction(_MetricGatedSingleAction):
         return [report], 0 if self._state_tracker.get_episode_metric(QUEST_MENU_METRIC) else -1
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "OpenMenu"
 
 
@@ -396,7 +396,7 @@ class BombermanQuestCloseMenuAction(_MetricGatedSingleAction):
         return [report], 0 if not self._state_tracker.get_episode_metric(QUEST_MENU_METRIC) else -1
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "CloseMenu"
 
 

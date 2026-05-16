@@ -72,7 +72,7 @@ class PassDialogueAction(SingleHighLevelAction):
         return [report], action_success
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "PassDialogue"
 
 
@@ -129,7 +129,7 @@ class InteractAction(SingleHighLevelAction):
         ], action_success  # 0 means something maybe happened. 1 means def happened.
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
+    def get_action_name() -> str:
         return "Interact"
 
 
@@ -458,8 +458,8 @@ class MoveStepsAction(BaseMovementAction):
         return super().is_valid(**kwargs)
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"Move {kwargs['direction']} {kwargs['steps']}"
+    def get_action_name(direction: str, steps: int) -> str:
+        return f"Move {direction} {steps}"
 
 
 class MoveGridAction(BaseMovementAction):
@@ -543,8 +543,8 @@ class MoveGridAction(BaseMovementAction):
         return super().is_valid()
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"MoveGrid ({kwargs['x_steps']}, {kwargs['y_steps']})"
+    def get_action_name(x_steps: int, y_steps: int) -> str:
+        return f"MoveGrid ({x_steps}, {y_steps})"
 
 
 class MenuAction(HighLevelAction):
@@ -621,8 +621,8 @@ class MenuAction(HighLevelAction):
         return [self._state_tracker.report()], action_success
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"Menu {kwargs['menu_action']}"
+    def get_action_name(menu_action: str) -> str:
+        return f"Menu {menu_action}"
 
 
 class OpenMenuAction(HighLevelAction):
@@ -703,8 +703,8 @@ class OpenMenuAction(HighLevelAction):
         return ret_states, 0
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"OpenMenu {kwargs['option']}"
+    def get_action_name(option: str) -> str:
+        return f"OpenMenu {option}"
 
 
 class BattleMenuAction(HighLevelAction):
@@ -863,8 +863,8 @@ class BattleMenuAction(HighLevelAction):
         return state_reports, success
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"BattleMenu {kwargs['option']}"
+    def get_action_name(option: str) -> str:
+        return f"BattleMenu {option}"
 
 
 class PickAttackAction(HighLevelAction):
@@ -940,5 +940,5 @@ class PickAttackAction(HighLevelAction):
         return state_reports, 0
 
     @staticmethod
-    def get_action_name(kwargs) -> str:
-        return f"PickAttack {kwargs['option']}"
+    def get_action_name(option: int) -> str:
+        return f"PickAttack {option}"
