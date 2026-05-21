@@ -6,9 +6,11 @@ from gameboy_worlds.emulation.survival_kids.base_metrics import (
     CoreSurvivalKidsMetrics,
     SurvivalKidsExploreMetrics,
     SurvivalKidsHudMetrics,
+    SurvivalKidsOCRMetric,
     SurvivalKidsVitalMetrics,
 )
 from gameboy_worlds.emulation.survival_kids.test_metrics import (
+    AfterFillingWaterTerminateMetric,
     BagIconTerminateMetric,
     AnimalKilledTerminateMetric,
     CanteenActionMenuTerminateMetric,
@@ -18,22 +20,39 @@ from gameboy_worlds.emulation.survival_kids.test_metrics import (
     CanteenTakeLeaveMenuTerminateMetric,
     CanteenUseSelectedTerminateMetric,
     Chapter1PathClearedTerminateMetric,
+    DayReferenceTerminateMetric,
+    DrinkWaterTerminateMetric,
+    EnteredShelterTerminateMetric,
     FeatherTakeLeaveMenuTerminateMetric,
+    FireLitTerminateMetric,
+    FoundRiverTerminateMetric,
     GameViewportChangedTerminateMetric,
+    GotTheBrdfeatherTerminateMetric,
+    GotTheStickTerminateMetric,
+    GotTheTreeBarkTerminateMetric,
+    GotTheWaterTerminateMetric,
     HpChangedTerminateMetric,
     HungerChangedTerminateMetric,
     InventoryOpenTerminateMetric,
+    KindlingMergedTerminateMetric,
     KnifeChosenTerminateMetric,
     KnifeEquippedTerminateMetric,
+    MergeConfirmTerminateMetric,
+    MergeMenuTerminateMetric,
     MeatActionMenuTerminateMetric,
     MeatEatenDialogueTerminateMetric,
     MeatEatSelectedTerminateMetric,
+    NightReferenceTerminateMetric,
     PickupItemDialogueTerminateMetric,
     PathAfterBlockingGrassTerminateMetric,
+    ResolveHungerTerminateMetric,
+    SelectKindlingTerminateMetric,
+    SelectTakeTerminateMetric,
     StaminaChangedTerminateMetric,
     StatusBarChangedTerminateMetric,
     TakeLeaveMenuTerminateMetric,
     ThirstChangedTerminateMetric,
+    WaterMenuOpenTerminateMetric,
 )
 
 
@@ -55,7 +74,13 @@ class SurvivalKidsHudTracker(SurvivalKidsTracker):
         self.metric_classes.extend([SurvivalKidsHudMetrics])
 
 
-class SurvivalKidsTestTracker(TestTrackerMixin, SurvivalKidsHudTracker):
+class SurvivalKidsOCRTracker(SurvivalKidsHudTracker):
+    def start(self):
+        super().start()
+        self.metric_classes.extend([SurvivalKidsOCRMetric])
+
+
+class SurvivalKidsTestTracker(TestTrackerMixin, SurvivalKidsOCRTracker):
     TERMINATION_TRUNCATION_METRIC = StatusBarChangedTerminateMetric
     SUBGOAL_METRIC = DummySubGoalMetric
 
@@ -72,8 +97,16 @@ class SurvivalKidsHungerChangedTracker(SurvivalKidsTestTracker):
     TERMINATION_TRUNCATION_METRIC = HungerChangedTerminateMetric
 
 
+class SurvivalKidsResolveHungerTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = ResolveHungerTerminateMetric
+
+
 class SurvivalKidsThirstChangedTracker(SurvivalKidsTestTracker):
     TERMINATION_TRUNCATION_METRIC = ThirstChangedTerminateMetric
+
+
+class SurvivalKidsDrinkWaterTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = DrinkWaterTerminateMetric
 
 
 class SurvivalKidsStaminaChangedTracker(SurvivalKidsTestTracker):
@@ -108,12 +141,28 @@ class SurvivalKidsKnifeChosenTracker(SurvivalKidsTestTracker):
     TERMINATION_TRUNCATION_METRIC = KnifeChosenTerminateMetric
 
 
+class SurvivalKidsMergeMenuTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = MergeMenuTerminateMetric
+
+
+class SurvivalKidsMergeConfirmTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = MergeConfirmTerminateMetric
+
+
 class SurvivalKidsCanteenChosenTracker(SurvivalKidsTestTracker):
     TERMINATION_TRUNCATION_METRIC = CanteenChosenTerminateMetric
 
 
+class SurvivalKidsKindlingMergedTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = KindlingMergedTerminateMetric
+
+
 class SurvivalKidsTakeLeaveMenuTracker(SurvivalKidsTestTracker):
     TERMINATION_TRUNCATION_METRIC = TakeLeaveMenuTerminateMetric
+
+
+class SurvivalKidsSelectTakeTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = SelectTakeTerminateMetric
 
 
 class SurvivalKidsCanteenTakeLeaveMenuTracker(SurvivalKidsTestTracker):
@@ -142,6 +191,54 @@ class SurvivalKidsChapter1PathClearedTracker(SurvivalKidsTestTracker):
 
 class SurvivalKidsPathAfterBlockingGrassTracker(SurvivalKidsTestTracker):
     TERMINATION_TRUNCATION_METRIC = PathAfterBlockingGrassTerminateMetric
+
+
+class SurvivalKidsDayReferenceTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = DayReferenceTerminateMetric
+
+
+class SurvivalKidsNightReferenceTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = NightReferenceTerminateMetric
+
+
+class SurvivalKidsEnteredShelterTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = EnteredShelterTerminateMetric
+
+
+class SurvivalKidsFoundRiverTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = FoundRiverTerminateMetric
+
+
+class SurvivalKidsWaterMenuOpenTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = WaterMenuOpenTerminateMetric
+
+
+class SurvivalKidsAfterFillingWaterTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = AfterFillingWaterTerminateMetric
+
+
+class SurvivalKidsGotTheWaterTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = GotTheWaterTerminateMetric
+
+
+class SurvivalKidsGotTheStickTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = GotTheStickTerminateMetric
+
+
+class SurvivalKidsGotTheTreeBarkTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = GotTheTreeBarkTerminateMetric
+
+
+class SurvivalKidsGotTheBrdfeatherTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = GotTheBrdfeatherTerminateMetric
+
+
+class SurvivalKidsSelectKindlingTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = SelectKindlingTerminateMetric
+
+
+class SurvivalKidsFireLitTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = FireLitTerminateMetric
 
 
 class SurvivalKidsFeatherTakeLeaveMenuTracker(SurvivalKidsTestTracker):

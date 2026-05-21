@@ -4,7 +4,7 @@ from typing import Any, Dict, Optional, Set
 
 import numpy as np
 
-from gameboy_worlds.emulation.tracker import MetricGroup
+from gameboy_worlds.emulation.tracker import MetricGroup, OCRegionMetric
 from gameboy_worlds.emulation.survival_kids.parsers import (
     AgentState,
     SurvivalKidsParser,
@@ -231,3 +231,24 @@ class SurvivalKidsHudMetrics(MetricGroup):
 
     def report_final(self) -> Dict[str, Any]:
         return self.final_metrics
+
+
+class SurvivalKidsOCRMetric(OCRegionMetric):
+    REQUIRED_PARSER = SurvivalKidsParser
+
+    def start(self):
+        self.kinds = {
+            "full_screen": "screen",
+            "dialogue": "dialogue_area",
+            "menu": "menu_area",
+        }
+        super().start()
+
+    def can_read_kind(self, current_frame: np.ndarray, kind: str) -> bool:
+        if kind == "full_screen":
+            return True
+        if kind == "dialogue":
+            return self.state_parser.is_in_dialogue(current_frame)
+        if kind == "menu":
+            return self.state_parser.is_in_menu(current_frame)
+        return False

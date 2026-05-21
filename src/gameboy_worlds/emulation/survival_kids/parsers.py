@@ -41,19 +41,43 @@ class SurvivalKidsParser(StateParser):
         ("bag_icon_area", 64, 32, 48, 48),
         ("choose_item_area", 0, 0, 160, 128),
         ("dialogue_area", 8, 112, 144, 28),
+        ("inventory_select_area", 0, 0, 88, 72),
         ("item_action_menu", 0, 0, 64, 56),
         ("item_action_menu_two_options", 0, 0, 64, 40),
+        ("item_action_menu_three_options", 0, 0, 64, 57),
         ("item_use_menu_area", 0, 84, 160, 56),
+        ("merge_menu_area", 0, 24, 160, 76),
         ("item_action_cursor", 6, 8, 12, 8),
         ("item_action_options", 18, 8, 42, 28),
         ("menu_area", 0, 0, 160, 144),
+        ("merge_confirm_area", 0, 101, 160, 31),
     ]
 
     MULTI_TARGETS: Dict[str, List[str]] = {
+        "screen": [
+            "after_filling_water",
+            "day_reference",
+            "entered_shelter",
+            "found_river",
+            "got_the_brdfeather",
+            "got_the_stick",
+            "got_the_tree_bark",
+            "got_the_water",
+            "night_reference",
+            "water_menu_open",
+        ],
         "menu_area": [
             "inventory_open",
         ],
+        "merge_menu_area": [
+            "merge_menu",
+            "select_stick",
+        ],
+        "merge_confirm_area": [
+            "merge_confirm",
+        ],
         "item_action_menu_two_options": [
+            "select_take",
             "take_leave_menu",
             "canteen_take_leave_menu",
             "feather_take_leave_menu",
@@ -61,7 +85,6 @@ class SurvivalKidsParser(StateParser):
         "dialogue_area": [
             "pickup_item_dialogue",
             "canteen_pickup_dialogue",
-            "meat_eaten_dialogue",
         ],
         "bag_icon_area": [
             "bag_icon",
@@ -70,8 +93,11 @@ class SurvivalKidsParser(StateParser):
             "knife_equipped",
         ],
         "choose_item_area": [
+            "fire_lit",
+            "kindling_merged",
             "knife_chosen",
             "canteen_chosen",
+            "select_kindling",
         ],
         "item_use_menu_area": [
             "canteen_action_menu",
@@ -80,7 +106,6 @@ class SurvivalKidsParser(StateParser):
         ],
         "item_action_menu": [
             "meat_take_eat_leave_menu",
-            "meat_eat_selected",
         ],
         "game_viewport": [
             "animal_killed",
