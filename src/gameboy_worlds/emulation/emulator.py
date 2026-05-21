@@ -352,6 +352,8 @@ class Emulator:
         save_video: bool = None,
         session_name: str = None,
         instance_id: str = None,
+        wait_ticks: int = None,
+        press_step: int = None,
     ):
         """
         Start the GameBoy emulator with the given ROM file and initial state.
@@ -368,6 +370,8 @@ class Emulator:
             save_video (bool, optional): Whether to save video of the episodes.
             session_name (str, optional): Name of the session. If None, a new session name will be allocated. This is the broad category you want to save files to
             instance_id (str, optional): Unique identifier for this environment instance. If None, a new UUID will be generated. The instance ID is useful for distinguishing multiple environments running in parallel with the same session name.
+            wait_ticks (int, optional): Number of ticks to wait between actions.
+            press_step (int, optional): Number of steps to press a button for.
         """
         verify_parameters(parameters)
         self._parameters = parameters
@@ -431,9 +435,13 @@ class Emulator:
         )
         """ Path to the session directory. This is where all artifacts for this session are saved. """
 
-        self.wait_ticks = parameters["gameboy_wait_ticks"]
+        if wait_ticks is None:
+            wait_ticks = parameters["gameboy_wait_ticks"]
+        self.wait_ticks = wait_ticks
         """ Number of emulator ticks to wait after an action. Defaults to value specified in config files. """
-        self.press_step = parameters["gameboy_press_step"]
+        if press_step is None:
+            press_step = parameters["gameboy_press_step"]
+        self.press_step = press_step
         """ Number of emulator ticks to hold down a button press. Defaults to value specified in config files. """
         self.render_headless = parameters["gameboy_headless_render"]
         """ Whether to render the emulator screen even in headless mode. This must be true for methods that rely on image observations (e.g. VLMs) to access the screen. Defaults to value specified in config files. """
@@ -911,7 +919,10 @@ class Emulator:
                 elif first_char == "g":
                     parts = user_input.split(" ")
                     if len(parts) != 2:
-                        log_warn(f"Invalid input {user_input}. Usage: g <code>", self._parameters)
+                        log_warn(
+                            f"Invalid input {user_input}. Usage: g <code>",
+                            self._parameters,
+                        )
                     else:
                         code = parts[1].upper()
                         self._pyboy.gameshark.add(code)
@@ -1017,21 +1028,72 @@ class Emulator:
         log_info("Human play mode ended.", self._parameters)
         # log_dict(tracker.report_final(), parameters=self._parameters)
 
-    def save_state(self, state_path: str):
+    def save_state(self, state_name: str, error_if_exists: bool = False):
         """
         Saves the current state of the emulator to a .state file.
         Args:
-            state_path (str): Path to save the .state file.
-
+            state_name (str): Name of the state file to save (with or without .state extension).
+            error_if_exists (bool): Whether to raise an error if the state file already exists.
         """
-        if not state_path.endswith(".state"):
-            state_path = state_path + ".state"
-        file_makedir(state_path)
-        with open(state_path, "wb") as f:
+        if not state_name.endswith(".state"):
+            state_name = state_name + ".state"
+        state_dir = os.path.abspath(self.state_parser.rom_data_path + "/states/")
+        potential_state_dir = os.path.abspath(os.path.dirname(state_name))
+        if state_dir != potential_state_dir:
+            if potential_state_dir != os.path.abspath(""):
+                log_error(
+                    f"Tried to save state file to {state_name}, which is outside of the states directory {state_dir}. This is not allowed.",
+                    self._parameters,
+                )
+            state_name = os.path.abspath(os.path.join(state_dir, state_name))
+        else:
+            pass
+        if os.path.exists(state_name):
+            if error_if_exists:
+                log_error(
+                    f"State file {state_name} already exists. Will not overwrite...",
+                    self._parameters,
+                )
+        file_makedir(state_name)
+        with open(state_name, "wb") as f:
             self._pyboy.save_state(f)
-        log_info(f"Saved state to {state_path}", self._parameters)
+        log_info(f"Saved state to {state_name}", self._parameters)
 
-    def _sav_to_state(self, sav_file: Optional[str], state_file: str):
+    def delete_state(self, state_name: str, error_if_not_exists: bool = False):
+        """
+        Deletes a .state file from the states directory.
+
+        Args:
+            state_name (str): Name of the state file to delete (with or without .state extension).
+            error_if_not_exists (bool): Whether to raise an error if the state file does not exist.
+        """
+        if not state_name.endswith(".state"):
+            state_name = state_name + ".state"
+        state_path = os.path.join(self.state_parser.rom_data_path, "states", state_name)
+        if not os.path.exists(state_path):
+            if error_if_not_exists:
+                log_error(
+                    f"State file {state_path} does not exist. Cannot delete.",
+                    self._parameters,
+                )
+            else:
+                log_warn(
+                    f"State file {state_path} does not exist. Cannot delete.",
+                    self._parameters,
+                )
+            return
+        # if somehow state_path isn't in the states directory, error out to avoid deleting random files
+        if os.path.abspath(os.path.dirname(state_path)) != os.path.abspath(
+            self.state_parser.rom_data_path + "/states/"
+        ):
+            log_error(
+                f"Tried to delete state file at {state_path}, which is outside of the states directory. This is not allowed.",
+                self._parameters,
+            )
+        os.remove(state_path)
+        log_info(f"Deleted state file {state_path}", self._parameters)
+
+    def _sav_to_state(self, sav_file: Optional[str], state_name: str):
         """
         Loads a .sav file into the emulator and saves the corresponding .state file.
         Use this if you want to manually create .sav files and convert them to .state files for use as initial states.
@@ -1039,7 +1101,7 @@ class Emulator:
 
         Args:
             save_file (str or None): Path to the .sav file to load. If None, looks for a .sav file in the same directory as the ROM with the same base name.
-            state_file (str): Path to save the .state file
+            state_name (str): Name of the state to save. The .state file will be saved in the states directory of the rom_data_path with this name.
         """
         log_info(
             "Trying to find .sav file and convert to .state file. This is a breaking operation, so the program will terminate after its completion.",
@@ -1057,19 +1119,11 @@ class Emulator:
                 f"Expected .sav file at {expected_sav} to convert to .state file, but it does not exist.",
                 self._parameters,
             )
-        if state_file is None or state_file == "":
+        if state_name is None or state_name == "":
             log_error(
-                "You must provide a state_file to save the .state file.",
+                "You must provide a state_name to save the .state file.",
                 self._parameters,
             )
-        if not state_file.endswith(".state"):
-            state_file = state_file + ".state"
-        if os.path.exists(state_file):
-            log_error(
-                f"state_file {state_file} already exists. Please provide a new path to avoid overwriting.",
-                self._parameters,
-            )
-        file_makedir(state_file)
         # copy the .sav file to self._gb_path.gb.ram file
         save_destination = self._gb_path.replace(".gb", ".gb.ram")
         shutil.copyfile(expected_sav, save_destination)
@@ -1080,7 +1134,7 @@ class Emulator:
         )
         self._pyboy.set_emulation_speed(0)
         self._open_to_first_state()
-        self.save_state(state_file)
+        self.save_state(state_name, error_if_exists=True)
         self._pyboy.stop(save=False)
         log_info(
             "State saved successfully. Exiting now to avoid issues ...",

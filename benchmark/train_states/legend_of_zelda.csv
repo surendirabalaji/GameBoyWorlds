@@ -1,0 +1,11 @@
+game,name,description,states
+legend_of_zelda_links_awakening,dialogue_skip,Skip the dialogue,"firstdialogue, seconddialogue, thirddialogue, fourthdialogue"
+legend_of_zelda_links_awakening,go_out,Go out,"topleft, nearchick, nearcabinet, behinddaddy, bottomright, betweenbed, nearpots"
+legend_of_zelda_links_awakening,call,Call,"farthest, straightfarthest, atphone"
+legend_of_zelda_links_awakening,read_sign,Read the signboard,"neartreeboard, leftboard, straightboard, atboard"
+legend_of_zelda_links_awakening,go_in,Go inside the house,"trightwood, tleftwood, brightwood, bleftwood"
+legend_of_zelda_the_oracle_of_seasons,go_in,Go inside the library,"nearflowerin, nearwoodin, ongrassin"
+legend_of_zelda_the_oracle_of_seasons,fall,Fall from the bridge,"frontbridge, downcorner, toprightcornerbridge"
+legend_of_zelda_the_oracle_of_seasons,walk_jiggly,Walk the jiggly path,"jigglyentry, 2ndstep, almostthere"
+legend_of_zelda_the_oracle_of_seasons,go_up,Go up,"near_artist, fountaintl, toprfountain"
+legend_of_zelda_the_oracle_of_seasons,chicken,Go inside chicken house,"outside_chicken, alilahead, almostchicken, frontofchick"

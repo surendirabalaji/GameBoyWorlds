@@ -174,7 +174,27 @@ class LegendOfZeldaLinksAwakeningParser(BaseLegendOfZeldaParser):
             ("shroom_sword", 40, 0, 36, 16),
             ("shroom_shield", 2, 3, 31, 9),
             ("signboard2", 44, 13, 25, 19),
-            ("empty_land", 0, 0, 160, 80)
+            ("empty_land", 0, 0, 160, 80),
+            ("pineapple", 46, 64, 17, 16),
+            ("granny", 113, 81, 15, 13),
+            ("empty_carpet", 48, 80, 61, 31),
+            ("chimney", 64, 49, 15, 13),
+            ("empty_track", 95, 96, 16, 31),
+            ("wood", 96, 50, 15, 12),
+            ("wood2", 28, 14, 116, 16),
+            ("block", 129, 16, 15, 111),
+            ("purplestone", 47, 67, 17, 11),
+            ("too_heavy", 9, 9, 89, 35),
+            ("boy2nd", 12, 83, 116, 32),
+            ("dirt", 14, 93, 19, 19),
+            ("dirt2", 15, 61, 20, 18),
+            ("tree", 100, 51, 24, 16),
+            ("boysay", 12, 13, 108, 29),
+            ("railing", 10, 46, 69, 7),
+            ("palmt", 76, 53, 11, 9),
+            ("gameover", 46, 38, 67, 19),
+            ("tileslong", 128, 18, 15, 108),
+            ("boardsign", 45, 14, 19, 18)
         ]
 
         """
@@ -251,6 +271,25 @@ class LegendOfZeldaTheOracleOfSeasonsParser(BaseLegendOfZeldaParser):
             ("look_no_matter", 16, 79, 78, 39),
             ("chest", 14, 32, 19, 15),
             ("dog", 28, 66, 22, 13),
+            ("mickey", 31, 64, 15, 15),
+            ("empty_block", 111, 64, 16, 15),
+            ("shopsign", 72, 73, 30, 6),
+            ("joystick", 81, 66, 13, 12),
+            ("redbook", 113, 80, 13, 12),
+            ("redsnake", 98, 64, 11, 13),
+            ("bluesnake", 46, 64, 17, 12),
+            ("bluesnaketalk", 9, 96, 136, 22),
+            ("redsnaketalk", 10, 97, 124, 17),
+            ("bluetext", 6, 96, 95, 37),
+            ("redtext", 9, 96, 118, 37),
+            ("guyonlava", 0, 111, 159, 30),
+            ("trackempty", 0, 47, 159, 31),
+            ("boundaryred", 0, 129, 159, 12),
+            ("gameover", 41, 7, 77, 16),
+            ("greencarpet", 16, 72, 46, 57),
+            ("holes", 111, 62, 34, 16),
+            ("trunk", 56, 31, 30, 26),
+            ("4cy", 79, 17, 16, 29)
         ]
         """
         - bricks: bricks on the right side of the screen, signifying that the inventory is open.

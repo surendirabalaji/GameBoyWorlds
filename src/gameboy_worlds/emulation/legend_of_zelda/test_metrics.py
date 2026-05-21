@@ -91,6 +91,58 @@ class ZeldaMultiRegionTerminationOnlyMetric(TerminationMetric):
                 return True
 
         return False
+
+
+class ZeldaAnyRegionTerminationOnlyMetric(TerminationMetric):
+    REQUIRED_PARSER = LegendOfZeldaLinksAwakeningParser
+    _TERMINATION_NAMED_REGIONS = []
+
+    def determine_terminated(
+        self, current_frame: np.ndarray, recent_frames: Optional[np.ndarray]
+    ) -> bool:
+        if len(self._TERMINATION_NAMED_REGIONS) == 0:
+            raise ValueError("_TERMINATION_NAMED_REGIONS must be set.")
+
+        all_frames = [current_frame]
+        if recent_frames is not None:
+            all_frames = recent_frames
+
+        for frame in all_frames:
+            self.state_parser: LegendOfZeldaLinksAwakeningParser
+
+            for region_name in self._TERMINATION_NAMED_REGIONS:
+                matched = self.state_parser.named_region_matches_target(
+                    frame, region_name
+                )
+                if matched:
+                    return True
+
+        return False
+
+
+class ZeldaStateTerminationMetric(TerminationMetric):
+    REQUIRED_PARSER = LegendOfZeldaLinksAwakeningParser
+    _TERMINATION_AGENT_STATE = None
+
+    def determine_terminated(
+        self, current_frame: np.ndarray, recent_frames: Optional[np.ndarray]
+    ) -> bool:
+        if self._TERMINATION_AGENT_STATE is None:
+            raise ValueError("_TERMINATION_AGENT_STATE must be set.")
+
+        all_frames = [current_frame]
+        if recent_frames is not None:
+            all_frames = recent_frames
+
+        for frame in all_frames:
+            self.state_parser: LegendOfZeldaLinksAwakeningParser
+            state_matched = (
+                self.state_parser.get_agent_state(frame)
+                == self._TERMINATION_AGENT_STATE
+            )
+            if state_matched:
+                return True
+        return False
     
 class ToronboShorePickupSwordTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
     _TERMINATION_NAMED_REGION = "equipped_action_2"
@@ -201,6 +253,86 @@ class WitchTalkTerminateMetric(ZeldaRegionAndStateTerminationMetric):
 class PotholesSignboardReadTerminateMetric(ZeldaRegionAndStateTerminationMetric):
     _TERMINATION_NAMED_REGION = "signboard_tracker"
     _TERMINATION_AGENT_STATE = "in_dialogue"
+
+
+class PineappleScreenTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "pineapple"
+
+
+class CallBoothApproachTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "call_booth"
+
+
+class GrannyCornerTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "granny"
+
+
+class LeaveBaldStoreCarpetTerminateMetric(ZeldaAnyRegionTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGIONS = ["empty_carpet", "chimney"]
+
+
+class LeaveTrackTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "empty_track"
+
+
+class ExitFatHouseTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "wood"
+
+
+class BoothHouseUpTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "wood2"
+
+
+class ChickHouseBlockTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "block"
+
+
+class PurplestoneStairsTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "purplestone"
+
+
+class HeavyStonePushTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "too_heavy"
+
+
+class BoyDialogueExitTerminateMetric(ZeldaStateTerminationMetric):
+    _TERMINATION_AGENT_STATE = "free_roam"
+
+
+class DirtPatchTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "dirt"
+
+
+class DirtPatchTwoTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "dirt2"
+
+
+class StonehouseRightTreeTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "tree"
+
+
+class SecondBoyDialogueExitTerminateMetric(ZeldaStateTerminationMetric):
+    _TERMINATION_AGENT_STATE = "free_roam"
+
+
+class RailingJumpTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "railing"
+
+
+class PalmtJumpTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "palmt"
+
+
+class MonsterDeathTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "gameover"
+
+
+class TileslongEscapeTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "tileslong"
+
+
+class BoardSignApproachTerminateMetric(ZeldaRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "boardsign"
 
 #oracle
 class OracleRegionMatchTerminationOnlyMetric(ZeldaRegionMatchTerminationOnlyMetric):
@@ -376,3 +508,83 @@ class OracleBridgeWalkTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
 
 class OracleDogTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
     _TERMINATION_NAMED_REGION = "dog"
+
+
+class OracleMickeyLeftTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "mickey"
+
+
+class OracleStepOffGrassBlockTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "empty_block"
+
+
+class OracleShopSignPathTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "shopsign"
+
+
+class OracleClocksUpTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "clocks"
+
+
+class OracleJoystickRightTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "joystick"
+
+
+class OracleJoystickHouseEntryTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "redbook"
+
+
+class OracleApproachRedSnakeTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "redsnake"
+
+
+class OracleApproachBlueSnakeTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "bluesnake"
+
+
+class OracleRedSnakeTalkTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "redsnaketalk"
+
+
+class OracleBlueSnakeTalkTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "bluesnaketalk"
+
+
+class OracleBlueBookReadTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "bluetext"
+
+
+class OracleRedBookReadTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "redtext"
+
+
+class OracleLavaFloorTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "guyonlava"
+
+
+class OracleStepOffTrackTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "trackempty"
+
+
+class OracleGloomyPlaceLeftTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "boundaryred"
+
+
+class OracleGameoverDeathTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "gameover"
+
+
+class OracleLeaveGreenCarpetTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "greencarpet"
+
+
+class OracleHolesToTrunkTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "trunk"
+
+
+class OracleTrunkToHolesTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "holes"
+
+
+class OracleLeftOfTrunkTerminateMetric(OracleRegionMatchTerminationOnlyMetric):
+    _TERMINATION_NAMED_REGION = "4cy"

@@ -33,6 +33,26 @@ from gameboy_worlds.emulation.legend_of_zelda.test_metrics import (
     WeirdTunnelInsideTerminateMetric,
     WitchTalkTerminateMetric,
     PotholesSignboardReadTerminateMetric,
+    PineappleScreenTerminateMetric,
+    CallBoothApproachTerminateMetric,
+    GrannyCornerTerminateMetric,
+    LeaveBaldStoreCarpetTerminateMetric,
+    LeaveTrackTerminateMetric,
+    ExitFatHouseTerminateMetric,
+    BoothHouseUpTerminateMetric,
+    ChickHouseBlockTerminateMetric,
+    PurplestoneStairsTerminateMetric,
+    HeavyStonePushTerminateMetric,
+    BoyDialogueExitTerminateMetric,
+    DirtPatchTerminateMetric,
+    DirtPatchTwoTerminateMetric,
+    StonehouseRightTreeTerminateMetric,
+    SecondBoyDialogueExitTerminateMetric,
+    RailingJumpTerminateMetric,
+    PalmtJumpTerminateMetric,
+    MonsterDeathTerminateMetric,
+    TileslongEscapeTerminateMetric,
+    BoardSignApproachTerminateMetric,
     OracleOtherPeopleTerminateMetric,
     OracleGirlTalkTerminateMetric,
     OracleJumpingTerminateMetric,
@@ -63,6 +83,26 @@ from gameboy_worlds.emulation.legend_of_zelda.test_metrics import (
     OracleOwnerTalkTerminateMetric,
     OracleBridgeWalkTerminateMetric,
     OracleDogTerminateMetric,
+    OracleMickeyLeftTerminateMetric,
+    OracleStepOffGrassBlockTerminateMetric,
+    OracleShopSignPathTerminateMetric,
+    OracleClocksUpTerminateMetric,
+    OracleJoystickRightTerminateMetric,
+    OracleJoystickHouseEntryTerminateMetric,
+    OracleApproachRedSnakeTerminateMetric,
+    OracleApproachBlueSnakeTerminateMetric,
+    OracleRedSnakeTalkTerminateMetric,
+    OracleBlueSnakeTalkTerminateMetric,
+    OracleBlueBookReadTerminateMetric,
+    OracleRedBookReadTerminateMetric,
+    OracleLavaFloorTerminateMetric,
+    OracleStepOffTrackTerminateMetric,
+    OracleGloomyPlaceLeftTerminateMetric,
+    OracleGameoverDeathTerminateMetric,
+    OracleLeaveGreenCarpetTerminateMetric,
+    OracleHolesToTrunkTerminateMetric,
+    OracleTrunkToHolesTerminateMetric,
+    OracleLeftOfTrunkTerminateMetric,
 )
 
 # from gameboy_worlds.emulation.tracker import (
@@ -386,6 +426,28 @@ class PotholesSignboardSubGoalMetric(SubGoalMetric):
     SUBGOALS = [PotholesSignboardSubGoal]
 
 
+class Boy2ndSubGoal(SubGoal):
+    NAME = "boy2nd"
+
+    def _check_completed(self, frame, parser) -> bool:
+        return parser.named_region_matches_target(frame, "boy2nd")
+
+
+class Boy2ndSubGoalMetric(SubGoalMetric):
+    SUBGOALS = [Boy2ndSubGoal]
+
+
+class BoysaySubGoal(SubGoal):
+    NAME = "boysay"
+
+    def _check_completed(self, frame, parser) -> bool:
+        return parser.named_region_matches_target(frame, "boysay")
+
+
+class BoysaySubGoalMetric(SubGoalMetric):
+    SUBGOALS = [BoysaySubGoal]
+
+
 class ZeldaLinksAwakeningMakeCall2TestTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
     TERMINATION_TRUNCATION_METRIC = MakeCall2TerminateMetric
     SUBGOAL_METRIC = DummySubGoalMetric
@@ -434,6 +496,106 @@ class ZeldaLinksAwakeningWitchTalkTestTracker(TestTrackerMixin, CoreLegendOfZeld
 class ZeldaLinksAwakeningSignboardReaderTestTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
     TERMINATION_TRUNCATION_METRIC = PotholesSignboardReadTerminateMetric
     SUBGOAL_METRIC = PotholesSignboardSubGoalMetric
+
+
+class ZeldaLinksAwakeningPineappleScreenTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = PineappleScreenTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningCallBoothApproachTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = CallBoothApproachTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningGrannyCornerTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = GrannyCornerTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningLeaveBaldStoreCarpetTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = LeaveBaldStoreCarpetTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningLeaveTrackTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = LeaveTrackTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningExitFatHouseTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = ExitFatHouseTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningBoothHouseUpTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = BoothHouseUpTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningChickHouseBlockTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = ChickHouseBlockTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningPurplestoneStairsTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = PurplestoneStairsTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningHeavyStonePushTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = HeavyStonePushTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningBoyDialogueExitTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = BoyDialogueExitTerminateMetric
+    SUBGOAL_METRIC = Boy2ndSubGoalMetric
+
+
+class ZeldaLinksAwakeningDirtPatchTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = DirtPatchTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningDirtPatchTwoTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = DirtPatchTwoTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningStonehouseRightTreeTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = StonehouseRightTreeTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningSecondBoyDialogueExitTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = SecondBoyDialogueExitTerminateMetric
+    SUBGOAL_METRIC = BoysaySubGoalMetric
+
+
+class ZeldaLinksAwakeningRailingJumpTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = RailingJumpTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningPalmtJumpTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = PalmtJumpTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningMonsterDeathTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = MonsterDeathTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningTileslongEscapeTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = TileslongEscapeTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaLinksAwakeningBoardSignApproachTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = BoardSignApproachTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
 
 #oracle
 
@@ -646,4 +808,104 @@ class ZeldaOracleOfSeasonsBridgeWalkTracker(TestTrackerMixin, CoreLegendOfZeldaT
 
 class ZeldaOracleOfSeasonsDogTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
     TERMINATION_TRUNCATION_METRIC = OracleDogTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsMickeyLeftTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleMickeyLeftTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsStepOffGrassBlockTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleStepOffGrassBlockTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsShopSignPathTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleShopSignPathTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsClocksUpTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleClocksUpTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsJoystickRightTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleJoystickRightTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsJoystickHouseEntryTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleJoystickHouseEntryTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsApproachRedSnakeTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleApproachRedSnakeTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsApproachBlueSnakeTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleApproachBlueSnakeTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsRedSnakeTalkTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleRedSnakeTalkTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsBlueSnakeTalkTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleBlueSnakeTalkTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsBlueBookReadTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleBlueBookReadTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsRedBookReadTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleRedBookReadTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsLavaFloorTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleLavaFloorTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsStepOffTrackTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleStepOffTrackTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsGloomyPlaceLeftTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleGloomyPlaceLeftTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsGameoverDeathTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleGameoverDeathTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsLeaveGreenCarpetTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleLeaveGreenCarpetTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsHolesToTrunkTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleHolesToTrunkTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsTrunkToHolesTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleTrunkToHolesTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class ZeldaOracleOfSeasonsLeftOfTrunkTracker(TestTrackerMixin, CoreLegendOfZeldaTracker):
+    TERMINATION_TRUNCATION_METRIC = OracleLeftOfTrunkTerminateMetric
     SUBGOAL_METRIC = DummySubGoalMetric

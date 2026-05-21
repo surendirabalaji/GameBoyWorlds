@@ -1,0 +1,13 @@
+game,task_category,task,init_state,state_tracker_class,shifted_training_games,can_train_from_init_state
+runes_of_virtue_1,menu,Open the inventory menu,gameplay,open_menu_test,runes_of_virtue_2,True
+runes_of_virtue_1,dialog,Talk to the king for the first time,near_king,king_dialog_test,runes_of_virtue_2,True
+runes_of_virtue_1,dialog,Talk to Chuckles,near_chuckles,chuckles_dialog_test,runes_of_virtue_2,True
+runes_of_virtue_1,dialog,Talk to Gnu Gnu at the 1st store,near_gnu_gnu_1,gnu_gnu_1_dialog_test,runes_of_virtue_2,True
+runes_of_virtue_1,dialog,Talk to Gnu Gnu at the 2nd store,near_gnu_gnu_2,gnu_gnu_2_dialog_test,runes_of_virtue_2,True
+runes_of_virtue_1,dialog,Talk to Sherry,near_sherry,sherry_dialog_test,runes_of_virtue_2,True
+runes_of_virtue_1,navigation,Enter the Cave of Deceit,near_cave_of_deceit,cave_of_deceit_test,runes_of_virtue_2,True
+runes_of_virtue_1,interaction,Access the telescope,near_telescope,telescope_view_test,runes_of_virtue_2,True
+runes_of_virtue_1,survival,Die,gameplay,death_screen_test,runes_of_virtue_2,True
+runes_of_virtue_2,menu,Open the inventory menu,gameplay,open_menu_test,runes_of_virtue_1,True
+runes_of_virtue_2,interaction,Read a book,read_book,read_book_test,runes_of_virtue_1,True
+runes_of_virtue_2,dialog,Talk to Nystul,near_nystul,nystul_dialog_test,runes_of_virtue_1,True

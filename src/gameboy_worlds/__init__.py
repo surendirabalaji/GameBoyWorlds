@@ -38,7 +38,14 @@ There are two ways to navigate the documentation:
 
 """
 
-from gameboy_worlds.utils import get_benchmark_tasks_dfs, get_benchmark_tasks
+from gameboy_worlds.utils import (
+    get_benchmark_tasks_dfs,
+    get_benchmark_tasks,
+    get_training_states,
+    get_all_training_states,
+    get_shifted_training_states,
+    get_all_shifted_training_states,
+)
 
 from gameboy_worlds.emulation.registry import (
     AVAILABLE_GAMES,
