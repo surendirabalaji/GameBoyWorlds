@@ -76,10 +76,36 @@ class PathAfterBlockingGrassTerminateMetric(
     _TERMINATION_TARGET_NAME = "path_after_blocking_grass"
 
 
+class NewPath1FoundTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = SurvivalKidsParser
+    _TERMINATION_NAMED_REGION = "game_viewport"
+    _TERMINATION_TARGET_NAME = "new_path_1_found"
+
+
+class NewPath2FoundTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = SurvivalKidsParser
+    _TERMINATION_NAMED_REGION = "game_viewport"
+    _TERMINATION_TARGET_NAME = "new_path_2_found"
+
+
+class SharpStoneFoundTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = SurvivalKidsParser
+    _TERMINATION_NAMED_REGION = "game_viewport"
+    _TERMINATION_TARGET_NAME = "sharp_stone_found"
+
+
 class DayReferenceTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
     REQUIRED_PARSER = SurvivalKidsParser
     _TERMINATION_NAMED_REGION = "screen"
     _TERMINATION_TARGET_NAME = "day_reference"
+
+
+class AfternoonReferenceTerminateMetric(
+    RegionMatchTerminationMetric, TerminationMetric
+):
+    REQUIRED_PARSER = SurvivalKidsParser
+    _TERMINATION_NAMED_REGION = "screen"
+    _TERMINATION_TARGET_NAME = "afternoon_reference"
 
 
 class NightReferenceTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
@@ -132,6 +158,24 @@ class GotTheTreeBarkTerminateMetric(RegionMatchTerminationMetric, TerminationMet
     _TERMINATION_TARGET_NAME = "got_the_tree_bark"
 
 
+class GotTheSharpStoneTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = SurvivalKidsParser
+    _TERMINATION_NAMED_REGION = "screen"
+    _TERMINATION_TARGET_NAME = "got_the_sharp_stone"
+
+
+class GotTheStoneTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = SurvivalKidsParser
+    _TERMINATION_NAMED_REGION = "screen"
+    _TERMINATION_TARGET_NAME = "got_the_stone"
+
+
+class GotTheVineTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = SurvivalKidsParser
+    _TERMINATION_NAMED_REGION = "screen"
+    _TERMINATION_TARGET_NAME = "got_the_vine"
+
+
 class GotTheBrdfeatherTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
     REQUIRED_PARSER = SurvivalKidsParser
     _TERMINATION_NAMED_REGION = "screen"
@@ -166,9 +210,23 @@ class BagIconTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
     _TERMINATION_TARGET_NAME = "bag_icon"
 
 
+class ObjectTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = SurvivalKidsParser
+    _TERMINATION_NAMED_REGION = "object_area"
+    _TERMINATION_TARGET_NAME = "bag_icon"
+
+
 class KnifeEquippedTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
     REQUIRED_PARSER = SurvivalKidsParser
     _TERMINATION_NAMED_REGION = "equipped_items_area"
+    _TERMINATION_TARGET_NAME = "knife_equipped"
+
+
+class KnifeEquippedPromptTerminateMetric(
+    RegionMatchTerminationMetric, TerminationMetric
+):
+    REQUIRED_PARSER = SurvivalKidsParser
+    _TERMINATION_NAMED_REGION = "equipped_item_prompt_area"
     _TERMINATION_TARGET_NAME = "knife_equipped"
 
 
