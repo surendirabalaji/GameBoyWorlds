@@ -11,6 +11,7 @@ from gameboy_worlds.emulation.survival_kids.base_metrics import (
 )
 from gameboy_worlds.emulation.survival_kids.test_metrics import (
     AfterFillingWaterTerminateMetric,
+    AfternoonReferenceTerminateMetric,
     BagIconTerminateMetric,
     AnimalKilledTerminateMetric,
     CanteenActionMenuTerminateMetric,
@@ -28,8 +29,11 @@ from gameboy_worlds.emulation.survival_kids.test_metrics import (
     FoundRiverTerminateMetric,
     GameViewportChangedTerminateMetric,
     GotTheBrdfeatherTerminateMetric,
+    GotTheSharpStoneTerminateMetric,
     GotTheStickTerminateMetric,
+    GotTheStoneTerminateMetric,
     GotTheTreeBarkTerminateMetric,
+    GotTheVineTerminateMetric,
     GotTheWaterTerminateMetric,
     HpChangedTerminateMetric,
     HungerChangedTerminateMetric,
@@ -44,12 +48,16 @@ from gameboy_worlds.emulation.survival_kids.test_metrics import (
     MeatActionMenuTerminateMetric,
     MeatEatenDialogueTerminateMetric,
     MeatEatSelectedTerminateMetric,
+    NewPath1FoundTerminateMetric,
+    NewPath2FoundTerminateMetric,
     NightReferenceTerminateMetric,
+    ObjectTerminateMetric,
     PickupItemDialogueTerminateMetric,
     PathAfterBlockingGrassTerminateMetric,
     ResolveHungerTerminateMetric,
     SelectKindlingTerminateMetric,
     SelectTakeTerminateMetric,
+    SharpStoneFoundTerminateMetric,
     StaminaChangedTerminateMetric,
     StatusBarChangedTerminateMetric,
     TakeLeaveMenuTerminateMetric,
@@ -136,6 +144,10 @@ class SurvivalKidsBagIconTracker(SurvivalKidsTestTracker):
     TERMINATION_TRUNCATION_METRIC = BagIconTerminateMetric
 
 
+class SurvivalKidsObjectTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = ObjectTerminateMetric
+
+
 class SurvivalKidsKnifeEquippedTracker(SurvivalKidsTestTracker):
     TERMINATION_TRUNCATION_METRIC = KnifeEquippedTerminateMetric
 
@@ -220,6 +232,10 @@ class SurvivalKidsDayReferenceTracker(SurvivalKidsTestTracker):
     TERMINATION_TRUNCATION_METRIC = DayReferenceTerminateMetric
 
 
+class SurvivalKidsAfternoonReferenceTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = AfternoonReferenceTerminateMetric
+
+
 class SurvivalKidsNightReferenceTracker(SurvivalKidsTestTracker):
     TERMINATION_TRUNCATION_METRIC = NightReferenceTerminateMetric
 
@@ -250,6 +266,18 @@ class SurvivalKidsGotTheStickTracker(SurvivalKidsTestTracker):
 
 class SurvivalKidsGotTheTreeBarkTracker(SurvivalKidsTestTracker):
     TERMINATION_TRUNCATION_METRIC = GotTheTreeBarkTerminateMetric
+
+
+class SurvivalKidsGotTheSharpStoneTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = GotTheSharpStoneTerminateMetric
+
+
+class SurvivalKidsGotTheStoneTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = GotTheStoneTerminateMetric
+
+
+class SurvivalKidsGotTheVineTracker(SurvivalKidsTestTracker):
+    TERMINATION_TRUNCATION_METRIC = GotTheVineTerminateMetric
 
 
 class SurvivalKidsGotTheBrdfeatherTracker(SurvivalKidsTestTracker):
