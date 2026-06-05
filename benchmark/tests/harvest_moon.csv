@@ -1,98 +1,151 @@
-game,task_category,task,init_state,state_tracker_class,other_disallowed_states,shifted_training_games
-harvest_moon_1,navigation,enter the cow barn,outside_barns,cow_barn_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,navigation,enter the chicken coop,outside_barns,chicken_coop_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,navigation,enter the storage shed,near_storage_shed,storage_shed_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",pick up the water can,inside_storage,pickup_watercan_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",pick up the sickle,inside_storage,pickup_sickle_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",pick up the hoe,inside_storage,pickup_hoe_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",pick up the hammer,inside_storage,pickup_hammer_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",pick up the grass seeds,inside_storage,pickup_grass_seed_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",go to bed,at_home,go_to_sleep_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",feed the harvest spirit,picked_apple,feed_spirit_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",help the spirit after earthquake,earthquake,help_spirit_earthquake_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",water the center of the turnip field,water_turnips,water_turnip_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",ship an egg into the shipping box,in_chicken_coop_with_eggs,ship_egg_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",harvest only the center turnip of the 3x3 crop field without disturbing the others,next_to_turnips,harvest_center_turnip_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",water only the center turnip of the 3x3 crop field without disturbing the others,next_to_turnips_to_water,water_center_turnip_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, menu, interaction",buy material at the carpenter,shopping_area,buy_material_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, menu, interaction",buy a chicken from the animal shop,shopping_area,buy_chicken_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, menu, interaction",buy a cow brush from the tool shop,shopping_area,buy_cow_brush_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, menu, interaction",buy a saddlebag from the tool shop,shopping_area,buy_saddlebag_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, menu, interaction",buy a milker from the tool shop,shopping_area,buy_milker_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, menu, interaction",buy 1 bag of potato seeds,shopping_area,buy_potato_seeds_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, menu, interaction",buy 2 bags of turnip seeds,shopping_area,buy_turnip_seeds_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, menu, interaction",buy a rice ball,shopping_area,buy_rice_ball_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, menu, interaction",buy a croissant,shopping_area,buy_croissant_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, menu, interaction",buy a cake,shopping_area,buy_cake_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, menu, interaction",go to the church to pray,shopping_area,go_to_church_pray_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",open the storage item list,inside_storage,open_storage_list_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",find the rainy money,at_home,find_rainy_money_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",find the lost bird for friend,lost_bird,find_lost_bird_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",speak to the girl with blue hair,picnic,speak_to_blue_hair_girl_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",speak to the girl with golden hair,picnic,speak_to_golden_hair_girl_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",speak to the girl with pink hair,picnic,speak_to_pink_hair_girl_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_1,"navigation, interaction",put chicken grass on the first block,fill_chicken_fodder,fill_chicken_fodder_test,,"harvest_moon_2, harvest_moon_3"
-harvest_moon_2,navigation,enter the cow barn,outside_barns,cow_barn_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,navigation,enter the chicken coop,outside_barns,chicken_coop_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, interaction",find the lucky money from the clock,at_home,find_lucky_money_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,navigation,enter the hospital,shopping_area,hospital_entrance_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,navigation,enter the tool shop,shopping_area,tool_shop_entrance_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,navigation,enter the carpenter,shopping_area_left,carpenter_entrance_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,navigation,enter the animal shop,shopping_area_low,animal_shop_entrance_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,navigation,enter the library,shopping_area_left,library_entrance_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,navigation,enter the flower shop,shopping_area,flower_shop_entrance_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,navigation,enter the restaurant,shopping_area_low,restaurant_entrance_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, menu, interaction",buy 1 bag of potato seeds,inside_flower_shop,buy_potato_seeds_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, menu, interaction",buy 2 bags of asparagus seeds,inside_flower_shop,buy_asparagus_seeds_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, menu, interaction",buy a food set,inside_restaurant,buy_lunch_set_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, menu, interaction",buy a beverage set,inside_restaurant,buy_beverage_set_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, menu, interaction",buy today's special,inside_restaurant,buy_todays_special_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, menu, interaction",write diary and go to bed,at_home,write_diary_and_sleep_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, interaction",read the secret garden sign,outside_home,read_secret_garden_sign_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, interaction",read the crop field sign,wandering,read_crop_field_sign_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, interaction",cross the 500m line in the cherry cup race,cherry_cup,cross_500m_line_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, interaction",cross the 1000m line in the cherry cup race,cherry_cup,cross_1000m_line_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, menu, interaction",equip the sickle,at_home,equip_sickle_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, menu, interaction",equip the hammer,at_home,equip_hammer_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, menu, interaction",equip the fishing rod,at_home,equip_fishing_rod_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, menu, interaction",exchange the axe with the net,at_home,equip_net_replacing_ax_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, menu, interaction",exchange the axe with the rosemary seeds,at_home,equip_rosemary_seeds_replacing_ax_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, menu, interaction",exchange the sprinkler with the sickle,at_home,equip_sickle_replacing_sprinkler_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, menu, interaction",exchange the hoe with the fishing net,at_home,equip_net_replacing_hoe_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, interaction",harvest only the center eggplant of the 3x3 crop field without disturbing the others,next_to_eggplants,harvest_center_eggplant_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, interaction",harvest only the center carrot of the 3x3 winter crop field without disturbing the others,next_to_carrots_winter,harvest_center_carrot_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, interaction",water only the center potato of the 3x3 crop field without disturbing the others,next_to_crops_to_water,water_center_potato_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, interaction",water only the center asparagus of the 3x3 crop field without disturbing the others,next_to_crops_to_water,water_center_asparagus_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, interaction",learn how to use computers from the billboard,billboard,read_computers_article_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, interaction",learn how to clean boulders from the billboard,billboard,read_boulders_article_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_2,"navigation, interaction",learn how to sell crops from the billboard,billboard,read_selling_crops_article_test,,"harvest_moon_1, harvest_moon_3"
-harvest_moon_3,navigation,enter the chicken coop,outside_barns,chicken_coop_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",read the secret garden sign,outside_home,read_secret_garden_sign_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",read the morning market sign,mainland_port,read_morning_market_sign_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",take the ferry back to the village,mainland_port,take_ferry_back_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",read the storage sign,outside_storage,read_storage_sign_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",speak to Kirk in the village,in_village,speak_to_Kirk_village_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",talk to Joe,mainland_port,speak_to_Joe_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",talk to Lukia,shopping_mall,speak_to_Lukia_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",talk to Lucus,shopping_mall_upstairs,speak_to_Lucus_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",talk to Lyla,shopping_mall_upstairs,speak_to_Lyla_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",put cow fodder on the righmost block,inside_cow_barn,fill_cow_fodder_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,navigation,enter the farm,island_map,farm_entrance_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,navigation,enter the village,island_map,village_entrance_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,navigation,enter the grassland,island_map,grassland_entrance_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,navigation,enter the forest,island_map,forest_entrance_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,navigation,enter the cliff,island_map,cliff_entrance_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,navigation,enter the mountain,island_map,mountain_entrance_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,navigation,enter the shopping mall,mainland_map,shopping_mall_entrance_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,navigation,enter the farmer's union,mainland_map,farmers_union_entrance_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,navigation,enter the aquarium,mainland_map,aquarium_entrance_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,navigation,enter the theatre,mainland_map,theatre_entrance_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, menu, interaction",buy a meal set,shopping_mall,buy_meal_set_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",choose tea to buy,shopping_mall,choose_tea_to_buy_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",choose asparagus seeds to buy,shopping_mall,choose_asparagus_seeds_to_buy_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",choose coffee to buy,shopping_mall,choose_coffee_to_buy_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",read the ferry sign,in_village,read_ferry_sign_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",find secret savings,at_home,find_secret_savings_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",choose potato seeds to buy,shopping_mall,choose_potato_seeds_to_buy_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,"navigation, interaction",choose turnip seeds to buy,shopping_mall,choose_turnip_seeds_to_buy_test,,"harvest_moon_1, harvest_moon_2"
-harvest_moon_3,navigation,enter the hot spring,mainland_map,hot_spring_entrance_test,,"harvest_moon_1, harvest_moon_2"
+game,task_category,task,init_state,state_tracker_class,shifted_training_games,can_train_from_init_state
+harvest_moon_1,navigation,enter the cow barn,outside_barns,cow_barn_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,navigation,enter the chicken coop,outside_barns,chicken_coop_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,navigation,enter the storage shed,near_storage_shed,storage_shed_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",pick up the water can,inside_storage,pickup_watercan_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",pick up the cow bell,storage_cow_bell,pickup_cowbell_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",pick up the sickle,inside_storage,pickup_sickle_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",pick up the hoe,inside_storage,pickup_hoe_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",pick up the hammer,inside_storage,pickup_hammer_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",pick up the grass seeds,inside_storage,pickup_grass_seed_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",go to bed,at_home,go_to_sleep_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",feed the harvest spirit,picked_apple,feed_spirit_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",help the spirit after earthquake,earthquake,help_spirit_earthquake_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",water only the center of the turnip bud field below without disturbing the others,water_turnips,water_turnip_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",harvest only the center turnip of the 3x3 crop field without disturbing the others,next_to_turnips,harvest_center_turnip_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",water only the center turnip of the 3x3 crop field without disturbing the others,next_to_turnips_to_water,water_center_turnip_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",harvest only the center potato of the 3x3 crop field without disturbing the others,next_to_potatoes,harvest_center_potato_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",water only the center potato of the 3x3 crop field above without disturbing the others,next_to_potatoes_to_water,water_center_potato_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",break the nearest rock with the hammer while standing to its left,near_rock_to_break,break_rock_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",break the rightmost rock in the area with the hammer while standing above it,near_rocks_to_break_2,break_rightmost_rock_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",pull out the bottommost weed while standing above it,next_to_weeds,remove_lowest_weed_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",cut the bottommost weed with the sickle while standing above it,next_to_weeds,cut_lowest_weed_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",pull out the topmost weed along the left fence by hand,next_to_top_left_weed,remove_top_left_weed_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",cut the topmost weed along the left fence with the sickle,next_to_top_left_weed,cut_top_left_weed_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",harvest the center row of grass from right to left without disturbing the other rows, stopping next to the center potato,near_grassland,,True
+harvest_moon_1,"navigation, interaction",pick up the broken fence piece and slot it back into the fence while staying next to the wall,near_broken_fence,restore_fence_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, menu, interaction",buy material at the carpenter,shopping_area,buy_material_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, menu, interaction",get an estimate for a home expansion at the carpenter,shopping_area,get_home_expansion_estimate_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, menu, interaction",buy a chicken from the animal shop,shopping_area,buy_chicken_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, menu, interaction",buy a cow and name it ABBY,ready_for_cow,buy_cow_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, menu, interaction",sell the 1st chicken at the animal shop,sell_chicken,sell_chicken_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, menu, interaction",buy a cow brush from the tool shop,shopping_area,buy_cow_brush_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, menu, interaction",buy a saddlebag from the tool shop,shopping_area,buy_saddlebag_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, menu, interaction",buy a milker from the tool shop,shopping_area,buy_milker_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, menu, interaction",buy a rice ball,shopping_area,buy_rice_ball_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, menu, interaction",buy a croissant,shopping_area,buy_croissant_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, menu, interaction",buy a cake,shopping_area,buy_cake_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, menu, interaction",buy a grape juice,shopping_area_evening,buy_grape_juice_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, menu, interaction",go to the church to pray,shopping_area,go_to_church_pray_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",open the storage item list,inside_storage,open_storage_list_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",find the rainy money,at_home,find_rainy_money_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",find the lost bird for friend,lost_bird,find_lost_bird_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",speak to the girl with long straight blue hair,picnic,speak_to_blue_hair_girl_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",speak to the girl with short hair,picnic,speak_to_golden_hair_girl_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",speak to the girl with long curly pink hair,picnic,speak_to_pink_hair_girl_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",speak to the girl with long straight blue hair at the winter gathering,winter_gathering,speak_to_blue_hair_girl_wg_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",speak to the girl with long curly pink hair at the winter gathering,winter_gathering,speak_to_pink_hair_girl_wg_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",speak to the girl with red hair and a high ponytail at the winter gathering,winter_gathering,speak_to_red_hair_girl_wg_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",put chicken grass on the leftmost block of the feeding stall,fill_chicken_fodder,fill_chicken_fodder_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",put cow fodder on the upper right feeding stall from the right,fill_cow_fodder,fill_cow_fodder_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_1,"navigation, interaction",place the egg into the incubator while standing against the wall to hatch it,one_egg,hatch_egg_test,"harvest_moon_2, harvest_moon_3",True
+harvest_moon_2,navigation,enter the cow barn,outside_barns,cow_barn_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,navigation,enter the chicken coop,outside_barns,chicken_coop_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",find the lucky money from the clock,at_home,find_lucky_money_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,navigation,enter the hospital,shopping_area,hospital_entrance_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,navigation,enter the tool shop,shopping_area,tool_shop_entrance_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,navigation,enter the carpenter,shopping_area_left,carpenter_entrance_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,navigation,enter the animal shop,shopping_area_low,animal_shop_entrance_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,navigation,enter the library,shopping_area_left,library_entrance_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,navigation,enter the flower shop,shopping_area,flower_shop_entrance_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,navigation,enter the restaurant,shopping_area_low,restaurant_entrance_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",get an estimate for building a bridge,shopping_area_left,get_bridge_estimate_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",buy a milker from the tool shop,shopping_area_tools,buy_milker_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",buy a food set,inside_restaurant,buy_lunch_set_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",buy a beverage set,inside_restaurant,buy_beverage_set_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",buy today's special,inside_restaurant,buy_todays_special_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",go to bed,at_home,go_to_bed_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",read the secret garden sign,outside_home,read_secret_garden_sign_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",read the crop field sign,wandering,read_crop_field_sign_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",cross the 500m line in the cherry cup race,cherry_cup,cross_500m_line_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",cross the 1000m line in the cherry cup race,cherry_cup,cross_1000m_line_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",equip the sickle replacig empty hands,equipment_cabinet,equip_sickle_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",equip the hammer replacig empty hands,equipment_cabinet,equip_hammer_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",equip the fishing rod replacig empty hands,equipment_cabinet,equip_fishing_rod_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",exchange the axe with the net,equipment_cabinet,equip_net_replacing_ax_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",exchange the axe with the rosemary seeds,equipment_cabinet,equip_rosemary_seeds_replacing_ax_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",exchange the sprinkler with the sickle,equipment_cabinet,equip_sickle_replacing_sprinkler_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",exchange the hoe with the fishing net,equipment_cabinet,equip_net_replacing_hoe_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",harvest only the center eggplant of the 3x3 crop field without disturbing the others,next_to_eggplants,harvest_center_eggplant_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",harvest only the center carrot of the 3x3 winter crop field without disturbing the others,next_to_carrots_winter,harvest_center_carrot_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",water only the center potato of the 3x3 crop field without disturbing the others,next_to_crops_to_water,water_center_potato_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",water only the center asparagus of the 3x3 crop field without disturbing the others,next_to_crops_to_water,water_center_asparagus_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",water the 3x3 corn field with the sprinkler while standing at the center,near_corn_sprinkler,water_corn_field_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",cut only the center corn bud of the 3x3 field with the sickle without disturbing the others,near_corn_to_cut,cut_center_corn_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",water the 3x3 cabbage field with the sprinkler while standing at the center,near_cabbage_sprinkler,water_cabbage_field_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",learn how to use computers from the billboard,billboard,read_computers_article_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",learn how to clean boulders from the billboard,billboard,read_boulders_article_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",learn how to sell crops from the billboard,billboard,read_selling_crops_article_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",remove the leftmost weed against the wall,next_to_leftmost_weed,remove_leftmost_weed_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",pick a berry from the left while standing against the treetop,in_grassland,pick_berry_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",pick the berry from above without disturbing the surrounding weeds,in_grassland_2,pick_berry_above_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",speak to the girl with blue twin tails by the billboard,festival_day,speak_to_blue_hair_girl_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",speak to the person with short purple hair standing by the wall,festival_day,speak_to_purple_hair_girl_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",speak to the person with short curly blonde hair,festival_day_2,speak_to_blonde_girl_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",place the egg in the incubator to hatch the chick,one_egg,hatch_egg_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"menu, interaction",buy a cow and name it LUNA,ready_for_cow,buy_cow_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",sell the cow at the animal shop,sell_cow,sell_cow_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",sell the chicken at the animal shop,sell_chicken,sell_chicken_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",get an estimate for building a hothouse,shopping_area_left,get_hothouse_estimate_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, menu, interaction",buy a chicken from the animal shop,ready_for_chicken,buy_chicken_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_2,"navigation, interaction",put chicken grass on the leftmost block,inside_chicken_coop,fill_chicken_fodder_test,"harvest_moon_1, harvest_moon_3",True
+harvest_moon_3,navigation,enter the chicken coop,outside_barns,chicken_coop_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",place the egg in the incubator to hatch the chick,one_egg,hatch_egg_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",put chicken grass on the topmost feeding block,inside_chicken_coop,fill_chicken_fodder_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",read the secret garden sign,outside_home,read_secret_garden_sign_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",read the morning market sign,mainland_port,read_morning_market_sign_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",take the ferry back to the village,mainland_port,take_ferry_back_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",read the storage sign,outside_storage,read_storage_sign_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",speak to Kirk (the ferry staff) in the village,in_village,speak_to_Kirk_village_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",talk to Joe (morning market staff),mainland_port,speak_to_Joe_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",talk to Lukia (flower shop staff),shopping_mall,speak_to_Lukia_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",talk to Lucus (tool shop staff),shopping_mall_upstairs,speak_to_Lucus_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",talk to Lyla (library staff),shopping_mall_upstairs,speak_to_Lyla_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",put cow fodder on the rightmost block,inside_cow_barn,fill_cow_fodder_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,navigation,enter the farm,island_map,farm_entrance_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,navigation,enter the village,island_map,village_entrance_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,navigation,enter the grassland,island_map,grassland_entrance_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,navigation,enter the forest,island_map,forest_entrance_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,navigation,enter the cliff,island_map,cliff_entrance_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,navigation,enter the mountain,island_map,mountain_entrance_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,navigation,enter the shopping mall,mainland_map,shopping_mall_entrance_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,navigation,go to the second floor of the shopping mall,shopping_mall,shopping_mall_second_floor_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,navigation,enter the farmer's union,mainland_map,farmers_union_entrance_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,navigation,enter the aquarium,mainland_map,aquarium_entrance_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,navigation,enter the theatre,mainland_map,theatre_entrance_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, menu, interaction",buy a meal set,shopping_mall,buy_meal_set_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, menu, interaction",buy a flower vase,shopping_mall_winter,buy_flower_vase_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, menu, interaction",buy a horse saddle,shopping_mall_winter_second_floor,buy_horse_saddle_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",choose tea to buy,shopping_mall,choose_tea_to_buy_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",choose asparagus seeds to buy,shopping_mall,choose_asparagus_seeds_to_buy_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",choose coffee to buy,shopping_mall,choose_coffee_to_buy_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",read the ferry sign,in_village,read_ferry_sign_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",find secret savings,at_home,find_secret_savings_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",choose potato seeds to buy,shopping_mall,choose_potato_seeds_to_buy_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",choose turnip seeds to buy,shopping_mall,choose_turnip_seeds_to_buy_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,navigation,enter the hot spring,outside_storage,hot_spring_entrance_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",break the rock in between the two stumps with the hammer while standing to its left,near_rock_to_break,break_rock_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",remove the weed against the fence while standing to its left,near_weed_to_remove,remove_weed_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",pick up the cherry while standing against the weed,in_grassland_near_cherry,pick_up_cherry_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",pick up the berry while standing above it and against the tree on the left,in_grassland_near_berry,pick_up_berry_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, menu, interaction",sell the chicken at the farmer's union,sell_chicken,sell_chicken_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, menu, interaction",buy and only buy a fodder set at the farmer's union,in_farmers_union,buy_fodder_set_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, menu, interaction",buy and only buy horse medicine at the farmer's union,in_farmers_union,buy_horse_medicine_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",speak to Kate (the girl in the light blue skirt) by the cliff and watch fireworks together,fireworks,speak_to_kate_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",water only the center sweet potato of the 3x3 field without disturbing the others,near_spotato_to_water,water_center_spotato_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",water only the center watermelon plant of the 3x3 field without disturbing the others,near_watermelon_to_water,water_center_watermelon_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",harvest only the top-center potato of the 3x3 field while standing below it without disturbing the others,near_potato_to_harvest,harvest_target_potato_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",harvest only the center eggplant of the top 3x3 field without disturbing the others,near_eggplant_to_harvest,harvest_center_eggplant_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction",harvest only the center turnip of the 3x3 turnip field on the left that has 8 turnips planted without disturbing the others,near_turnip_to_harvest,harvest_center_turnip_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, interaction","read through ""Living with Animals"" Chapter 2",at_home,read_animal_ch2_test,"harvest_moon_1, harvest_moon_2",True
+harvest_moon_3,"navigation, menu",check how much money the player May currently has,menu_open,check_player_money_test,"harvest_moon_1, harvest_moon_2",True
