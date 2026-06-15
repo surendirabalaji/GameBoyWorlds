@@ -1,4 +1,6 @@
 from gameboy_worlds.interface.survival_kids.environments import (
     SurvivalKidsEnvironment,
+    SurvivalKidsOCREnvironment,
     SurvivalKidsTestEnvironment,
+    SurvivalKidsTrainEnvironment,
 )

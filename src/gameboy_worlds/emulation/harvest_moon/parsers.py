@@ -158,12 +158,7 @@ class HarvestMoonStateParser(StateParser, ABC):
                 multi_target_paths=region_target_paths,
             )
             named_screen_regions.append(region)
-        super().__init__(pyboy, parameters, named_screen_regions)
-
-    # def is_in_menu(self, current_screen: np.ndarray) -> bool:
-    #     return self.named_region_matches_multi_target(current_screen, "screen", "menu_open")
-
-    
+        super().__init__(pyboy, parameters, named_screen_regions)    
 
     def get_agent_state(self, current_screen: np.ndarray) -> AgentState:
         if self.is_in_dialogue(current_screen):
@@ -242,11 +237,12 @@ class HarvestMoon1Parser(BaseHarvestMoonStateParser):
             ("dialogue_box_top_mid", 68, 11, 22, 8),
             ("dialogue_box_top_short", 71, 11, 15, 8),
             ("dialogue_box_bottom", 0, 105, 160, 35),
-            ("field_middle", 75, 60, 10,10),
             ("item_bed", 0, 40, 40, 40),
             ("item_watercan_above", 56, 85, 15, 35),
             ("item_watercan_right", 55, 80, 30, 20),
             ("item_watercan_below", 56, 70, 15, 30),
+            ("item_cowbell_above", 39, 49, 15, 35),
+            ("item_cowbell_below", 39, 70, 15, 30),
             ("item_sickle_above", 88, 85, 15, 35),
             ("item_sickle_left", 70, 80, 30, 20),
             ("item_sickle_below", 88, 70, 15, 30),
@@ -274,24 +270,39 @@ class HarvestMoon1Parser(BaseHarvestMoonStateParser):
             ("item_pink_hair_girl_left", 32, 68, 33, 22),
             ("item_pink_hair_girl_right", 48, 68, 30, 22),
             ("item_pink_hair_girl_above", 48, 68, 15, 38),
+            ("item_blue_hair_girl_wg_left", 80, 25, 30, 20),  
+            ("item_blue_hair_girl_wg_right", 97, 25, 30, 21),
+            ("item_blue_hair_girl_wg_below", 97, 25, 13, 35), 
+            ("item_pink_hair_girl_wg_left",  32, 68, 33, 22), 
+            ("item_pink_hair_girl_wg_right", 48, 68, 30, 22), 
+            ("item_pink_hair_girl_wg_above", 48, 68, 15, 38), 
+            ("item_red_hair_girl_wg_left", 80, 68, 30, 22),
+            ("item_red_hair_girl_wg_right", 97, 68, 30, 22),
+            ("item_red_hair_girl_wg_above", 97, 68, 13, 40),
             ("item_chicken_stall_block1", 5, 40, 25, 20),
             ("item_next_to_chicken_stall_block1", 5, 55, 25, 25),
             ("item_chicken_silo_left", 100, 40, 30, 30),
             ("item_chicken_silo_below1", 120, 50, 15, 35),
             ("item_chicken_silo_below2", 135, 50, 15, 35),
-            ("item_egg_right", 13, 76, 23, 29),
-            ("item_egg_above", 11, 63, 14, 42),
-            ("item_egg_pickup_right", 25, 70, 11, 30),
-            ("item_egg_pickup_above", 10, 58, 15, 29),
-            ("item_shipping_box_right", 7, 85, 30, 26),
-            ("item_shipping_box_up", 7, 104, 30, 26),
+            ("item_cow_feeding_stall", 55, 25, 30, 45),
+            ("item_cow_feeding_stall_right", 55, 25, 45, 45),
+            ("item_egg_left", 89, 75, 31, 25),
+            ("item_egg_above", 105, 78, 15, 37),
+            ("item_egg_right", 110, 75, 22, 25),
+            ("item_hatching_box", 120, 70, 35, 30), 
             ("turnip_center", 70, 90, 20, 20),
             ("turnip_top", 70, 70, 20, 35),
             ("item_turnip_field", 55, 65, 47, 54),
             ("item_turnip_field_water", 40, 58, 47, 47),
-            # ("item_broken_fence_field", 70, 55, 17, 32),
-            # ("item_fence_up", 50, 55, 50, 10),
-            # ("item_fence_down", 55, 65, 47, 54),
+            ("item_potato_field", 55, 40, 47, 54),
+            ("item_rock_left", 0, 65, 45, 20),
+            ("item_rightmost_rock_above", 55, 60, 33, 40),
+            ("item_weed_above", 15, 65, 30, 50),
+            ("item_top_left_weed", 25, 60, 25, 25),
+            ("item_grassland_right", 50, 60, 35, 30),
+            ("item_center_grassline", 40, 70, 95, 20),
+            ("item_broken_fence_field", 63, 55, 30, 30),
+            ("item_fence_field", 0, 40, 30, 60),
             ("center_sign", 55, 65, 50, 15),
             ("screen_top_half", 0, 0, 160, 65),
             ("screen_bottom_half", 0, 75, 160, 65),
@@ -329,24 +340,28 @@ class HarvestMoon1Parser(BaseHarvestMoonStateParser):
             "dialogue_box_bottom":[
                 "found_rainy_money",
                 "select_material",
+                "select_home_expansion",
                 "select_chicken",
+                "select_selling_chicken",
+                "select_cow",
+                "bought_named_cow",
                 "select_cow_brush",
                 "select_saddlebag",
                 "select_milker",
                 "choose_yes_for_sleep",
                 "fed_spirit",
                 "helped_spirit_earthquake",
-                "select_potato_seeds",
-                "select_potato_seeds_portion",
-                "select_turnip_seeds",
-                "select_turnip_seeds_portion",
                 "select_rice_ball",
                 "select_croissant",
                 "select_cake",
+                "select_grape_juice",
                 "found_bird_for_friend",
                 "speaking_to_blue_hair_girl",
                 "speaking_to_golden_hair_girl",
                 "speaking_to_pink_hair_girl",
+                "speaking_to_blue_hair_girl_wg",
+                "speaking_to_pink_hair_girl_wg",
+                "speaking_to_red_hair_girl_wg",
                 "option_to_pray",
                 "praying",
             ],
@@ -361,6 +376,12 @@ class HarvestMoon1Parser(BaseHarvestMoonStateParser):
             ],
             "item_watercan_right":[
                 "pickup_watercan_left",
+            ],
+            "item_cowbell_above":[
+                "next_to_cowbell_down",
+            ],
+            "item_cowbell_below":[
+                "next_to_cowbell_up",
             ],
             "item_watercan_below":[
                 "pickup_watercan_up",
@@ -447,6 +468,33 @@ class HarvestMoon1Parser(BaseHarvestMoonStateParser):
             "item_pink_hair_girl_above":[
                 "next_to_pink_hair_girl_down",
             ],
+            "item_blue_hair_girl_wg_left": [
+                "next_to_blue_hair_girl_wg_right",
+            ],
+            "item_blue_hair_girl_wg_right": [
+                "next_to_blue_hair_girl_wg_left",
+            ],
+            "item_blue_hair_girl_wg_below": [
+                "next_to_blue_hair_girl_wg_up",
+            ],
+            "item_pink_hair_girl_wg_left": [
+                "next_to_pink_hair_girl_wg_right",
+            ],
+            "item_pink_hair_girl_wg_right": [
+                "next_to_pink_hair_girl_wg_left",
+            ],
+            "item_pink_hair_girl_wg_above": [
+                "next_to_pink_hair_girl_wg_down",
+            ],
+            "item_red_hair_girl_wg_left": [
+                "next_to_red_hair_girl_wg_right",
+            ],
+            "item_red_hair_girl_wg_right": [
+                "next_to_red_hair_girl_wg_left",
+            ],
+            "item_red_hair_girl_wg_above": [
+                "next_to_red_hair_girl_wg_down",
+            ],
             "item_chicken_stall_block1":[
                 "filled_chicken_stall_block1",
             ],
@@ -465,23 +513,23 @@ class HarvestMoon1Parser(BaseHarvestMoonStateParser):
                 "next_to_chicken_silo_up2",
                 "got_fodder_from_chicken_silo_up2",
             ],
-            "item_egg_right": [
-                "next_to_egg_left",
+            "item_cow_feeding_stall": [
+                "cow_feeding_stall_filled",
+            ],
+            "item_cow_feeding_stall_right": [
+                "next_to_cow_feeding_stall_left",
+            ],
+            "item_egg_left": [
+                "next_to_egg_right",
             ],
             "item_egg_above": [
                 "next_to_egg_down",
             ],
-            "item_egg_pickup_right": [
-                "picked_up_egg_right",
+            "item_egg_right": [
+                "next_to_egg_left",
             ],
-            "item_egg_pickup_above": [
-                "picked_up_egg_up",
-            ],
-            "item_shipping_box_right": [
-                "drop_egg_into_shipping_box_right",
-            ],
-            "item_shipping_box_up": [
-                "drop_egg_into_shipping_box_up",
+            "item_hatching_box": [
+                "dropped_egg_into_hatching_box",
             ],
             "dialogue_box_top":[
                 "pick_up_watercan",
@@ -490,15 +538,18 @@ class HarvestMoon1Parser(BaseHarvestMoonStateParser):
             "dialogue_box_top_mid":[
                 "pick_up_sickle",
                 "pick_up_hammer",
+                "pick_up_cowbell",
             ],
             "dialogue_box_top_short":[
                 "pick_up_hoe",
             ],
             "turnip_center":[
-                "finish_watering",
+                "finish_watering_1",
+                "finish_watering_2",
             ],
             "turnip_top":[
-                "ready_to_water",
+                "ready_to_water_1",
+                "ready_to_water_2",
             ],
             "item_turnip_field": [
                 "next_to_center_turnip_down_1",
@@ -512,47 +563,81 @@ class HarvestMoon1Parser(BaseHarvestMoonStateParser):
                 "center_turnip_watered_1",
                 "center_turnip_watered_2",
             ],
-            # "item_broken_fence_field": [
-            #     "picked_up_missing_fence_down",
-            #     "picked_up_missing_fence_up",
-            #     "picked_up_missing_fence_right",
-            #     "picked_up_missing_fence_left",
-            # ],
-            # "item_fence_up": [
-            #     "restored_fence_up",
-            # ],
-            # "item_fence_down": [
-            #     "restored_fence_down",
-            # ],
+            "item_potato_field": [
+                "next_to_center_potato_up_1",
+                "next_to_center_potato_up_2",
+                "next_to_center_potato_below_up_1",
+                "next_to_center_potato_below_up_2",
+                "center_potato_watered_1",
+                "center_potato_watered_2",
+                "center_potato_harvested_1",
+                "center_potato_harvested_2",
+            ],
+            "item_rock_left": [
+                "next_to_rock_right",
+                "rock_cleared",
+            ],
+            "item_rightmost_rock_above": [
+                "next_to_rightmost_rock_down",
+                "rightmost_rock_cleared",
+            ],
+            "item_weed_above": [
+                "next_to_lowest_weed_down",
+                "lowest_weed_removed",
+                "lowest_weed_cut",
+            ],
+            "item_top_left_weed": [
+                "next_to_top_left_weed_up",
+                "top_left_weed_removed",
+                "top_left_weed_cut",
+            ],
+            "item_grassland_right": [
+                "next_to_grassland_left",
+            ],
+            "item_center_grassline": [
+                "center_grass_harvested_1",
+                "center_grass_harvested_2",
+            ],
+            "item_broken_fence_field": [
+                "picked_up_broken_fence_up",
+                "picked_up_broken_fence_down",
+                "picked_up_broken_fence_left",
+                "picked_up_broken_fence_right",
+            ],
+            "item_fence_field": [
+                "restored_fence",
+            ],
             "center_sign":[
                 "outside_carpenter",
                 "outside_animal_shop",
                 "outside_tool_shop",
-                "outside_flower_shop",
                 "outside_restaurant",
+                "outside_juice_bar",
                 "outside_church",
             ],
             "screen_bottom_half":[
                 "bought_material",
+                "home_expansion_estimate",
                 "bought_chicken",
+                "sold_chicken",
                 "bought_cow_brush",
                 "bought_saddlebag",
                 "bought_milker",
-                "bought_potato_seeds",
-                "bought_turnip_seeds",
                 "option_to_buy_rice_ball",
                 "bought_rice_ball",
                 "option_to_buy_croissant",
                 "bought_croissant",
                 "option_to_buy_cake",
                 "bought_cake",
+                "option_to_buy_grape_juice",
+                "bought_grape_juice",
             ],
             "screen_top_half":[
                 "in_carpenter",
                 "in_animal_shop",
                 "in_tool_shop",
                 "in_restaurant",
-                "in_flower_shop",
+                "in_juice_bar",
                 "in_church",
             ],
             "left_border_frame":[
@@ -685,6 +770,27 @@ class HarvestMoon2Parser(BaseHarvestMoonStateParser):
             ("item_distance_markers", 65, 40, 30, 30),
             ("item_potato_field", 32, 40, 50, 45),
             ("item_asparagus_field", 70, 40, 50, 45),
+            ("item_corn_field", 55, 40, 48, 47),
+            ("item_cabbage_field", 55, 40, 48, 47),
+            ("item_center_corn_above", 58, 50, 45, 50),
+            ("item_leftmost_weed_right", 10, 50, 35, 23),
+            ("item_leftmost_weed_above", 10, 50, 20, 43),
+            ("item_berry_left", 70, 39, 32, 31),
+            ("item_berry_above", 68, 38, 18, 48),
+            ("item_chicken_stall_block1", 5, 20, 35, 20),
+            ("item_next_to_chicken_stall_block1", 5, 35, 35, 30),
+            ("item_chicken_silo_left1", 100, 30, 30, 30),
+            ("item_chicken_silo_left2", 100, 40, 30, 30),
+            ("item_chicken_silo_below", 115, 38, 15, 35),
+            ("item_next_to_hatching_box", 113, 60, 37, 40),
+            ("item_hatching_box", 129, 66, 16, 30),
+            ("npc_blue_hair_girl_left", 66, 39, 29, 21),
+            ("npc_blue_hair_girl_below", 72, 28, 16, 39),
+            ("npc_blue_hair_girl_right", 56, 39, 29, 21),
+            ("npc_purple_hair_girl_left", 98, 39, 30, 21),
+            ("npc_purple_hair_girl_below", 114, 31, 16, 39),
+            ("npc_blonde_girl_right", 31, 48, 29, 21),
+            ("npc_blonde_girl_above", 31, 48, 14, 47),
             ("center_sign", 55, 65, 50, 15),
             ("screen_top_half", 0, 0, 160, 65),
             ("screen_bottom_half", 0, 75, 160, 65),
@@ -720,6 +826,17 @@ class HarvestMoon2Parser(BaseHarvestMoonStateParser):
                 "reading_boulders_article",
                 "crops_article_selected",
                 "reading_crops_article",
+                "select_cow",
+                "bought_named_cow",
+                "select_chicken",
+                "select_selling_chicken",
+                "select_selling_cow",
+                "select_hothouse",
+                "select_bridge",
+                "select_milker",
+                "speaking_to_blue_hair_girl",
+                "speaking_to_purple_hair_girl",
+                "speaking_to_blonde_girl",
             ],
             "item_clock_below": [
                 "next_to_clock_up",
@@ -772,9 +889,15 @@ class HarvestMoon2Parser(BaseHarvestMoonStateParser):
                 "center_carrot_harvested_1",
                 "center_carrot_harvested_2",
             ],
+            "item_cabbage_field": [
+                "at_cabbage_center_1",
+                "at_cabbage_center_2",
+                "cabbage_field_watered_1",
+                "cabbage_field_watered_2",
+            ],
             "item_potato_field": [
-                "next_to_center_potato_left_1",
-                "next_to_center_potato_left_2",
+                "next_to_center_potato_up_1",
+                "next_to_center_potato_up_2",
                 "center_potato_watered_1",
                 "center_potato_watered_2",
             ],
@@ -783,6 +906,18 @@ class HarvestMoon2Parser(BaseHarvestMoonStateParser):
                 "next_to_center_asparagus_right_2",
                 "center_asparagus_watered_1",
                 "center_asparagus_watered_2",
+            ],
+            "item_corn_field": [
+                "at_corn_center_1",
+                "at_corn_center_2",
+                "corn_field_watered_1",
+                "corn_field_watered_2",
+            ],
+            "item_center_corn_above": [
+                "next_to_center_corn_down_1",
+                "next_to_center_corn_down_2",
+                "center_corn_cut_1",
+                "center_corn_cut_2",
             ],
             "restaurant_location": [
                 "outside_restaurant_up",
@@ -822,6 +957,7 @@ class HarvestMoon2Parser(BaseHarvestMoonStateParser):
                 "in_library",
                 "in_flower_shop",
                 "in_restaurant",
+                "shop_for_construction_estimates",
             ],
             "screen_bottom_half": [
                 "bought_potato_seeds",
@@ -839,6 +975,12 @@ class HarvestMoon2Parser(BaseHarvestMoonStateParser):
                 "bought_todays_special",
                 "select_todays_special",
                 "option_to_buy_todays_special",
+                "bought_chicken",
+                "sold_cow",
+                "sold_chicken",
+                "hothouse_estimate",
+                "bridge_estimate",
+                "bought_milker",
             ],
             "outside_barns":[
                 "outside_cow_barn_left",
@@ -873,6 +1015,69 @@ class HarvestMoon2Parser(BaseHarvestMoonStateParser):
                 "sickle_equipped",
                 "hammer_equipped",
                 "fishing_rod_equipped",
+            ],
+            "item_leftmost_weed_right": [
+                "next_to_leftmost_weed_left",
+                "leftmost_weed_removed_left",
+            ],
+            "item_leftmost_weed_above": [
+                "next_to_leftmost_weed_down",
+                "leftmost_weed_removed_down",
+            ],
+            "item_berry_left": [
+                "next_to_berry_right",
+                "berry_picked_right",
+            ],
+            "item_berry_above": [
+                "next_to_berry_down_1",
+                "next_to_berry_down_2",
+                "berry_picked_above_1",
+                "berry_picked_above_2",
+            ],
+            "item_chicken_stall_block1": [
+                "filled_chicken_stall_block1",
+            ],
+            "item_next_to_chicken_stall_block1": [
+                "next_to_chicken_stall_block1",
+            ],
+            "item_chicken_silo_left1": [
+                "next_to_chicken_silo_right1",
+                "got_fodder_from_chicken_silo_right1",
+            ],
+            "item_chicken_silo_left2": [
+                "next_to_chicken_silo_right2",
+                "got_fodder_from_chicken_silo_right2",
+            ],
+            "item_chicken_silo_below": [
+                "next_to_chicken_silo_up",
+                "got_fodder_from_chicken_silo_up",
+            ],
+            "item_next_to_hatching_box": [
+                "next_to_hatching_box",
+            ],
+            "item_hatching_box": [
+                "dropped_egg_into_hatching_box",
+            ],
+            "npc_blue_hair_girl_left": [
+                "next_to_blue_hair_girl_right",
+            ],
+            "npc_blue_hair_girl_below": [
+                "next_to_blue_hair_girl_up",
+            ],
+            "npc_blue_hair_girl_right": [
+                "next_to_blue_hair_girl_left",
+            ],
+            "npc_purple_hair_girl_left": [
+                "next_to_purple_hair_girl_right",
+            ],
+            "npc_purple_hair_girl_below": [
+                "next_to_purple_hair_girl_up",
+            ],
+            "npc_blonde_girl_right": [
+                "next_to_blonde_girl_left",
+            ],
+            "npc_blonde_girl_above": [
+                "next_to_blonde_girl_down",
             ],
         }
         super().__init__(
@@ -971,9 +1176,51 @@ class HarvestMoon3Parser(BaseHarvestMoonStateParser):
             ("item_asparagus_seeds_below", 72, 40, 17, 39),
             ("item_right_cow_stall_block", 115, 25, 45, 25),
             ("item_right_cow_stall_block_below", 115, 25, 45, 50),
+            ("item_right_cow_stall_block_left", 95, 35, 55, 35),
+            ("item_cow_stall_block_2", 112, 35, 38, 35),
             ("item_ferry_sign_above", 70, 60, 16, 45),
             ("item_ferry_sign_left", 70, 60, 30, 28),
             ("item_fireplace_below", 105, 40, 15, 40),
+            ("item_rock_left", 95, 55, 30, 25),
+            ("item_target_potato_below", 56, 32, 48, 47),
+            ("item_center_spotato_above", 56, 60, 47, 50),
+            ("item_center_watermelon_above", 30, 25, 49, 54),
+            ("npc_kate_left", 50, 58, 28, 19),
+            ("npc_kate_right", 63, 55, 33, 23),
+            ("npc_kate_below", 63, 39, 16, 40),
+            ("item_weed_left", 70, 0, 50, 45),
+            ("item_cherry_left", 95, 50, 30, 38),
+            ("item_fodder_set_below", 113, 40, 14, 40),
+            ("item_horse_medicine_below", 97, 40, 14, 40),
+            ("item_chicken_silo_left1", 96, 50, 30, 30),
+            ("item_chicken_silo_left2", 96, 65, 30, 30),
+            ("item_chicken_silo_above", 110, 50, 20, 40),
+            ("item_topmost_chicken_stall_block", 115, 36, 35, 29),
+            ("item_next_to_topmost_chicken_stall_block", 97, 36, 53, 29),
+            ("item_fodder_set", 97, 40, 30, 5),
+            ("item_horse_medicine", 97, 40, 30, 5),
+            ("item_next_to_hatching_box", 7, 62, 36, 38),
+            ("item_hatching_box", 7, 62, 23, 38),
+            ("item_stairs", 40, 0, 95, 80),
+            ("item_flower_vase_empty_1", 0, 80, 50, 15),
+            ("item_flower_vase_empty_2", 0, 40, 50, 5),
+            ("item_flower_vase_above", 32, 56, 16, 40),
+            ("item_flower_vase_below", 32, 40, 16, 40),
+            ("item_horse_saddle_empty_1", 78, 80, 80, 15),
+            ("item_horse_saddle_empty_2", 78, 40, 80, 15),
+            ("item_horse_saddle_above", 72, 55, 24, 41),
+            ("item_horse_saddle_below", 78, 40, 17, 39),
+            ("item_center_eggplant_above", 52, 15, 51, 64),
+            ("item_center_eggplant_left", 70, 32, 48, 48),
+            ("menu_box", 106, 0, 53, 122),
+            ("player_top_left", 0, 0, 35, 40),
+            ("item_berry_above", 0, 50, 35, 45),
+            ("sell_animal_section_1", 62, 80, 83, 16),
+            ("sell_animal_section_2", 62, 40, 83, 16),
+            ("item_sell_chicken_below", 80, 40, 15, 40),
+            ("item_sell_chicken_above", 78, 56, 17, 39),
+            ("item_center_turnip_below", 56, 32, 48, 47),
+            ("item_bookshelf_below", 125, 32, 25, 48),
         ]
         override_multi_targets = {
             "dialogue_bottom_right": [
@@ -996,6 +1243,7 @@ class HarvestMoon3Parser(BaseHarvestMoonStateParser):
                 "bought_turnip_seeds",
                 "bought_potato_seeds",
                 "select_meal_set",
+                "speaking_to_kate",
                 "farm_label",
                 "village_label",
                 "grassland_label",
@@ -1006,6 +1254,86 @@ class HarvestMoon3Parser(BaseHarvestMoonStateParser):
                 "farmers_union_label",
                 "aquarium_label",
                 "theatre_label",
+                "selected_fodder_set",
+                "selected_horse_medicine",
+                "bought_from_farmers_union",
+                "bought_from_flower_shop",
+                "animal_sold",
+                "finish_animal_ch2",
+            ],
+            "item_rock_left": [
+                "next_to_rock_right",
+                "rock_cleared",
+            ],
+            "item_target_potato_below": [
+                "next_to_target_potato_up",
+                "target_potato_harvested",
+            ],
+            "item_center_spotato_above": [
+                "next_to_spotato_down",
+                "center_spotato_watered",
+            ],
+            "item_center_watermelon_above": [
+                "next_to_center_watermelon_down",
+                "center_watermelon_watered",
+            ],
+            "npc_kate_left": [
+                "next_to_kate_right",
+            ],
+            "npc_kate_right": [
+                "next_to_kate_left",
+            ],
+            "npc_kate_below": [
+                "next_to_kate_up",
+            ],
+            "item_weed_left": [
+                "next_to_weed_right",
+                "weed_removed",
+            ],
+            "item_cherry_left": [
+                "next_to_cherry_right",
+                "cherry_picked",
+            ],
+            "item_chicken_silo_left1": [
+                "next_to_chicken_silo_right1",
+                "got_fodder_from_chicken_silo_right1",
+            ],
+            "item_chicken_silo_left2": [
+                "next_to_chicken_silo_right2",
+                "got_fodder_from_chicken_silo_right2",
+            ],
+            "item_chicken_silo_above": [
+                "next_to_chicken_silo_down",
+                "got_fodder_from_chicken_silo_down",
+            ],
+            "item_topmost_chicken_stall_block": [
+                "filled_topmost_chicken_stall_block",
+            ],
+            "item_next_to_topmost_chicken_stall_block": [
+                "next_to_topmost_chicken_stall_block",
+            ],
+            "item_next_to_hatching_box": [
+                "next_to_hatching_box",
+            ],
+            "item_hatching_box": [
+                "dropped_egg_into_hatching_box",
+            ],
+            "item_stairs": [
+                "next_to_stairs_1",
+                "next_to_stairs_2",
+                "next_to_stairs_3",
+            ],
+            "item_fodder_set_below": [
+                "next_to_fodder_set_up",
+            ],
+            "item_horse_medicine_below": [
+                "next_to_horse_medicine_up",
+            ],
+            "item_fodder_set": [
+                "picked_fodder_set",
+            ],
+            "item_horse_medicine": [
+                "picked_horse_medicine",
             ],
             "item_storage_sign_below": [
                 "next_to_storage_sign_up",
@@ -1076,6 +1404,67 @@ class HarvestMoon3Parser(BaseHarvestMoonStateParser):
                 "outside_chicken_coop_right",
                 "outside_chicken_coop_up",
             ],
+            "item_flower_vase_empty_1": [
+                "bought_flower_vase_1",
+            ],
+            "item_flower_vase_empty_2": [
+                "bought_flower_vase_2",
+            ],
+            "item_flower_vase_above": [
+                "next_to_vase_down",
+            ],
+            "item_flower_vase_below": [
+                "next_to_vase_up",
+            ],
+            "item_center_eggplant_above": [
+                "next_to_eggplant_down",
+                "center_eggplant_harvested_down",
+            ],
+            "item_center_eggplant_left": [
+                "next_to_eggplant_right",
+                "center_eggplant_harvested_right",
+            ],
+            "menu_box": [
+                "choose_may",
+            ],
+            "player_top_left": [
+                "display_player_status",
+            ],
+            "item_berry_above": [
+                "next_to_berry_down",
+                "berry_picked_above",
+            ],
+            "sell_animal_section_1": [
+                "selling_animal_1",
+            ],
+            "sell_animal_section_2": [
+                "selling_animal_2",
+            ],
+            "item_sell_chicken_below": [
+                "next_to_sell_chicken_up",
+            ],
+            "item_sell_chicken_above": [
+                "next_to_sell_chicken_down",
+            ],
+            "item_center_turnip_below": [
+                "next_to_center_turnip_up",
+                "center_turnip_harvested",
+            ],
+            "item_bookshelf_below": [
+                "next_to_bookshelf_up",
+            ],
+            "item_horse_saddle_empty_1": [
+                "bought_horse_saddle_1",
+            ],
+            "item_horse_saddle_empty_2": [
+                "bought_horse_saddle_2",
+            ],
+            "item_horse_saddle_above": [
+                "next_to_horse_saddle_down",
+            ],
+            "item_horse_saddle_below": [
+                "next_to_horse_saddle_up",
+            ],
             "item_meal_set_empty_1": [
                 "bought_meal_set_1",
             ],
@@ -1103,6 +1492,7 @@ class HarvestMoon3Parser(BaseHarvestMoonStateParser):
                 "aquarium_entrance",
                 "theatre_entrance",
                 "hot_spring_entrance",
+                "shopping_mall_second_floor",
             ],
             "item_tea_above": [
                 "next_to_tea_down",
@@ -1121,6 +1511,12 @@ class HarvestMoon3Parser(BaseHarvestMoonStateParser):
             ],
             "item_right_cow_stall_block_below": [
                 "next_to_right_cow_stall_block_up",
+            ],
+            "item_right_cow_stall_block_left": [
+                "next_to_right_cow_stall_block_right",
+            ],
+            "item_cow_stall_block_2": [
+                "filled_cow_stall_block_right",
             ],
             "item_ferry_sign_above": [
                 "next_to_ferry_sign_down",
