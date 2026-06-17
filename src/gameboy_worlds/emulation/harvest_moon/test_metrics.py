@@ -207,6 +207,23 @@ class NextToWaterCanSubgoal(AnyRegionMatchSubGoal):
         "pickup_watercan_up",
     ]
     
+class PickupCowBellTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+
+    _TERMINATION_NAMED_REGION = "dialogue_box_top_mid"
+    _TERMINATION_TARGET_NAME = "pick_up_cowbell"
+
+class NextToCowBellSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_cowbell"
+    _NAMED_REGIONS = [
+        "item_cowbell_above",
+        "item_cowbell_below",
+    ]
+    _TARGET_NAMES = [
+        "next_to_cowbell_down",
+        "next_to_cowbell_up",
+    ]
+
 class PickupSickleTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
     REQUIRED_PARSER = BaseHarvestMoonStateParser
 
@@ -332,20 +349,17 @@ class NextToEarthquakeSpiritSubgoal(AnyRegionMatchSubGoal):
         "help_spirit_earthquake_down",
     ]
 
-class WaterTurnipTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+class WaterTurnipTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
     REQUIRED_PARSER = BaseHarvestMoonStateParser
-
-    _TERMINATION_NAMED_REGION = "turnip_center"
-    _TERMINATION_TARGET_NAME = "finish_watering"
+    _OR_PAIRS = [
+        ("turnip_center", "finish_watering_1"),
+        ("turnip_center", "finish_watering_2"),
+    ]
 
 class NextToTurnipSubgoal(AnyRegionMatchSubGoal):
     NAME = "next_to_turnip"
-    _NAMED_REGIONS = [
-        "turnip_top",
-    ]
-    _TARGET_NAMES = [
-        "ready_to_water",
-    ]
+    _NAMED_REGIONS = ["turnip_top", "turnip_top"]
+    _TARGET_NAMES = ["ready_to_water_1", "ready_to_water_2"]
     
 class BuyMaterialTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
     REQUIRED_PARSER = BaseHarvestMoonStateParser
@@ -413,6 +427,67 @@ class SelectChickenSubgoal(AnyRegionMatchSubGoal):
         "select_chicken",
     ]
 
+class SelectCowSubgoal(AnyRegionMatchSubGoal):
+    NAME = "selected_cow"
+    _NAMED_REGIONS = [
+        "dialogue_box_bottom",
+    ]
+    _TARGET_NAMES = [
+        "select_cow",
+    ]
+
+class BuyCowTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+
+    _TERMINATION_NAMED_REGION = "dialogue_box_bottom"
+    _TERMINATION_TARGET_NAME = "bought_named_cow"
+
+class SellChickenTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+
+    _TERMINATION_NAMED_REGION = "screen_bottom_half"
+    _TERMINATION_TARGET_NAME = "sold_chicken"
+
+class SelectSellingChickenSubgoal(AnyRegionMatchSubGoal):
+    NAME = "selected_selling_chicken"
+    _NAMED_REGIONS = [
+        "dialogue_box_bottom",
+    ]
+    _TARGET_NAMES = [
+        "select_selling_chicken",
+    ]
+
+# HM2 sell cow task
+class SellCowTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "screen_bottom_half"
+    _TERMINATION_TARGET_NAME = "sold_cow"
+
+class SelectSellingCowSubgoal(AnyRegionMatchSubGoal):
+    NAME = "selected_selling_cow"
+    _NAMED_REGIONS = [
+        "dialogue_box_bottom",
+    ]
+    _TARGET_NAMES = [
+        "select_selling_cow",
+    ]
+
+# HM2 get hothouse estimate task
+class ShopForConstructionEstimatesSubgoal(AnyRegionMatchSubGoal):
+    NAME = "shop_for_construction_estimates"
+    _NAMED_REGIONS = ["screen_top_half"]
+    _TARGET_NAMES = ["shop_for_construction_estimates"]
+
+class SelectHothouseSubgoal(AnyRegionMatchSubGoal):
+    NAME = "selected_hothouse"
+    _NAMED_REGIONS = ["dialogue_box_bottom"]
+    _TARGET_NAMES = ["select_hothouse"]
+
+class GetHothouseEstimateTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "screen_bottom_half"
+    _TERMINATION_TARGET_NAME = "hothouse_estimate"
+
 class BuyCowBrushTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
     REQUIRED_PARSER = BaseHarvestMoonStateParser
 
@@ -474,72 +549,6 @@ class SelectMilkerSubgoal(AnyRegionMatchSubGoal):
     ]
     _TARGET_NAMES = [
         "select_milker",
-    ]
-
-class BuyPotatoSeedsTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
-    REQUIRED_PARSER = BaseHarvestMoonStateParser
-
-    _TERMINATION_NAMED_REGION = "screen_bottom_half"
-    _TERMINATION_TARGET_NAME = "bought_potato_seeds"
-    
-class OutsideFlowerShopSubgoal(AnyRegionMatchSubGoal):
-    NAME = "outside_flower_shop"
-    _NAMED_REGIONS = [
-        "center_sign",
-    ]
-    _TARGET_NAMES = [
-        "outside_flower_shop",
-    ]
-    
-class ShopForSeedsSubgoal(AnyRegionMatchSubGoal):
-    NAME = "shop_for_seeds"
-    _NAMED_REGIONS = [
-        "screen_top_half",
-    ]
-    _TARGET_NAMES = [
-        "in_flower_shop",
-    ]
-
-class SelectPotatoSeedsSubgoal(AnyRegionMatchSubGoal):
-    NAME = "selected_potato_seeds"
-    _NAMED_REGIONS = [
-        "dialogue_box_bottom",
-    ]
-    _TARGET_NAMES = [
-        "select_potato_seeds",
-    ]
-    
-class SelectPotatoSeedsOnePortionSubgoal(AnyRegionMatchSubGoal):
-    NAME = "select_potato_seeds_one_portion"
-    _NAMED_REGIONS = [
-        "dialogue_box_bottom",
-    ]
-    _TARGET_NAMES = [
-        "select_potato_seeds_portion",
-    ]
-    
-class BuyTurnipSeedsTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
-    REQUIRED_PARSER = BaseHarvestMoonStateParser
-
-    _TERMINATION_NAMED_REGION = "screen_bottom_half"
-    _TERMINATION_TARGET_NAME = "bought_turnip_seeds"
-    
-class SelectTurnipSeedsSubgoal(AnyRegionMatchSubGoal):
-    NAME = "selected_turnip_seeds"
-    _NAMED_REGIONS = [
-        "dialogue_box_bottom",
-    ]
-    _TARGET_NAMES = [
-        "select_turnip_seeds",
-    ]
-    
-class SelectTurnipSeedsOnePortionSubgoal(AnyRegionMatchSubGoal):
-    NAME = "select_turnip_seeds_two_portion"
-    _NAMED_REGIONS = [
-        "dialogue_box_bottom",
-    ]
-    _TARGET_NAMES = [
-        "select_turnip_seeds_portion",
     ]
 
 class BuyRiceBallTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
@@ -630,6 +639,48 @@ class BuyCakeOptionSubgoal(AnyRegionMatchSubGoal):
     ]
     _TARGET_NAMES = [
         "option_to_buy_cake",
+    ]
+
+class OutsideJuiceBarSubgoal(AnyRegionMatchSubGoal):
+    NAME = "outside_juice_bar"
+    _NAMED_REGIONS = [
+        "center_sign",
+    ]
+    _TARGET_NAMES = [
+        "outside_juice_bar",
+    ]
+
+class ShopForJuiceSubgoal(AnyRegionMatchSubGoal):
+    NAME = "shop_for_juice"
+    _NAMED_REGIONS = [
+        "screen_top_half",
+    ]
+    _TARGET_NAMES = [
+        "in_juice_bar",
+    ]
+
+class BuyGrapeJuiceTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+
+    _TERMINATION_NAMED_REGION = "screen_bottom_half"
+    _TERMINATION_TARGET_NAME = "bought_grape_juice"
+
+class SelectGrapeJuiceSubgoal(AnyRegionMatchSubGoal):
+    NAME = "selected_grape_juice"
+    _NAMED_REGIONS = [
+        "dialogue_box_bottom",
+    ]
+    _TARGET_NAMES = [
+        "select_grape_juice",
+    ]
+
+class BuyGrapeJuiceOptionSubgoal(AnyRegionMatchSubGoal):
+    NAME = "buy_grape_juice_option"
+    _NAMED_REGIONS = [
+        "screen_bottom_half",
+    ]
+    _TARGET_NAMES = [
+        "option_to_buy_grape_juice",
     ]
 
 class GoToChurchPrayTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
@@ -820,6 +871,61 @@ class NextToPinkHairGirlSubgoal(AnyRegionMatchSubGoal):
         "next_to_pink_hair_girl_left",
     ]
 
+# HM1 winter gathering speak to girl tasks
+class SpeakToBlueHairGirlWGTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_bottom"
+    _TERMINATION_TARGET_NAME = "speaking_to_blue_hair_girl_wg"
+
+class NextToBlueHairGirlWGSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_blue_hair_girl_wg"
+    _NAMED_REGIONS = [
+        "item_blue_hair_girl_wg_below",
+        "item_blue_hair_girl_wg_left",
+        "item_blue_hair_girl_wg_right",
+    ]
+    _TARGET_NAMES = [
+        "next_to_blue_hair_girl_wg_up",
+        "next_to_blue_hair_girl_wg_right",
+        "next_to_blue_hair_girl_wg_left",
+    ]
+
+class SpeakToPinkHairGirlWGTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_bottom"
+    _TERMINATION_TARGET_NAME = "speaking_to_pink_hair_girl_wg"
+
+class NextToPinkHairGirlWGSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_pink_hair_girl_wg"
+    _NAMED_REGIONS = [
+        "item_pink_hair_girl_wg_above",
+        "item_pink_hair_girl_wg_left",
+        "item_pink_hair_girl_wg_right",
+    ]
+    _TARGET_NAMES = [
+        "next_to_pink_hair_girl_wg_down",
+        "next_to_pink_hair_girl_wg_right",
+        "next_to_pink_hair_girl_wg_left",
+    ]
+
+class SpeakToRedHairGirlWGTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_bottom"
+    _TERMINATION_TARGET_NAME = "speaking_to_red_hair_girl_wg"
+
+class NextToRedHairGirlWGSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_red_hair_girl_wg"
+    _NAMED_REGIONS = [
+        "item_red_hair_girl_wg_above",
+        "item_red_hair_girl_wg_left",
+        "item_red_hair_girl_wg_right",
+    ]
+    _TARGET_NAMES = [
+        "next_to_red_hair_girl_wg_down",
+        "next_to_red_hair_girl_wg_right",
+        "next_to_red_hair_girl_wg_left",
+    ]
+
 class FillChickenFodderBlock1TerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
     REQUIRED_PARSER = BaseHarvestMoonStateParser
 
@@ -861,7 +967,47 @@ class PickupChickenFodderSubgoal(AnyRegionMatchSubGoal):
         "got_fodder_from_chicken_silo_up2",
     ]
 
+# HM1 fill cow fodder task
+class NextToCowFeedingStallSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_cow_feeding_stall_with_fodder"
+    _NAMED_REGIONS = [
+        "item_cow_feeding_stall_right",
+    ]
+    _TARGET_NAMES = [
+        "next_to_cow_feeding_stall_left",
+    ]
 
+class FillUpperRightCowStallTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_cow_feeding_stall"
+    _TERMINATION_TARGET_NAME = "cow_feeding_stall_filled"
+
+# HM2 fill chicken fodder subgoals
+class NextToChickenSilo2Subgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_chicken_silo"
+    _NAMED_REGIONS = [
+        "item_chicken_silo_left1",
+        "item_chicken_silo_left2",
+        "item_chicken_silo_below",
+    ]
+    _TARGET_NAMES = [
+        "next_to_chicken_silo_right1",
+        "next_to_chicken_silo_right2",
+        "next_to_chicken_silo_up",
+    ]
+
+class PickupChickenFodder2Subgoal(AnyRegionMatchSubGoal):
+    NAME = "picked_up_chicken_fodder_from_silo"
+    _NAMED_REGIONS = [
+        "item_chicken_silo_left1",
+        "item_chicken_silo_left2",
+        "item_chicken_silo_below",
+    ]
+    _TARGET_NAMES = [
+        "got_fodder_from_chicken_silo_right1",
+        "got_fodder_from_chicken_silo_right2",
+        "got_fodder_from_chicken_silo_up",
+    ]
 
 
 class HospitalEntranceTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
@@ -974,47 +1120,15 @@ class OutsideFlowerShop2Subgoal(AnyRegionMatchSubGoal):
     ]
 
 
-class SelectPotatoSeeds2Subgoal(AnyRegionMatchSubGoal):
-    NAME = "selected_potato_seeds"
-    _NAMED_REGIONS = [
-        "screen_bottom_half",
-    ]
-    _TARGET_NAMES = [
-        "select_potato_seeds",
-    ]
-    
-class SelectPotatoSeedsOnePortion2Subgoal(AnyRegionMatchSubGoal):
-    NAME = "select_potato_seeds_one_portion"
-    _NAMED_REGIONS = [
-        "screen_bottom_half",
-    ]
-    _TARGET_NAMES = [
-        "select_potato_seeds_portion",
-    ]
-    
-class BuyAsparagusSeedsTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+class SelectBridgeSubgoal(AnyRegionMatchSubGoal):
+    NAME = "selected_bridge"
+    _NAMED_REGIONS = ["dialogue_box_bottom"]
+    _TARGET_NAMES = ["select_bridge"]
+
+class GetBridgeEstimateTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
     REQUIRED_PARSER = BaseHarvestMoonStateParser
-
     _TERMINATION_NAMED_REGION = "screen_bottom_half"
-    _TERMINATION_TARGET_NAME = "bought_asparagus_seeds"
-  
-class SelectAsparagusSeeds2Subgoal(AnyRegionMatchSubGoal):
-    NAME = "selected_asparagus_seeds"
-    _NAMED_REGIONS = [
-        "screen_bottom_half",
-    ]
-    _TARGET_NAMES = [
-        "select_asparagus_seeds",
-    ]
-
-class SelectAsparagusSeedsOnePortion2Subgoal(AnyRegionMatchSubGoal):
-    NAME = "select_asparagus_seeds_two_portion"
-    _NAMED_REGIONS = [
-        "screen_bottom_half",
-    ]
-    _TARGET_NAMES = [
-        "select_asparagus_seeds_portion",
-    ]
+    _TERMINATION_TARGET_NAME = "bridge_estimate"
 
 
 class RestaurantEntranceTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
@@ -1309,23 +1423,82 @@ class EquipNetReplacingHoeTerminateMetric(RegionMatchTerminationMetric, Terminat
 # HM1 pick up egg task
 class NextToEggSubgoal(AnyRegionMatchSubGoal):
     NAME = "next_to_egg"
-    _NAMED_REGIONS = ["item_egg_right", "item_egg_above"]
-    _TARGET_NAMES = ["next_to_egg_left", "next_to_egg_down"]
+    _NAMED_REGIONS = ["item_egg_left", "item_egg_above", "item_egg_right"]
+    _TARGET_NAMES = ["next_to_egg_right", "next_to_egg_down", "next_to_egg_left"]
 
-class PickedUpEggSubgoal(AnyRegionMatchSubGoal):
-    NAME = "picked_up_egg"
-    _NAMED_REGIONS = ["item_egg_pickup_right", "item_egg_pickup_above"]
-    _TARGET_NAMES = ["picked_up_egg_right", "picked_up_egg_up"]
+# HM1 hatch egg task
+class HatchEggTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_hatching_box"
+    _TERMINATION_TARGET_NAME = "dropped_egg_into_hatching_box"
 
-class ShipEggTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+# HM1 break rock task
+class NextToRockFromLeftSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_rock_from_left"
+    _NAMED_REGIONS = ["item_rock_left"]
+    _TARGET_NAMES = ["next_to_rock_right"]
+
+class BreakRockTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_rock_left"
+    _TERMINATION_TARGET_NAME = "rock_cleared"
+
+class NextToRightmostRockAboveSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_rightmost_rock_above"
+    _NAMED_REGIONS = ["item_rightmost_rock_above"]
+    _TARGET_NAMES = ["next_to_rightmost_rock_down"]
+
+class BreakRightmostRockTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_rightmost_rock_above"
+    _TERMINATION_TARGET_NAME = "rightmost_rock_cleared"
+
+# HM1 weed removal tasks
+class NextToTopLeftWeedFromRightSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_top_left_weed"
+    _NAMED_REGIONS = ["item_top_left_weed"]
+    _TARGET_NAMES = ["next_to_top_left_weed_up"]
+
+class RemoveTopLeftWeedTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_top_left_weed"
+    _TERMINATION_TARGET_NAME = "top_left_weed_removed"
+
+class CutTopLeftWeedTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_top_left_weed"
+    _TERMINATION_TARGET_NAME = "top_left_weed_cut"
+
+class NextToLowestWeedFromAboveSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_lowest_weed_from_above"
+    _NAMED_REGIONS = ["item_weed_above"]
+    _TARGET_NAMES = ["next_to_lowest_weed_down"]
+
+class RemoveLowestWeedTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_weed_above"
+    _TERMINATION_TARGET_NAME = "lowest_weed_removed"
+
+class CutLowestWeedTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_weed_above"
+    _TERMINATION_TARGET_NAME = "lowest_weed_cut"
+
+# HM1 harvest center grassline task
+class NextToGrasslandFromLeftSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_grassland_right"
+    _NAMED_REGIONS = ["item_grassland_right"]
+    _TARGET_NAMES = ["next_to_grassland_left"]
+
+class HarvestCenterGrasslineTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
     _OR_PAIRS = [
-        ("item_shipping_box_right", "drop_egg_into_shipping_box_right"),
-        ("item_shipping_box_up", "drop_egg_into_shipping_box_up"),
+        ("item_center_grassline", "center_grass_harvested_1"),
+        ("item_center_grassline", "center_grass_harvested_2"),
     ]
 
 # HM1 restore fence task
-class PickedUpMissingFenceSubgoal(AnyRegionMatchSubGoal):
-    NAME = "picked_up_missing_fence"
+class PickedUpBrokenFenceSubgoal(AnyRegionMatchSubGoal):
+    NAME = "picked_up_broken_fence"
     _NAMED_REGIONS = [
         "item_broken_fence_field",
         "item_broken_fence_field",
@@ -1333,16 +1506,15 @@ class PickedUpMissingFenceSubgoal(AnyRegionMatchSubGoal):
         "item_broken_fence_field",
     ]
     _TARGET_NAMES = [
-        "picked_up_missing_fence_down",
-        "picked_up_missing_fence_up",
-        "picked_up_missing_fence_right",
-        "picked_up_missing_fence_left",
+        "picked_up_broken_fence_up",
+        "picked_up_broken_fence_down",
+        "picked_up_broken_fence_left",
+        "picked_up_broken_fence_right",
     ]
 
 class RestoreFenceTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
     _OR_PAIRS = [
-        ("item_fence_up", "restored_fence_up"),
-        ("item_fence_down", "restored_fence_down"),
+        ("item_fence_field", "restored_fence"),
     ]
 
 # HM1 harvest turnip task
@@ -1383,12 +1555,23 @@ class HarvestCenterEggplantTerminateMetric(MultiRegionMatchTerminationMetric, Te
 class NextToCenterPotatoSubgoal(AnyRegionMatchSubGoal):
     NAME = "next_to_center_potato"
     _NAMED_REGIONS = ["item_potato_field", "item_potato_field"]
-    _TARGET_NAMES = ["next_to_center_potato_left_1", "next_to_center_potato_left_2"]
+    _TARGET_NAMES = ["next_to_center_potato_up_1", "next_to_center_potato_up_2"]
 
 class WaterCenterPotatoTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
     _OR_PAIRS = [
         ("item_potato_field", "center_potato_watered_1"),
         ("item_potato_field", "center_potato_watered_2"),
+    ]
+
+class NextToCenterPotatoBelowSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_center_potato_below"
+    _NAMED_REGIONS = ["item_potato_field", "item_potato_field"]
+    _TARGET_NAMES = ["next_to_center_potato_below_up_1", "next_to_center_potato_below_up_2"]
+
+class HarvestCenterPotatoTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    _OR_PAIRS = [
+        ("item_potato_field", "center_potato_harvested_1"),
+        ("item_potato_field", "center_potato_harvested_2"),
     ]
 
 class NextToCenterAsparagusSubgoal(AnyRegionMatchSubGoal):
@@ -1400,6 +1583,42 @@ class WaterCenterAsparagusTerminateMetric(MultiRegionMatchTerminationMetric, Ter
     _OR_PAIRS = [
         ("item_asparagus_field", "center_asparagus_watered_1"),
         ("item_asparagus_field", "center_asparagus_watered_2"),
+    ]
+
+# HM2 water corn field task
+class AtCornCenterSubgoal(AnyRegionMatchSubGoal):
+    NAME = "at_corn_center"
+    _NAMED_REGIONS = ["item_corn_field", "item_corn_field"]
+    _TARGET_NAMES = ["at_corn_center_1", "at_corn_center_2"]
+
+class WaterCornFieldTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    _OR_PAIRS = [
+        ("item_corn_field", "corn_field_watered_1"),
+        ("item_corn_field", "corn_field_watered_2"),
+    ]
+
+# HM2 water cabbage field task
+class AtCabbageCenterSubgoal(AnyRegionMatchSubGoal):
+    NAME = "at_cabbage_center"
+    _NAMED_REGIONS = ["item_cabbage_field", "item_cabbage_field"]
+    _TARGET_NAMES = ["at_cabbage_center_1", "at_cabbage_center_2"]
+
+class WaterCabbageFieldTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    _OR_PAIRS = [
+        ("item_cabbage_field", "cabbage_field_watered_1"),
+        ("item_cabbage_field", "cabbage_field_watered_2"),
+    ]
+
+# HM2 cut center corn task
+class NextToCenterCornSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_center_corn"
+    _NAMED_REGIONS = ["item_center_corn_above", "item_center_corn_above"]
+    _TARGET_NAMES = ["next_to_center_corn_down_1", "next_to_center_corn_down_2"]
+
+class CutCenterCornTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    _OR_PAIRS = [
+        ("item_center_corn_above", "center_corn_cut_1"),
+        ("item_center_corn_above", "center_corn_cut_2"),
     ]
 
 class NextToCenterCarrotSubgoal(AnyRegionMatchSubGoal):
@@ -1470,6 +1689,118 @@ class ReadCropsArticleTerminateMetric(RegionMatchTerminationMetric, TerminationM
     REQUIRED_PARSER = BaseHarvestMoonStateParser
     _TERMINATION_NAMED_REGION = "dialogue_box_bottom"
     _TERMINATION_TARGET_NAME = "reading_crops_article"
+
+# HM2 weed tasks
+class NextToLeftmostWeedSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_leftmost_weed"
+    _NAMED_REGIONS = [
+        "item_leftmost_weed_right",
+        "item_leftmost_weed_above",
+    ]
+    _TARGET_NAMES = [
+        "next_to_leftmost_weed_left",
+        "next_to_leftmost_weed_down",
+    ]
+
+class RemoveLeftmostWeedTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    _OR_PAIRS = [
+        ("item_leftmost_weed_right", "leftmost_weed_removed_left"),
+        ("item_leftmost_weed_above", "leftmost_weed_removed_down"),
+    ]
+
+# HM2 pick berry task
+class NextToBerrySubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_berry"
+    _NAMED_REGIONS = [
+        "item_berry_left",
+    ]
+    _TARGET_NAMES = [
+        "next_to_berry_right",
+    ]
+
+class PickBerryTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    _OR_PAIRS = [
+        ("item_berry_left", "berry_picked_right"),
+    ]
+
+class NextToBerryAboveSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_berry_above"
+    _NAMED_REGIONS = [
+        "item_berry_above",
+        "item_berry_above",
+    ]
+    _TARGET_NAMES = [
+        "next_to_berry_down_1",
+        "next_to_berry_down_2",
+    ]
+
+class PickBerryAboveTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    _OR_PAIRS = [
+        ("item_berry_above", "berry_picked_above_1"),
+        ("item_berry_above", "berry_picked_above_2"),
+    ]
+
+# HM2 speak to girl tasks
+class NextToBlueHairGirl2Subgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_blue_hair_girl"
+    _NAMED_REGIONS = [
+        "npc_blue_hair_girl_left",
+        "npc_blue_hair_girl_below",
+        "npc_blue_hair_girl_right",
+    ]
+    _TARGET_NAMES = [
+        "next_to_blue_hair_girl_right",
+        "next_to_blue_hair_girl_up",
+        "next_to_blue_hair_girl_left",
+    ]
+
+class SpeakToBlueHairGirl2TerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_bottom"
+    _TERMINATION_TARGET_NAME = "speaking_to_blue_hair_girl"
+
+class NextToPurpleHairGirlSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_purple_hair_girl"
+    _NAMED_REGIONS = [
+        "npc_purple_hair_girl_left",
+        "npc_purple_hair_girl_below",
+    ]
+    _TARGET_NAMES = [
+        "next_to_purple_hair_girl_right",
+        "next_to_purple_hair_girl_up",
+    ]
+
+class SpeakToPurpleHairGirlTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_bottom"
+    _TERMINATION_TARGET_NAME = "speaking_to_purple_hair_girl"
+
+class NextToBlondeGirlSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_blonde_girl"
+    _NAMED_REGIONS = [
+        "npc_blonde_girl_right",
+        "npc_blonde_girl_above",
+    ]
+    _TARGET_NAMES = [
+        "next_to_blonde_girl_left",
+        "next_to_blonde_girl_down",
+    ]
+
+class SpeakToBlondeGirlTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_bottom"
+    _TERMINATION_TARGET_NAME = "speaking_to_blonde_girl"
+
+# HM2 hatch egg task
+class HarvestMoon2NextToHatchingBoxSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_hatching_box"
+    _NAMED_REGIONS = ["item_next_to_hatching_box"]
+    _TARGET_NAMES = ["next_to_hatching_box"]
+
+class HarvestMoon2HatchEggTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_hatching_box"
+    _TERMINATION_TARGET_NAME = "dropped_egg_into_hatching_box"
 
 ## HM3
 class NextToSecretGardenSign3Subgoal(AnyRegionMatchSubGoal):
@@ -1657,6 +1988,33 @@ class NextToLylaSubgoal(AnyRegionMatchSubGoal):
         "next_to_lyla_left",
     ]
 
+class BuyHorseSaddleTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _OR_PAIRS = [
+        ("item_horse_saddle_empty_1", "bought_horse_saddle_1"),
+        ("item_horse_saddle_empty_2", "bought_horse_saddle_2"),
+    ]
+
+class NextToHorseSaddleSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_horse_saddle"
+    _NAMED_REGIONS = ["item_horse_saddle_above", "item_horse_saddle_below"]
+    _TARGET_NAMES = ["next_to_horse_saddle_down", "next_to_horse_saddle_up"]
+
+class BuyFlowerVaseTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _OR_PAIRS = [
+        ("item_flower_vase_empty_1", "bought_flower_vase_1"),
+        ("item_flower_vase_empty_2", "bought_flower_vase_2"),
+    ]
+    _ALL_PAIRS = [
+        ("dialogue_box_bottom", "bought_from_flower_shop"),
+    ]
+
+class NextToVaseSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_vase"
+    _NAMED_REGIONS = ["item_flower_vase_above", "item_flower_vase_below"]
+    _TARGET_NAMES = ["next_to_vase_down", "next_to_vase_up"]
+
 class BuyMealSetTerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
     REQUIRED_PARSER = BaseHarvestMoonStateParser
     _OR_PAIRS = [
@@ -1699,20 +2057,153 @@ class SelectCoffeeSubgoal(AnyRegionMatchSubGoal):
         "select_coffee",
     ]
 
-class FillCowFodderBlock3TerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
-    REQUIRED_PARSER = BaseHarvestMoonStateParser
+class NextToWeed3Subgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_weed"
+    _NAMED_REGIONS = ["item_weed_left"]
+    _TARGET_NAMES = ["next_to_weed_right"]
 
-    _TERMINATION_NAMED_REGION = "item_right_cow_stall_block"
-    _TERMINATION_TARGET_NAME = "filled_right_cow_stall_block"
+class RemoveWeed3TerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_weed_left"
+    _TERMINATION_TARGET_NAME = "weed_removed"
+
+class NextToCherrySubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_cherry"
+    _NAMED_REGIONS = ["item_cherry_left"]
+    _TARGET_NAMES = ["next_to_cherry_right"]
+
+class PickUpCherry3TerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_cherry_left"
+    _TERMINATION_TARGET_NAME = "cherry_picked"
+
+class SpeakToKateTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_bottom"
+    _TERMINATION_TARGET_NAME = "speaking_to_kate"
+
+class NextToKateSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_kate"
+    _NAMED_REGIONS = [
+        "npc_kate_left",
+        "npc_kate_right",
+        "npc_kate_below",
+    ]
+    _TARGET_NAMES = [
+        "next_to_kate_right",
+        "next_to_kate_left",
+        "next_to_kate_up",
+    ]
+
+class NextToCenterSPotatoSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_center_spotato"
+    _NAMED_REGIONS = ["item_center_spotato_above"]
+    _TARGET_NAMES = ["next_to_spotato_down"]
+
+class WaterCenterSPotato3TerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    _OR_PAIRS = [
+        ("item_center_spotato_above", "center_spotato_watered"),
+    ]
+
+class NextToCenterWatermelonSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_center_watermelon"
+    _NAMED_REGIONS = ["item_center_watermelon_above"]
+    _TARGET_NAMES = ["next_to_center_watermelon_down"]
+
+class WaterCenterWatermelon3TerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_center_watermelon_above"
+    _TERMINATION_TARGET_NAME = "center_watermelon_watered"
+
+class NextToTargetPotatoBelowSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_target_potato_below"
+    _NAMED_REGIONS = ["item_target_potato_below"]
+    _TARGET_NAMES = ["next_to_target_potato_up"]
+
+class HarvestTargetPotato3TerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    _OR_PAIRS = [
+        ("item_target_potato_below", "target_potato_harvested"),
+    ]
+
+# HM3 harvest center eggplant top 3x3 field task
+class NextToCenterEggplantTopSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_center_eggplant"
+    _NAMED_REGIONS = ["item_center_eggplant_above", "item_center_eggplant_left"]
+    _TARGET_NAMES = ["next_to_eggplant_down", "next_to_eggplant_right"]
+
+class HarvestCenterEggplantTop3TerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    _OR_PAIRS = [
+        ("item_center_eggplant_above", "center_eggplant_harvested_down"),
+        ("item_center_eggplant_left", "center_eggplant_harvested_right"),
+    ]
+
+class NextToBookshelfSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_bookshelf"
+    _NAMED_REGIONS = ["item_bookshelf_below"]
+    _TARGET_NAMES = ["next_to_bookshelf_up"]
+
+class ReadAnimalCh2TerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_bottom"
+    _TERMINATION_TARGET_NAME = "finish_animal_ch2"
+
+# HM3 harvest center turnip task
+class NextToCenterTurnip3Subgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_center_turnip_below"
+    _NAMED_REGIONS = ["item_center_turnip_below"]
+    _TARGET_NAMES = ["next_to_center_turnip_up"]
+
+class HarvestCenterTurnip3TerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_center_turnip_below"
+    _TERMINATION_TARGET_NAME = "center_turnip_harvested"
+
+class NextToSellChicken3Subgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_sell_chicken"
+    _NAMED_REGIONS = ["item_sell_chicken_below", "item_sell_chicken_above"]
+    _TARGET_NAMES = ["next_to_sell_chicken_up", "next_to_sell_chicken_down"]
+
+class SellChicken3TerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _OR_PAIRS = [
+        ("sell_animal_section_1", "selling_animal_1"),
+        ("sell_animal_section_2", "selling_animal_2"),
+    ]
+    _ALL_PAIRS = [
+        ("dialogue_box_bottom", "animal_sold"),
+    ]
+
+class NextToBerry3Subgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_berry_above"
+    _NAMED_REGIONS = ["item_berry_above"]
+    _TARGET_NAMES = ["next_to_berry_down"]
+
+class PickBerry3TerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_berry_above"
+    _TERMINATION_TARGET_NAME = "berry_picked_above"
+
+class CheckPlayerMoneySubgoal(AnyRegionMatchSubGoal):
+    NAME = "choose_may"
+    _NAMED_REGIONS = ["menu_box"]
+    _TARGET_NAMES = ["choose_may"]
+
+class CheckPlayerMoneyTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "player_top_left"
+    _TERMINATION_TARGET_NAME = "display_player_status"
+
+class FillCowFodderBlock3TerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _OR_PAIRS = [
+        ("item_right_cow_stall_block", "filled_right_cow_stall_block"),
+        ("item_cow_stall_block_2", "filled_cow_stall_block_right"),
+    ]
 
 class NextToCowFodderBlock3Subgoal(AnyRegionMatchSubGoal):
     NAME = "next_to_rightmost_cow_fodder_block"
-    _NAMED_REGIONS = [
-        "item_right_cow_stall_block_below",
-    ]
-    _TARGET_NAMES = [
-        "next_to_right_cow_stall_block_up",
-    ]
+    _NAMED_REGIONS = ["item_right_cow_stall_block_below", "item_right_cow_stall_block_left"]
+    _TARGET_NAMES = ["next_to_right_cow_stall_block_up", "next_to_right_cow_stall_block_right"]
 
 class FarmEntranceTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
     REQUIRED_PARSER = BaseHarvestMoonStateParser
@@ -1794,6 +2285,16 @@ class NearShoppingMallSubgoal(AnyRegionMatchSubGoal):
         "shopping_mall_label",
     ]
 
+class ShoppingMallSecondFloorTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "entrance"
+    _TERMINATION_TARGET_NAME = "shopping_mall_second_floor"
+
+class NextToStairsSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_stairs"
+    _NAMED_REGIONS = ["item_stairs", "item_stairs", "item_stairs"]
+    _TARGET_NAMES = ["next_to_stairs_1", "next_to_stairs_2", "next_to_stairs_3"]
+
 class FarmersUnionEntranceTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
     REQUIRED_PARSER = BaseHarvestMoonStateParser
 
@@ -1857,4 +2358,89 @@ class NearHotSpringSubgoal(AnyRegionMatchSubGoal):
         "outside_hot_spring_right",
         "outside_hot_spring_up",
     ]
+
+# HM3 hatch egg task
+class HarvestMoon3NextToHatchingBoxSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_hatching_box"
+    _NAMED_REGIONS = ["item_next_to_hatching_box"]
+    _TARGET_NAMES = ["next_to_hatching_box"]
+
+class HarvestMoon3HatchEggTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_hatching_box"
+    _TERMINATION_TARGET_NAME = "dropped_egg_into_hatching_box"
+
+# HM3 fill chicken fodder subgoals
+class NextToChickenSilo3Subgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_chicken_silo"
+    _NAMED_REGIONS = [
+        "item_chicken_silo_left1",
+        "item_chicken_silo_left2",
+        "item_chicken_silo_above",
+    ]
+    _TARGET_NAMES = [
+        "next_to_chicken_silo_right1",
+        "next_to_chicken_silo_right2",
+        "next_to_chicken_silo_down",
+    ]
+
+class PickupChickenFodder3Subgoal(AnyRegionMatchSubGoal):
+    NAME = "picked_up_chicken_fodder_from_silo"
+    _NAMED_REGIONS = [
+        "item_chicken_silo_left1",
+        "item_chicken_silo_left2",
+        "item_chicken_silo_above",
+    ]
+    _TARGET_NAMES = [
+        "got_fodder_from_chicken_silo_right1",
+        "got_fodder_from_chicken_silo_right2",
+        "got_fodder_from_chicken_silo_down",
+    ]
+
+class NextToTopmostChickenStallBlockSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_topmost_chicken_stall_block_with_fodder"
+    _NAMED_REGIONS = ["item_next_to_topmost_chicken_stall_block"]
+    _TARGET_NAMES = ["next_to_topmost_chicken_stall_block"]
+
+class FillTopmostChickenStallBlockTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "item_topmost_chicken_stall_block"
+    _TERMINATION_TARGET_NAME = "filled_topmost_chicken_stall_block"
+
+class NextToFodderSetSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_fodder_set"
+    _NAMED_REGIONS = ["item_fodder_set_below"]
+    _TARGET_NAMES = ["next_to_fodder_set_up"]
+
+class SelectedFodderSetSubgoal(AnyRegionMatchSubGoal):
+    NAME = "selected_fodder_set"
+    _NAMED_REGIONS = ["dialogue_box_bottom"]
+    _TARGET_NAMES = ["selected_fodder_set"]
+
+class BuyFodderSet3TerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    _ALL_PAIRS = [("dialogue_box_bottom", "bought_from_farmers_union"), ("item_fodder_set", "picked_fodder_set")]
+
+class NextToHorseMedicineSubgoal(AnyRegionMatchSubGoal):
+    NAME = "next_to_horse_medicine"
+    _NAMED_REGIONS = ["item_horse_medicine_below"]
+    _TARGET_NAMES = ["next_to_horse_medicine_up"]
+
+class SelectedHorseMedicineSubgoal(AnyRegionMatchSubGoal):
+    NAME = "selected_horse_medicine"
+    _NAMED_REGIONS = ["dialogue_box_bottom"]
+    _TARGET_NAMES = ["selected_horse_medicine"]
+
+class BuyHorseMedicine3TerminateMetric(MultiRegionMatchTerminationMetric, TerminationMetric):
+    _ALL_PAIRS = [("dialogue_box_bottom", "bought_from_farmers_union"), ("item_horse_medicine", "picked_horse_medicine")]
+
+# HM1 home expansion estimate task
+class SelectHomeExpansionSubgoal(AnyRegionMatchSubGoal):
+    NAME = "selected_home_expansion"
+    _NAMED_REGIONS = ["dialogue_box_bottom"]
+    _TARGET_NAMES = ["select_home_expansion"]
+
+class GetHomeExpansionEstimateTerminateMetric(RegionMatchTerminationMetric, TerminationMetric):
+    REQUIRED_PARSER = BaseHarvestMoonStateParser
+    _TERMINATION_NAMED_REGION = "screen_bottom_half"
+    _TERMINATION_TARGET_NAME = "home_expansion_estimate"
 

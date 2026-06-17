@@ -1,22 +1,118 @@
 game,name,description,states
 harvest_moon_1,at_home,Inside the farmhouse,at_home
 harvest_moon_1,shopping_area,In the shopping area,shopping_area
+harvest_moon_1,shopping_area_evening,In the shopping area at night,shopping_area_evening
 harvest_moon_1,on_farm,On the farm,"outside_barns, outside_storage, near_storage_shed"
 harvest_moon_1,inside_storage,Inside the storage shed,inside_storage
-harvest_moon_1,inside_chicken_coop,Inside the chicken coop,"fill_chicken_fodder"
-harvest_moon_1,farming,Tending to crops at various stages,"water_turnips"
-harvest_moon_1,lost_bird_mission,Mission to help friend find lost bird,"lost_bird"
-harvest_moon_1,earthquake_event,After an earthquake event,"earthquake"
-harvest_moon_1,harvest_spirit,Interaction with harvest spirit,"picked_apple"
+harvest_moon_1,in_chicken_coop,Inside the chicken coop,fill_chicken_fodder
+harvest_moon_1,in_chicken_coop_with_eggs,Inside the chicken coop with eggs,in_chicken_coop_with_eggs
+harvest_moon_1,in_crop_field,In the crop field,in_crop_field
+harvest_moon_1,water_turnips,Next to turnips that need watering,water_turnips
+harvest_moon_1,all_seeds_planted,All seeds have been planted,all_seeds_planted
+harvest_moon_1,budding_turnips,Turnips starting to bud,budding_turnips
+harvest_moon_1,grown_turnip,Turnips fully grown,grown_turnip
+harvest_moon_1,turnip_harvest,Harvesting turnips,turnip_harvest
+harvest_moon_1,lost_bird_mission,Mission to help friend find lost bird,lost_bird
+harvest_moon_1,earthquake_event,After an earthquake event,earthquake
+harvest_moon_1,harvest_spirit,Interaction with harvest spirit,picked_apple
 harvest_moon_1,picnic,Attending a picnic event,picnic
-harvest_moon_2,on_farm,On the farm,"wandering,outside_barns, outside_home"
+harvest_moon_1,sell_chicken,In animal shop while capable of selling a chicken,sell_chicken
+harvest_moon_1,next_to_potatoes,Next to the harvesting potato field,next_to_potatoes
+harvest_moon_1,next_to_potatoes_to_water,Next to potatoes ready to water,next_to_potatoes_to_water
+harvest_moon_1,next_to_top_left_weed,Next to weeds to be cleared,"next_to_top_left_weed, next_to_weeds"
+harvest_moon_1,next_to_turnips,Next to the turnip field,next_to_turnips
+harvest_moon_1,next_to_turnips_to_water,Next to turnips ready to water,next_to_turnips_to_water
+harvest_moon_1,near_broken_fence,Near a broken fence,near_broken_fence
+harvest_moon_1,near_grass,Near the field with grass planted,near_grassland
+harvest_moon_1,near_rock_to_break_summer,Near a rock to break in summer,near_rock_to_break
+harvest_moon_1,near_rocks_to_break_spring,Near rocks to break in spring,near_rocks_to_break_2
+harvest_moon_1,inside_cow_barn,Inside the cow barn,fill_cow_fodder
+harvest_moon_1,ready_for_cow,Set up ready to buy a cow,ready_for_cow
+harvest_moon_1,bought_chicken,After purchasing a chicken,bought_chicken
+harvest_moon_1,find_nina,Looking for Nina in the village,find_nina
+harvest_moon_1,nina_missing_again,Nina is missing again,nina_missing_again
+harvest_moon_1,meet_red_girl,Meeting the red-haired girl,meet_red_girl
+harvest_moon_1,summarize_first_year,End of first year summary,summarize_first_year
+harvest_moon_1,windy_day,During a windy day,windy_day
+harvest_moon_1,winter_gathering,Winter gathering event,winter_gathering
+harvest_moon_1,hatched_chick,After a chick has hatched,hatched_chick
+harvest_moon_1,get_horse,Getting a horse,get_horse
+harvest_moon_1,one_egg,One egg available in the chicken coop,one_egg
+harvest_moon_1,storage_cow_bell,Near storage with cow bell,storage_cow_bell
+harvest_moon_1,hot_escape,Hot escape event,hot_escape
+harvest_moon_2,wandering,Wandering on the farm,wandering
+harvest_moon_2,on_the_farm,On the farm,"outside_barns, outside_home"
 harvest_moon_2,at_home,Inside the farmhouse,at_home
-harvest_moon_2,shopping_area,In the shopping area,"shopping_area, shopping_area_left,shopping_area_low"
-harvest_moon_2,inside_shops,Inside the shops,"inside_animal_shop, inside_flower_shop, inside_restaurant"
+harvest_moon_2,shopping_area,In the shopping area,"shopping_area, shopping_area_left, shopping_area_low"
+harvest_moon_2,shopping_area_summer,In the shopping area during summer,shopping_area_summer
+harvest_moon_2,shopping_area_tools,In the tools section of the shopping area,shopping_area_tools
+harvest_moon_2,inside_animal_shop,Inside the animal shop,inside_animal_shop
+harvest_moon_2,inside_chicken_coop,Inside the chicken coop,inside_chicken_coop
+harvest_moon_2,inside_flower_shop,Inside the flower shop,inside_flower_shop
+harvest_moon_2,inside_restaurant,Inside the restaurant,inside_restaurant
+harvest_moon_2,billboard,At the billboard,billboard
+harvest_moon_2,sell_chicken,In the shopping area while capable of selling a chicken,sell_chicken
+harvest_moon_2,sell_cow,In the shopping area while capable of selling a cow,sell_cow
+harvest_moon_2,festival_day,Festival day event,"festival_day, festival_day_2"
+harvest_moon_2,thanksgiving_festival,Thanksgiving festival event,thanksgiving_festival
+harvest_moon_2,cherry_cup,Cherry cup event,cherry_cup
+harvest_moon_2,in_grassland,In the grassland in spring,"in_grassland, in_grassland_2, in_grassland_spring"
+harvest_moon_2,near_cabbage_sprinkler,Near the cabbage ready to be watered,near_cabbage_sprinkler
+harvest_moon_2,near_carrot_sprinkler,Near the carrot ready to be watered,near_carrot_sprinkler
+harvest_moon_2,near_corn_sprinkler,Near the corn ready to be watered,near_corn_sprinkler
+harvest_moon_2,near_corn_to_cut,Near corn ready to be cut,near_corn_to_cut
+harvest_moon_2,fall_first_year,First year of fall,fall_first_year
+harvest_moon_2,next_to_carrots_winter,Next to carrots in winter,next_to_carrots_winter
+harvest_moon_2,winter_blizzard,During a winter blizzard,winter_blizzard
+harvest_moon_2,next_to_crops_to_water,Next to crops ready to water,next_to_crops_to_water
+harvest_moon_2,next_to_eggplants,Next to the eggplants,next_to_eggplants
+harvest_moon_2,next_to_leftmost_weed,Next to the leftmost weed,next_to_leftmost_weed
+harvest_moon_2,ready_for_chicken,Set up ready to buy a chicken,ready_for_chicken
+harvest_moon_2,ready_for_cow,Set up ready to buy a cow,ready_for_cow
+harvest_moon_2,harvest_carrot_winter,Harvesting carrots in winter,harvest_carrot_winter
+harvest_moon_2,harvest_eggplant,Harvesting eggplants,harvest_eggplant
+harvest_moon_2,water_potato,Watering potatoes,water_potato
+harvest_moon_2,bought_cow,After purchasing a cow,bought_cow
+harvest_moon_2,first_chicken,After getting the first chicken,first_chicken
+harvest_moon_2,meet_green_hair,Meeting the green-haired character,meet_green_hair
+harvest_moon_2,blue_hair_invitation,Blue-haired character invitation event,blue_hair_invitation
+harvest_moon_2,getting_married,Two characters show up to announce getting married,getting_married
+harvest_moon_2,equipment_cabinet,At the equipment cabinet,equipment_cabinet
+harvest_moon_2,get_horse,Getting a horse event,get_horse
+harvest_moon_2,broken_hoe,Hoe has broken,broken_hoe
+harvest_moon_2,one_egg,One egg available in the chicken coop,one_egg
+harvest_moon_2,mole_game,Playing the mole game,mole_game
 harvest_moon_3,at_home,Inside the farmhouse at home,at_home
-harvest_moon_3,island_exploration,Exploring the island map,"island_map"
+harvest_moon_3,island_exploration,Exploring the island map,island_map
 harvest_moon_3,in_village,In the village,in_village
 harvest_moon_3,on_farm,On the farm,"outside_barns, outside_home, outside_storage"
 harvest_moon_3,inside_cow_barn,Inside the cow barn,inside_cow_barn
-harvest_moon_3,mainland_exploration,On the mainland,"mainland_map, mainland_port"
-harvest_moon_3,shopping_mall,In the shopping mall,"shopping_mall, shopping_mall_upstairs"
+harvest_moon_3,mainland_map,On the mainland map,mainland_map
+harvest_moon_3,mainland_port,At the mainland port,mainland_port
+harvest_moon_3,shopping_mall,In the shopping mall,shopping_mall
+harvest_moon_3,shopping_mall_upstairs,On the upper floor of the shopping mall,shopping_mall_upstairs
+harvest_moon_3,shopping_mall_winter,In the shopping mall during winter,shopping_mall_winter
+harvest_moon_3,shopping_mall_winter_second_floor,On the second floor of the shopping mall in winter,shopping_mall_winter_second_floor
+harvest_moon_3,fireworks,During the fireworks event,fireworks
+harvest_moon_3,sell_chicken,In the farmer's union while capable of selling a chicken,sell_chicken
+harvest_moon_3,one_egg,One egg available in the chicken coop,one_egg
+harvest_moon_3,two_eggs,Two eggs available in the chicken coop,two_eggs
+harvest_moon_3,menu_open,Game menu is open,menu_open
+harvest_moon_3,select_tools,Selecting tools from menu,select_tools
+harvest_moon_3,in_farmers_union_winter,Inside the farmer's union during winter,in_farmers_union
+harvest_moon_3,in_farmers_union_summer,Inside the farmer's union during summer,in_farmers_union_2
+harvest_moon_3,in_grassland_near_berry,In the grassland near the berry,in_grassland_near_berry
+harvest_moon_3,in_grassland_near_cherry,In the grassland near the cherry,in_grassland_near_cherry
+harvest_moon_3,near_asparagus_to_water,Near asparagus ready to be watered,near_asparagus_to_water
+harvest_moon_3,near_eggplant_to_harvest,Near eggplants ready to harvest,near_eggplant_to_harvest
+harvest_moon_3,near_eggplant_water,Near eggplants ready to water,near_eggplant_water_2
+harvest_moon_3,near_potato_to_harvest,Near potatoes ready to harvest,near_potato_to_harvest
+harvest_moon_3,near_spotato_to_water,Near sweet potatoes ready to water,near_spotato_to_water
+harvest_moon_3,near_turnip_to_harvest,Near turnips ready to harvest,near_turnip_to_harvest
+harvest_moon_3,near_watermelon_to_water,Near watermelons ready to water,near_watermelon_to_water
+harvest_moon_3,near_weed_to_remove,Near a weed to remove,near_weed_to_remove
+harvest_moon_3,near_rock_to_break,Near a rock to break,near_rock_to_break
+harvest_moon_3,ready_for_cow,Set up ready to buy a cow,ready_for_cow
+harvest_moon_3,harvest_turnip,Harvesting turnips,harvest_turnip
+harvest_moon_3,inside_chicken_coop,Inside the chicken coop,inside_chicken_coop
+harvest_moon_3,clean_field,In the clean field without weed stumps and rocks,clean_field

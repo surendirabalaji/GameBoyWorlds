@@ -34,7 +34,12 @@ def get_logger(
         logging.Logger: Configured logger instance.
     """
     fmt_str = "%(asctime)s, [%(levelname)s, %(custom_path)s:%(lineno)d] %(message)s"
-    logging.basicConfig(format=fmt_str)
+    # Note: deliberately not passing format=fmt_str here — fmt_str requires
+    # record.custom_path, which only RelativePathFormatter (below) sets. The
+    # root logger's handler uses a plain Formatter, so giving it fmt_str
+    # would raise a KeyError whenever another logger (e.g. asyncio) propagates
+    # a record to root.
+    logging.basicConfig()
     logger = logging.getLogger("GameBoyWorlds-Server")
     if add_console:
         logger.handlers.clear()

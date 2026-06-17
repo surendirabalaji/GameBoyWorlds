@@ -14,6 +14,8 @@ from gameboy_worlds.emulation.harvest_moon.test_metrics import (
     OutsideStorageSubgoal,
     PickupWaterCanTerminateMetric,
     NextToWaterCanSubgoal,
+    PickupCowBellTerminateMetric,
+    NextToCowBellSubgoal,
     PickupSickleTerminateMetric,
     NextToSickleSubgoal,
     PickupHoeTerminateMetric,
@@ -34,10 +36,21 @@ from gameboy_worlds.emulation.harvest_moon.test_metrics import (
     OutsideCarpenter1Subgoal,
     ShopForMaterialSubgoal,
     SelectMaterialSubgoal,
+    SelectHomeExpansionSubgoal,
+    GetHomeExpansionEstimateTerminateMetric,
     BuyChickenTerminateMetric,
+    BuyCowTerminateMetric,
+    SellChickenTerminateMetric,
+    SellCowTerminateMetric,
+    SelectSellingCowSubgoal,
+    ShopForConstructionEstimatesSubgoal,
+    SelectHothouseSubgoal,
+    GetHothouseEstimateTerminateMetric,
     OutsideAnimalShop1Subgoal,
     ShopForAnimalSubgoal,
     SelectChickenSubgoal,
+    SelectCowSubgoal,
+    SelectSellingChickenSubgoal,
     BuyCowBrushTerminateMetric,
     BuySaddlebagTerminateMetric,
     BuyMilkerTerminateMetric,
@@ -46,14 +59,6 @@ from gameboy_worlds.emulation.harvest_moon.test_metrics import (
     SelectCowBrushSubgoal,
     SelectSaddlebagSubgoal,
     SelectMilkerSubgoal,
-    BuyPotatoSeedsTerminateMetric,
-    OutsideFlowerShopSubgoal,
-    ShopForSeedsSubgoal,
-    SelectPotatoSeedsSubgoal,
-    SelectPotatoSeedsOnePortionSubgoal,
-    BuyTurnipSeedsTerminateMetric,
-    SelectTurnipSeedsSubgoal,
-    SelectTurnipSeedsOnePortionSubgoal,
     BuyRiceBallTerminateMetric,
     OutsideRestaurantSubgoal,
     ShopForFoodSubgoal,
@@ -65,6 +70,11 @@ from gameboy_worlds.emulation.harvest_moon.test_metrics import (
     BuyCakeTerminateMetric,
     SelectCakeSubgoal,
     BuyCakeOptionSubgoal,
+    OutsideJuiceBarSubgoal,
+    ShopForJuiceSubgoal,
+    BuyGrapeJuiceTerminateMetric,
+    SelectGrapeJuiceSubgoal,
+    BuyGrapeJuiceOptionSubgoal,
     GoToChurchPrayTerminateMetric,
     OutsideChurchSubgoal,
     InsideChurchSubgoal,
@@ -76,6 +86,12 @@ from gameboy_worlds.emulation.harvest_moon.test_metrics import (
     FindLostBirdTerminateMetric,
     NextToLostBirdSubgoal,
     SpeakToBlueHairGirlTerminateMetric,
+    SpeakToBlueHairGirlWGTerminateMetric,
+    NextToBlueHairGirlWGSubgoal,
+    SpeakToPinkHairGirlWGTerminateMetric,
+    NextToPinkHairGirlWGSubgoal,
+    SpeakToRedHairGirlWGTerminateMetric,
+    NextToRedHairGirlWGSubgoal,
     NextToBlueHairGirlSubgoal,
     SpeakToGoldenHairGirlTerminateMetric,
     NextToGoldenHairGirlSubgoal,
@@ -85,6 +101,10 @@ from gameboy_worlds.emulation.harvest_moon.test_metrics import (
     NextToChickenSiloSubgoal,
     PickupChickenFodderSubgoal,
     NextToChickenFodderBlock1Subgoal,
+    NextToCowFeedingStallSubgoal,
+    FillUpperRightCowStallTerminateMetric,
+    NextToChickenSilo2Subgoal,
+    PickupChickenFodder2Subgoal,
     ReadVillageSignTerminateMetric,
     NextToVillageSignSubgoal,
     ReadFarmSignTerminateMetric,
@@ -107,11 +127,8 @@ from gameboy_worlds.emulation.harvest_moon.test_metrics import (
     NextToClockSubgoal,
     FlowerShopEntranceTerminateMetric,
     OutsideFlowerShop2Subgoal,
-    SelectPotatoSeeds2Subgoal,
-    SelectPotatoSeedsOnePortion2Subgoal,
-    BuyAsparagusSeedsTerminateMetric,
-    SelectAsparagusSeeds2Subgoal,
-    SelectAsparagusSeedsOnePortion2Subgoal,
+    SelectBridgeSubgoal,
+    GetBridgeEstimateTerminateMetric,
     RestaurantEntranceTerminateMetric,
     OutsideRestaurant2Subgoal,
     BuyLunchSetTerminateMetric,
@@ -145,10 +162,21 @@ from gameboy_worlds.emulation.harvest_moon.test_metrics import (
     HoeSelected3Subgoal,
     EquipNetReplacingHoeTerminateMetric,
     NextToEggSubgoal,
-    PickedUpEggSubgoal,
-    ShipEggTerminateMetric,
-    # PickedUpMissingFenceSubgoal,
-    # RestoreFenceTerminateMetric,
+    HatchEggTerminateMetric,
+    NextToRockFromLeftSubgoal,
+    BreakRockTerminateMetric,
+    NextToRightmostRockAboveSubgoal,
+    BreakRightmostRockTerminateMetric,
+    NextToLowestWeedFromAboveSubgoal,
+    RemoveLowestWeedTerminateMetric,
+    CutLowestWeedTerminateMetric,
+    NextToTopLeftWeedFromRightSubgoal,
+    RemoveTopLeftWeedTerminateMetric,
+    CutTopLeftWeedTerminateMetric,
+    NextToGrasslandFromLeftSubgoal,
+    HarvestCenterGrasslineTerminateMetric,
+    PickedUpBrokenFenceSubgoal,
+    RestoreFenceTerminateMetric,
     NextToCenterTurnipSubgoal,
     HarvestCenterTurnipTerminateMetric,
     NextToCenterTurnipLeftSubgoal,
@@ -164,20 +192,78 @@ from gameboy_worlds.emulation.harvest_moon.test_metrics import (
     HarvestCenterCarrotTerminateMetric,
     NextToCenterPotatoSubgoal,
     WaterCenterPotatoTerminateMetric,
+    NextToCenterPotatoBelowSubgoal,
+    HarvestCenterPotatoTerminateMetric,
     NextToCenterAsparagusSubgoal,
     WaterCenterAsparagusTerminateMetric,
+    AtCornCenterSubgoal,
+    WaterCornFieldTerminateMetric,
+    AtCabbageCenterSubgoal,
+    WaterCabbageFieldTerminateMetric,
+    NextToCenterCornSubgoal,
+    CutCenterCornTerminateMetric,
     ComputersArticleSelectedSubgoal,
     ReadComputersArticleTerminateMetric,
     BouldersArticleSelectedSubgoal,
     ReadBouldersArticleTerminateMetric,
     CropsArticleSelectedSubgoal,
     ReadCropsArticleTerminateMetric,
+    NextToLeftmostWeedSubgoal,
+    RemoveLeftmostWeedTerminateMetric,
+    NextToBerrySubgoal,
+    PickBerryTerminateMetric,
+    NextToBerryAboveSubgoal,
+    PickBerryAboveTerminateMetric,
+    NextToBlueHairGirl2Subgoal,
+    SpeakToBlueHairGirl2TerminateMetric,
+    NextToPurpleHairGirlSubgoal,
+    SpeakToPurpleHairGirlTerminateMetric,
+    NextToBlondeGirlSubgoal,
+    SpeakToBlondeGirlTerminateMetric,
+    HarvestMoon2NextToHatchingBoxSubgoal,
+    HarvestMoon2HatchEggTerminateMetric,
     ReadyToPickNetSubgoal,
     EquipNetReplacingAxTerminateMetric,
     ReadyToPickRosemarySeedsSubgoal,
     EquipRosemarySeedsReplacingAxTerminateMetric,
     
     ## HM3
+    NextToWeed3Subgoal,
+    RemoveWeed3TerminateMetric,
+    NextToCherrySubgoal,
+    PickUpCherry3TerminateMetric,
+    HarvestMoon3NextToHatchingBoxSubgoal,
+    HarvestMoon3HatchEggTerminateMetric,
+    NextToChickenSilo3Subgoal,
+    PickupChickenFodder3Subgoal,
+    NextToTopmostChickenStallBlockSubgoal,
+    FillTopmostChickenStallBlockTerminateMetric,
+    NextToFodderSetSubgoal,
+    SelectedFodderSetSubgoal,
+    BuyFodderSet3TerminateMetric,
+    NextToHorseMedicineSubgoal,
+    SelectedHorseMedicineSubgoal,
+    BuyHorseMedicine3TerminateMetric,
+    SpeakToKateTerminateMetric,
+    NextToKateSubgoal,
+    NextToCenterSPotatoSubgoal,
+    ReadAnimalCh2TerminateMetric,
+    NextToBookshelfSubgoal,
+    HarvestCenterTurnip3TerminateMetric,
+    NextToCenterTurnip3Subgoal,
+    SellChicken3TerminateMetric,
+    NextToSellChicken3Subgoal,
+    PickBerry3TerminateMetric,
+    NextToBerry3Subgoal,
+    CheckPlayerMoneyTerminateMetric,
+    CheckPlayerMoneySubgoal,
+    HarvestCenterEggplantTop3TerminateMetric,
+    NextToCenterEggplantTopSubgoal,
+    WaterCenterSPotato3TerminateMetric,
+    NextToCenterWatermelonSubgoal,
+    WaterCenterWatermelon3TerminateMetric,
+    NextToTargetPotatoBelowSubgoal,
+    HarvestTargetPotato3TerminateMetric,
     OutsideChickenCoop3Subgoal,
     NextToSecretGardenSign3Subgoal,
     ReadFerrySignTerminateMetric,
@@ -208,6 +294,10 @@ from gameboy_worlds.emulation.harvest_moon.test_metrics import (
     NextToLucusSubgoal,
     SpeakToLylaTerminateMetric,
     NextToLylaSubgoal,
+    BuyHorseSaddleTerminateMetric,
+    NextToHorseSaddleSubgoal,
+    BuyFlowerVaseTerminateMetric,
+    NextToVaseSubgoal,
     BuyMealSetTerminateMetric,
     SelectMealSetSubgoal,
     BuyCoffeeTerminateMetric,
@@ -229,6 +319,8 @@ from gameboy_worlds.emulation.harvest_moon.test_metrics import (
     NearMountainSubgoal,
     ShoppingMallEntranceTerminateMetric,
     NearShoppingMallSubgoal,
+    ShoppingMallSecondFloorTerminateMetric,
+    NextToStairsSubgoal,
     FarmersUnionEntranceTerminateMetric,
     NearFarmersUnionSubgoal,
     AquariumEntranceTerminateMetric,
@@ -333,6 +425,10 @@ class HarvestMoonPickupWaterCanTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = PickupWaterCanTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([NextToWaterCanSubgoal])
 
+class HarvestMoonPickupCowBellTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = PickupCowBellTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToCowBellSubgoal])
+
 class HarvestMoonPickupSickleTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = PickupSickleTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([NextToSickleSubgoal])
@@ -385,6 +481,14 @@ class HarvestMoonBuyChickenTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = BuyChickenTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([OutsideAnimalShop1Subgoal, ShopForAnimalSubgoal, SelectChickenSubgoal])
 
+class HarvestMoonBuyCowTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BuyCowTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([SelectCowSubgoal])
+
+class HarvestMoonSellChickenTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = SellChickenTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([OutsideAnimalShop1Subgoal, ShopForAnimalSubgoal, SelectSellingChickenSubgoal])
+
 class HarvestMoonBuyCowBrushTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = BuyCowBrushTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([OutsideToolShop1Subgoal, ShopForToolsSubgoal, SelectCowBrushSubgoal])
@@ -396,22 +500,6 @@ class HarvestMoonBuySaddlebagTracker(HarvestMoonTestTracker):
 class HarvestMoonBuyMilkerTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = BuyMilkerTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([OutsideToolShop1Subgoal, ShopForToolsSubgoal, SelectMilkerSubgoal])
-
-class HarvestMoonBuyPotatoSeedsTracker(HarvestMoonTestTracker):
-    """
-    Inherit this class and set TERMINATION_TRUNCATION_METRIC to create a TestTracker for Harvest Moon games.
-    """
-
-    TERMINATION_TRUNCATION_METRIC = BuyPotatoSeedsTerminateMetric
-    SUBGOAL_METRIC = make_subgoal_metric_class([OutsideFlowerShopSubgoal, ShopForSeedsSubgoal, SelectPotatoSeedsSubgoal, SelectPotatoSeedsOnePortionSubgoal])
-
-class HarvestMoonBuyTurnipSeedsTracker(HarvestMoonTestTracker):
-    """
-    Inherit this class and set TERMINATION_TRUNCATION_METRIC to create a TestTracker for Harvest Moon games.
-    """
-
-    TERMINATION_TRUNCATION_METRIC = BuyTurnipSeedsTerminateMetric
-    SUBGOAL_METRIC = make_subgoal_metric_class([OutsideFlowerShopSubgoal,ShopForSeedsSubgoal, SelectTurnipSeedsSubgoal, SelectTurnipSeedsOnePortionSubgoal])
 
 class HarvestMoonBuyRiceBallTracker(HarvestMoonTestTracker):
     """
@@ -428,6 +516,10 @@ class HarvestMoonBuyCroissantTracker(HarvestMoonTestTracker):
 class HarvestMoonBuyCakeTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = BuyCakeTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([OutsideRestaurantSubgoal, ShopForFoodSubgoal, SelectCakeSubgoal, BuyCakeOptionSubgoal])
+
+class HarvestMoonBuyGrapeJuiceTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BuyGrapeJuiceTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([OutsideJuiceBarSubgoal, ShopForJuiceSubgoal, SelectGrapeJuiceSubgoal, BuyGrapeJuiceOptionSubgoal])
 
 class HarvestMoonGoToChurchPrayTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = GoToChurchPrayTerminateMetric
@@ -469,6 +561,18 @@ class HarvestMoonSpeakToPinkHairGirlTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = SpeakToPinkHairGirlTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([NextToPinkHairGirlSubgoal])
 
+class HarvestMoon1SpeakToBlueHairGirlWGTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = SpeakToBlueHairGirlWGTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToBlueHairGirlWGSubgoal])
+
+class HarvestMoon1SpeakToPinkHairGirlWGTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = SpeakToPinkHairGirlWGTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToPinkHairGirlWGSubgoal])
+
+class HarvestMoon1SpeakToRedHairGirlWGTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = SpeakToRedHairGirlWGTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToRedHairGirlWGSubgoal])
+
 class HarvestMoonFillChickenFodderTracker(HarvestMoonTestTracker):
     """
     Inherit this class and set TERMINATION_TRUNCATION_METRIC to create a TestTracker for Harvest Moon games.
@@ -476,6 +580,10 @@ class HarvestMoonFillChickenFodderTracker(HarvestMoonTestTracker):
 
     TERMINATION_TRUNCATION_METRIC = FillChickenFodderBlock1TerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([NextToChickenSiloSubgoal, PickupChickenFodderSubgoal, NextToChickenFodderBlock1Subgoal])
+
+class HarvestMoon1FillCowFodderTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = FillUpperRightCowStallTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToCowFeedingStallSubgoal])
 
 
 
@@ -519,13 +627,13 @@ class HarvestMoon2FlowerShopEntranceTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = FlowerShopEntranceTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([OutsideFlowerShop2Subgoal])
 
-class HarvestMoon2BuyPotatoSeedsTracker(HarvestMoonTestTracker):
-    TERMINATION_TRUNCATION_METRIC = BuyPotatoSeedsTerminateMetric
-    SUBGOAL_METRIC = make_subgoal_metric_class([SelectPotatoSeeds2Subgoal, SelectPotatoSeedsOnePortion2Subgoal])
+class HarvestMoon2GetBridgeEstimateTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = GetBridgeEstimateTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([OutsideCarpenter2Subgoal, ShopForConstructionEstimatesSubgoal, SelectBridgeSubgoal])
 
-class HarvestMoon2BuyAsparagusSeedsTracker(HarvestMoonTestTracker):
-    TERMINATION_TRUNCATION_METRIC = BuyAsparagusSeedsTerminateMetric
-    SUBGOAL_METRIC = make_subgoal_metric_class([SelectAsparagusSeeds2Subgoal, SelectAsparagusSeedsOnePortion2Subgoal])
+class HarvestMoon2BuyMilkerTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BuyMilkerTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([OutsideToolShop2Subgoal, ShopForToolsSubgoal, SelectMilkerSubgoal])
 
 class HarvestMoon2RestaurantEntranceTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = RestaurantEntranceTerminateMetric
@@ -543,7 +651,7 @@ class HarvestMoon2BuyTodaysSpecialTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = BuyTodaysSpecialTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([SelectTodaysSpecialSubgoal, BuyTodaysSpecialOptionSubgoal])
 
-class HarvestMoon2WriteDiaryAndSleepTracker(HarvestMoonTestTracker):
+class HarvestMoon2GoToBedTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = GoToSleepTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([NextToDiarySubgoal, DiaryOptionSubgoal])
 
@@ -583,13 +691,41 @@ class HarvestMoon2EquipNetReplacingHoeTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = EquipNetReplacingHoeTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([HoeSelected3Subgoal, ReadyToPickNetSubgoal])
 
-class HarvestMoon1ShipEggTracker(HarvestMoonTestTracker):
-    TERMINATION_TRUNCATION_METRIC = ShipEggTerminateMetric
-    SUBGOAL_METRIC = make_subgoal_metric_class([NextToEggSubgoal, PickedUpEggSubgoal])
+class HarvestMoon1HatchEggTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = HatchEggTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToEggSubgoal])
 
-# class HarvestMoon1RestoreFenceTracker(HarvestMoonTestTracker):
-#     TERMINATION_TRUNCATION_METRIC = RestoreFenceTerminateMetric
-#     SUBGOAL_METRIC = make_subgoal_metric_class([PickedUpMissingFenceSubgoal])
+class HarvestMoon1BreakRockTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BreakRockTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToRockFromLeftSubgoal])
+
+class HarvestMoon1BreakRightmostRockTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BreakRightmostRockTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToRightmostRockAboveSubgoal])
+
+class HarvestMoon1RemoveLowestWeedTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = RemoveLowestWeedTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToLowestWeedFromAboveSubgoal])
+
+class HarvestMoon1CutLowestWeedTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = CutLowestWeedTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToLowestWeedFromAboveSubgoal])
+
+class HarvestMoon1RemoveTopLeftWeedTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = RemoveTopLeftWeedTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToTopLeftWeedFromRightSubgoal])
+
+class HarvestMoon1CutTopLeftWeedTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = CutTopLeftWeedTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToTopLeftWeedFromRightSubgoal])
+
+class HarvestMoon1HarvestCenterGrasslineTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = HarvestCenterGrasslineTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToGrasslandFromLeftSubgoal])
+
+class HarvestMoon1RestoreFenceTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = RestoreFenceTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([PickedUpBrokenFenceSubgoal])
 
 class HarvestMoon1HarvestCenterTurnipTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = HarvestCenterTurnipTerminateMetric
@@ -598,6 +734,18 @@ class HarvestMoon1HarvestCenterTurnipTracker(HarvestMoonTestTracker):
 class HarvestMoon1WaterCenterTurnipTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = WaterCenterTurnipTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([NextToCenterTurnipLeftSubgoal])
+
+class HarvestMoon1WaterCenterPotatoTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = WaterCenterPotatoTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToCenterPotatoSubgoal])
+
+class HarvestMoon1HarvestCenterPotatoTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = HarvestCenterPotatoTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToCenterPotatoBelowSubgoal])
+
+class HarvestMoon1GetHomeExpansionEstimateTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = GetHomeExpansionEstimateTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([OutsideCarpenter1Subgoal, ShopForMaterialSubgoal, SelectHomeExpansionSubgoal])
 
 # class HarvestMoon2ShipEggplantTracker(HarvestMoonTestTracker):
 #     TERMINATION_TRUNCATION_METRIC = ShipEggplantTerminateMetric
@@ -627,6 +775,18 @@ class HarvestMoon2WaterCenterAsparagusTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = WaterCenterAsparagusTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([NextToCenterAsparagusSubgoal])
 
+class HarvestMoon2WaterCornFieldTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = WaterCornFieldTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([AtCornCenterSubgoal])
+
+class HarvestMoon2WaterCabbageFieldTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = WaterCabbageFieldTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([AtCabbageCenterSubgoal])
+
+class HarvestMoon2CutCenterCornTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = CutCenterCornTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToCenterCornSubgoal])
+
 class HarvestMoon2ReadComputersArticleTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = ReadComputersArticleTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([ComputersArticleSelectedSubgoal])
@@ -638,6 +798,58 @@ class HarvestMoon2ReadBouldersArticleTracker(HarvestMoonTestTracker):
 class HarvestMoon2ReadCropsArticleTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = ReadCropsArticleTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([CropsArticleSelectedSubgoal])
+
+class HarvestMoon2RemoveLeftmostWeedTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = RemoveLeftmostWeedTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToLeftmostWeedSubgoal])
+
+class HarvestMoon2PickBerryTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = PickBerryTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToBerrySubgoal])
+
+class HarvestMoon2PickBerryAboveTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = PickBerryAboveTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToBerryAboveSubgoal])
+
+class HarvestMoon2SpeakToBlueHairGirlTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = SpeakToBlueHairGirl2TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToBlueHairGirl2Subgoal])
+
+class HarvestMoon2SpeakToPurpleHairGirlTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = SpeakToPurpleHairGirlTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToPurpleHairGirlSubgoal])
+
+class HarvestMoon2SpeakToBlondeGirlTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = SpeakToBlondeGirlTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToBlondeGirlSubgoal])
+
+class HarvestMoon2HatchEggTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = HarvestMoon2HatchEggTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([HarvestMoon2NextToHatchingBoxSubgoal])
+
+class HarvestMoon2BuyCowTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BuyCowTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([SelectCowSubgoal])
+
+class HarvestMoon2SellCowTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = SellCowTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([ShopForAnimalSubgoal, SelectSellingCowSubgoal])
+
+class HarvestMoon2SellChickenTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = SellChickenTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([ShopForAnimalSubgoal, SelectSellingChickenSubgoal])
+
+class HarvestMoon2GetHothouseEstimateTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = GetHothouseEstimateTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([OutsideCarpenter2Subgoal, ShopForConstructionEstimatesSubgoal, SelectHothouseSubgoal])
+
+class HarvestMoon2BuyChickenTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BuyChickenTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([ShopForAnimalSubgoal, SelectChickenSubgoal])
+
+class HarvestMoon2FillChickenFodderTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = FillChickenFodderBlock1TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToChickenSilo2Subgoal, PickupChickenFodder2Subgoal, NextToChickenFodderBlock1Subgoal])
 
 ## TO DO
 class HarvestMoonReadNoticeBoardTracker(HarvestMoonTestTracker):
@@ -723,6 +935,14 @@ class HarvestMoon3SpeakToLylaTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = SpeakToLylaTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([NextToLylaSubgoal])
 
+class HarvestMoon3BuyHorseSaddleTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BuyHorseSaddleTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToHorseSaddleSubgoal])
+
+class HarvestMoon3BuyFlowerVaseTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BuyFlowerVaseTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToVaseSubgoal])
+
 class HarvestMoon3BuyMealSetTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = BuyMealSetTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([SelectMealSetSubgoal])
@@ -763,6 +983,10 @@ class HarvestMoon3ShoppingMallEntranceTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = ShoppingMallEntranceTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([NearShoppingMallSubgoal])
 
+class HarvestMoon3ShoppingMallSecondFloorTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = ShoppingMallSecondFloorTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToStairsSubgoal])
+
 class HarvestMoon3FarmersUnionEntranceTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = FarmersUnionEntranceTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([NearFarmersUnionSubgoal])
@@ -778,3 +1002,71 @@ class HarvestMoon3TheatreEntranceTracker(HarvestMoonTestTracker):
 class HarvestMoon3HotSpringEntranceTracker(HarvestMoonTestTracker):
     TERMINATION_TRUNCATION_METRIC = HotSpringEntranceTerminateMetric
     SUBGOAL_METRIC = make_subgoal_metric_class([NearHotSpringSubgoal])
+
+class HarvestMoon3BreakRockTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BreakRockTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToRockFromLeftSubgoal])
+
+class HarvestMoon3RemoveWeedTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = RemoveWeed3TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToWeed3Subgoal])
+
+class HarvestMoon3PickUpCherryTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = PickUpCherry3TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToCherrySubgoal])
+
+class HarvestMoon3HatchEggTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = HarvestMoon3HatchEggTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([HarvestMoon3NextToHatchingBoxSubgoal])
+
+class HarvestMoon3FillChickenFodderTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = FillTopmostChickenStallBlockTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToChickenSilo3Subgoal, PickupChickenFodder3Subgoal, NextToTopmostChickenStallBlockSubgoal])
+
+class HarvestMoon3BuyFodderSetTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BuyFodderSet3TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToFodderSetSubgoal, SelectedFodderSetSubgoal])
+
+class HarvestMoon3BuyHorseMedicineTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BuyHorseMedicine3TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToHorseMedicineSubgoal, SelectedHorseMedicineSubgoal])
+
+class HarvestMoon3SpeakToKateTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = SpeakToKateTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToKateSubgoal])
+
+class HarvestMoon3WaterCenterWatermelonTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = WaterCenterWatermelon3TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToCenterWatermelonSubgoal])
+
+class HarvestMoon3WaterCenterSPotatoTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = WaterCenterSPotato3TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToCenterSPotatoSubgoal])
+
+class HarvestMoon3HarvestTargetPotatoTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = HarvestTargetPotato3TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToTargetPotatoBelowSubgoal])
+
+class HarvestMoon3ReadAnimalCh2Tracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = ReadAnimalCh2TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToBookshelfSubgoal])
+
+class HarvestMoon3HarvestCenterTurnipTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = HarvestCenterTurnip3TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToCenterTurnip3Subgoal])
+
+class HarvestMoon3SellChickenTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = SellChicken3TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToSellChicken3Subgoal])
+
+class HarvestMoon3PickBerryTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = PickBerry3TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToBerry3Subgoal])
+
+class HarvestMoon3CheckPlayerMoneyTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = CheckPlayerMoneyTerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([CheckPlayerMoneySubgoal])
+
+class HarvestMoon3HarvestCenterEggplantTopTracker(HarvestMoonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = HarvestCenterEggplantTop3TerminateMetric
+    SUBGOAL_METRIC = make_subgoal_metric_class([NextToCenterEggplantTopSubgoal])

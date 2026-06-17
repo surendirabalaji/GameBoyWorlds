@@ -4,7 +4,7 @@ from typing import Any, Dict, Optional, Set
 
 import numpy as np
 
-from gameboy_worlds.emulation.tracker import MetricGroup
+from gameboy_worlds.emulation.tracker import MetricGroup, OCRegionMetric
 from gameboy_worlds.emulation.survival_kids.parsers import (
     AgentState,
     SurvivalKidsParser,
@@ -178,3 +178,78 @@ class SurvivalKidsVitalMetrics(MetricGroup):
             "times_dehydrated": self._times_dehydrated,
         }
 
+
+class SurvivalKidsHudMetrics(MetricGroup):
+    NAME = "survival_kids_hud"
+    REQUIRED_PARSER = SurvivalKidsParser
+
+    _REGIONS = [
+        "status_bar",
+        "hp_area",
+        "hunger_area",
+        "thirst_area",
+        "stamina_area",
+        "equipped_items_area",
+        "equipped_item_area",
+        "pack_icon_area",
+    ]
+    _CHANGE_MAE_THRESHOLD = 10
+
+    def reset(self, first: bool = False):  # noqa: ARG002
+        self._baselines: Dict[str, Optional[np.ndarray]] = {
+            region: None for region in self._REGIONS
+        }
+        self._mae: Dict[str, float] = {region: 0.0 for region in self._REGIONS}
+        self._changed: Dict[str, bool] = {region: False for region in self._REGIONS}
+
+    def close(self):
+        self.final_metrics = {
+            f"{region}_changed": self._changed[region] for region in self._REGIONS
+        }
+
+    def step(
+        self, current_frame: np.ndarray, recent_frames: Optional[np.ndarray]
+    ):  # noqa: ARG002
+        for region in self._REGIONS:
+            cropped = self.state_parser.capture_named_region(current_frame, region)
+            if self._baselines[region] is None:
+                self._baselines[region] = cropped.copy()
+                self._mae[region] = 0.0
+                self._changed[region] = False
+                continue
+            mae = np.abs(
+                cropped.astype(float) - self._baselines[region].astype(float)
+            ).mean()
+            self._mae[region] = float(mae)
+            self._changed[region] = mae > self._CHANGE_MAE_THRESHOLD
+
+    def report(self) -> Dict[str, Any]:
+        report: Dict[str, Any] = {}
+        for region in self._REGIONS:
+            report[f"{region}_mae"] = round(self._mae[region], 4)
+            report[f"{region}_changed"] = self._changed[region]
+        return report
+
+    def report_final(self) -> Dict[str, Any]:
+        return self.final_metrics
+
+
+class SurvivalKidsOCRMetric(OCRegionMetric):
+    """Expose OCR regions only when Survival Kids shows readable UI text."""
+
+    REQUIRED_PARSER = SurvivalKidsParser
+
+    def start(self):
+        self.kinds = {
+            "dialogue": "dialogue_area",
+            "dialogue_bottom": "screen_bottom",
+            "menu": "menu_area",
+        }
+        super().start()
+
+    def can_read_kind(self, current_frame: np.ndarray, kind: str) -> bool:
+        if kind in {"dialogue", "dialogue_bottom"}:
+            return self.state_parser.is_in_dialogue(current_frame)
+        if kind == "menu":
+            return self.state_parser.is_in_menu(current_frame)
+        return False
