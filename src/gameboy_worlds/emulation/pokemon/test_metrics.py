@@ -11,6 +11,14 @@ from gameboy_worlds.emulation.tracker import (
 from gameboy_worlds.emulation.pokemon.base_metrics import (
     PokemonExitBattleTruncationMetric,
 )
+
+from gameboy_worlds.emulation.pokemon.parsers import (
+    PokemonRedStateParser,
+    PokemonPrismStateParser,
+)
+from gameboy_worlds.emulation.pokemon.base_metrics import (
+    PokemonExitBattleTruncationMetric,
+)
 import numpy as np
 
 
@@ -142,3 +150,14 @@ class OpenMapTerminateMetric(TerminationMetric):
             if in_map:
                 return True
         return False
+
+
+class BlackbeltRyuDefeatedTerminateMetric(RegionMatchTerminationOnlyMetric):
+    REQUIRED_PARSER = PokemonPrismStateParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_middle"
+    _TERMINATION_TARGET_NAME = "blackbelt_ryu_defeated"
+
+class PyreBadgeEarnedTerminateMetric(RegionMatchTerminationOnlyMetric):
+    REQUIRED_PARSER = PokemonPrismStateParser
+    _TERMINATION_NAMED_REGION = "dialogue_box_middle"
+    _TERMINATION_TARGET_NAME = "pyre_badge_earned"

@@ -867,6 +867,192 @@ class BattleMenuAction(HighLevelAction):
         return f"BattleMenu {option}"
 
 
+class ReadDialogueAndRespondAction(SingleHighLevelAction):
+    """
+    Reads dialogue using a VLM and responds intelligently.
+
+    Advances through informational NPC speech by pressing B, and for binary
+    YES/NO choice prompts, calls the configured VLM to decide the correct
+    response based on the current task goal.
+
+    Works for all Pokemon games because it relies only on COMMON_REGIONS
+    (dialogue_choice_bottom_right, dialogue_box_full) defined in PokemonStateParser.
+
+    Is Valid When:
+    - In Dialogue State
+
+    Action Success Interpretation:
+    - -1: First press did not change the frame (stuck dialogue).
+    - 0: Advanced through informational dialogue until dialogue ended.
+    - 1: Encountered a YES/NO prompt and chose YES.
+    - 2: Encountered a YES/NO prompt and chose NO.
+    - 3: VLM callable not configured; fell back to B press for choice prompt.
+    - 4: Hit MAX_PRESSES limit without exiting dialogue (very long NPC speech).
+
+    Action Returns:
+    - `n_presses` (int): Number of B presses made before the action ended.
+    - `choice_made` (str or None): "yes", "no", or None if no choice was encountered.
+
+    Configuration (via parameters dict):
+    - "vlm_callable": Optional callable with signature
+          (image: np.ndarray, prompt: str) -> str
+      The image is the dialogue_box_full region as a (H, W, 1) numpy array.
+      The str return must contain the word "yes" or "no" (case-insensitive).
+    - "task_description": Optional str describing the agent's current goal.
+      Passed verbatim to the VLM so it can make context-appropriate decisions.
+      Defaults to "Play Pokemon as effectively as possible."
+    """
+
+    REQUIRED_STATE_PARSER = PokemonStateParser
+    REQUIRED_STATE_TRACKER = CorePokemonTracker
+
+    MAX_PRESSES = 30
+    """ Safety ceiling on the number of B presses before giving up. """
+
+    def is_valid(self, **kwargs) -> bool:
+        return (
+            self._state_tracker.get_episode_metric(("pokemon_core", "agent_state"))
+            == AgentState.IN_DIALOGUE
+        )
+
+    # ------------------------------------------------------------------
+    # Internal helpers
+    # ------------------------------------------------------------------
+
+    def _vlm_callable(self):
+        """Returns the VLM callable from parameters, or None if not configured."""
+        return self._parameters.get("vlm_callable", None)
+
+    def _task_description(self) -> str:
+        return self._parameters.get(
+            "task_description", "Play Pokemon as effectively as possible."
+        )
+
+    def _capture_dialogue_crop(self) -> np.ndarray:
+        """Crops the dialogue_box_full region from the current frame."""
+        return self._emulator.state_parser.capture_named_region(
+            self._emulator.get_current_frame(), "dialogue_box_full"
+        )
+
+    def _is_choice_prompt(self) -> bool:
+        """
+        Returns True if the current screen shows a binary YES/NO choice box.
+        Uses the dialogue_choice_bottom_right region already defined in
+        COMMON_REGIONS -- works for all Pokemon games.
+        """
+        return self._emulator.state_parser.named_region_matches_target(
+            self._emulator.get_current_frame(), "dialogue_choice_bottom_right"
+        )
+
+    def _ask_vlm_yes_or_no(self, vlm_callable) -> bool:
+        """
+        Sends the current dialogue crop to the VLM and returns True for YES.
+
+        Falls back to False (NO / safe decline) if the VLM raises an exception
+        or returns an unrecognisable response.
+        """
+        dialogue_image = self._capture_dialogue_crop()
+        prompt = (
+            f"You are playing a Pokemon game. Your current task: {self._task_description()}. "
+            f"The game is showing you a YES/NO choice prompt. "
+            f"Read the dialogue box carefully and decide: should you choose YES or NO? "
+            f"Reply with exactly one word: YES or NO."
+        )
+        try:
+            response = vlm_callable(dialogue_image, prompt)
+            return "yes" in response.strip().lower()
+        except Exception as e:
+            log_warn(
+                f"ReadDialogueAndRespondAction: VLM call failed with {e}. "
+                f"Defaulting to NO.",
+                self._parameters,
+            )
+            return False
+
+    def _execute_choice(self, vlm_callable) -> Tuple[List, int]:
+        """
+        Handles a YES/NO choice prompt.
+
+        In both Gen I and Gen II the cursor starts on YES by default, so:
+          YES -> press A immediately.
+          NO  -> press DOWN once then A.
+
+        Returns (state_reports, action_success) where action_success is 1
+        for YES and 2 for NO.
+        """
+        choose_yes = self._ask_vlm_yes_or_no(vlm_callable)
+        if not choose_yes:
+            self._emulator.step(LowLevelActions.PRESS_ARROW_DOWN)
+        self._emulator.step(LowLevelActions.PRESS_BUTTON_A)
+        report = self._state_tracker.report()
+        return [report], 1 if choose_yes else 2
+
+    # ------------------------------------------------------------------
+    # Core execution
+    # ------------------------------------------------------------------
+
+    def _execute(self) -> Tuple[List, int]:
+        vlm = self._vlm_callable()
+        reports = []
+        n_presses = 0
+        choice_made = None
+        first_frame = self._emulator.get_current_frame()
+        action_success = -1
+
+        while n_presses < self.MAX_PRESSES:
+            # Before each B press, check whether a choice prompt appeared.
+            if self._is_choice_prompt():
+                if vlm is not None:
+                    choice_reports, action_success = self._execute_choice(vlm)
+                    reports.extend(choice_reports)
+                    choice_made = "yes" if action_success == 1 else "no"
+                else:
+                    # No VLM configured: press B to safely decline and continue.
+                    self._emulator.step(LowLevelActions.PRESS_BUTTON_B)
+                    reports.append(self._state_tracker.report())
+                    action_success = 3
+                break
+
+            # Advance informational dialogue with B.
+            frames, done = self._emulator.step(LowLevelActions.PRESS_BUTTON_B)
+            reports.append(self._state_tracker.report())
+            n_presses += 1
+
+            # Detect stuck frame on the very first press.
+            if n_presses == 1 and not frame_changed(
+                first_frame, self._emulator.get_current_frame()
+            ):
+                action_success = -1
+                break
+
+            if done:
+                action_success = 0
+                break
+
+            agent_state = self._emulator.state_parser.get_agent_state(
+                self._emulator.get_current_frame()
+            )
+            if agent_state != AgentState.IN_DIALOGUE:
+                action_success = 0
+                break
+        else:
+            # Exited while loop via MAX_PRESSES.
+            action_success = 4
+
+        if not reports:
+            reports = [self._state_tracker.report()]
+
+        reports[-1]["core"]["action_return"] = {
+            "n_presses": n_presses,
+            "choice_made": choice_made,
+        }
+        return reports, action_success
+
+    @staticmethod
+    def get_action_name() -> str:
+        return "ReadDialogueAndRespond"
+
+
 class PickAttackAction(HighLevelAction):
     """
     Selects an attack option in the battle fight menu.

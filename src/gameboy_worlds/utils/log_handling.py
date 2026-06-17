@@ -16,7 +16,7 @@ def log_error(message: str, parameters: dict = None):
     parameters = load_parameters(parameters)
     logger = parameters["logger"]
     logger.error(message, stacklevel=2)
-    raise RuntimeError()
+    raise RuntimeError(message)
     # sys.exit(1)
 
 

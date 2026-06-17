@@ -727,11 +727,17 @@ class PokemonCrystalStateParser(BasePokemonCrystalStateParser):
 class PokemonPrismStateParser(BasePokemonCrystalStateParser):
     def __init__(self, pyboy, parameters):
         override_regions = [("player_card_middle", 25, 58, 5, 5)]
+        override_multi_targets = {
+            "dialogue_box_middle": [
+                "blackbelt_ryu_defeated",
+            ],
+        }
         super().__init__(
             pyboy,
             variant="pokemon_prism",
             parameters=parameters,
             override_regions=override_regions,
+            override_multi_targets=override_multi_targets,
         )
 
 

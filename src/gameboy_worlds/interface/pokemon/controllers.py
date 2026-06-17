@@ -8,6 +8,7 @@ from gameboy_worlds.interface.pokemon.actions import (
     PickAttackAction,
     MoveGridAction,
     OpenMenuAction,
+    ReadDialogueAndRespondAction,
 )
 from gameboy_worlds.interface.controller import Controller
 from gameboy_worlds.interface.action import HighLevelAction
@@ -26,6 +27,10 @@ class PokemonStateWiseController(Controller):
 
     - In Dialogue:
         - PassDialogueAction(): Advance the dialogue by one step.
+        - ReadDialogueAndRespondAction(): Read all current dialogue using a VLM and respond
+          intelligently. Advances informational speech with B and handles YES/NO choice
+          prompts by asking the VLM which option to select. Requires "vlm_callable" and
+          optionally "task_description" in the environment parameters.
 
     - In Battle:
         - BattleMenuAction(option: str): Navigate the battle menu to select an option. Fight to choose an attack, Pokemon to switch Pokemon, Bag to use an item, Run to attempt to flee the battle, and Progress to continue dialogue or other battle events.
@@ -45,6 +50,7 @@ class PokemonStateWiseController(Controller):
         PickAttackAction,
         MoveStepsAction,
         OpenMenuAction,
+        ReadDialogueAndRespondAction,
     ]
 
     def string_to_high_level_action(self, input_str):
@@ -58,6 +64,8 @@ class PokemonStateWiseController(Controller):
             return InteractAction, {}
         if action_name == "passdialogue":
             return PassDialogueAction, {}
+        if action_name == "readdialogue":
+            return ReadDialogueAndRespondAction, {}
         # Now handle the actions with fixed options
         if action_name == "battlemenu":
             option = action_args_str.strip()
@@ -119,6 +127,7 @@ class PokemonStateWiseController(Controller):
         }
         dialogue_action_strings = {
             PassDialogueAction: "passdialogue(): Advance the dialogue by one step.",
+            ReadDialogueAndRespondAction: "readdialogue(): Read all current dialogue using a VLM and respond intelligently. Advances informational speech automatically and handles YES/NO prompts by choosing the contextually correct option.",
         }
         battle_action_strings = {
             BattleMenuAction: "battlemenu(<fight, pokemon, bag, run or progress>): Navigate the battle menu to select an option. Fight to choose an attack, Pokemon to switch Pokemon, Bag to use an item, Run to attempt to flee the battle, and Progress to continue dialogue or other battle events.",
@@ -137,6 +146,7 @@ class PokemonStateWiseController(Controller):
                 **pick_attack_action_strings,
                 **menu_action_strings,
             }
+            # ReadDialogueAndRespondAction is already included via dialogue_action_strings
         else:
             if current_state == AgentState.FREE_ROAM:
                 actions = free_roam_action_strings

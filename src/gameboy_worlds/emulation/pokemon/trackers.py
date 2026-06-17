@@ -20,6 +20,8 @@ from gameboy_worlds.emulation.pokemon.test_metrics import (
     BoughtPotionAtPewterPokemartTerminateMetric,
     UsedPotionOnCharmanderTerminateMetric,
     OpenMapTerminateMetric,
+    BlackbeltRyuDefeatedTerminateMetric,
+    PyreBadgeEarnedTerminateMetric
 )
 
 from gameboy_worlds.emulation.pokemon.base_metrics import (
@@ -215,4 +217,18 @@ class PokemonRedOpenMapTestTracker(PokemonTestTracker):
     """
 
     TERMINATION_TRUNCATION_METRIC = OpenMapTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+
+
+class PokemonPrismBlackbeltRyuTestTracker(PokemonTestTracker):
+    TERMINATION_TRUNCATION_METRIC = BlackbeltRyuDefeatedTerminateMetric
+    SUBGOAL_METRIC = DummySubGoalMetric
+    
+
+class PokemonPrismPyreBadgeTestTracker(PokemonTestTracker):
+    """
+    A TestTracker for Pokemon Prism that ends an episode when the agent
+    earns the Pyre Badge by defeating Gym Leader Josiah in Oxalis City.
+    """
+    TERMINATION_TRUNCATION_METRIC = PyreBadgeEarnedTerminateMetric
     SUBGOAL_METRIC = DummySubGoalMetric

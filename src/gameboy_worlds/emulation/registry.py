@@ -316,6 +316,7 @@ def get_emulator(
     *,
     parameters: Optional[dict] = None,
     init_state: str = None,
+    gb_path: Optional[str] = None,
     state_tracker_class: Union[str, Type[StateTracker]] = "default",
     **emulator_kwargs,
 ) -> Emulator:
@@ -337,7 +338,8 @@ def get_emulator(
             f"ROM data path for game '{game}' is not specified in the parameters under key '{game}_rom_data_path'.",
             parameters,
         )
-    gb_path = parameters[f"{game}_rom_data_path"] + "/" + GAME_TO_GB_NAME[game]
+    if gb_path is None:
+        gb_path = parameters[f"{game}_rom_data_path"] + "/" + GAME_TO_GB_NAME[game]
     if init_state is not None:
         if not init_state.endswith(".state"):
             init_state = init_state + ".state"

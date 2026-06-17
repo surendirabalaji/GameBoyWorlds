@@ -30,22 +30,36 @@ import click
     help="Whether to run the emulator in headless mode (no GUI).",
 )
 @click.option(
+    "--rom-path",
+    type=click.Path(exists=True, dir_okay=False, path_type=str),
+    default=None,
+    help="Optional path to a .gb/.gbc ROM file to use instead of the configured ROM location.",
+)
+@click.option(
     "--save_video",
     type=bool,
     default=None,
     help="Whether to save a video of the gameplay. If not specified, uses default from config.",
 )
-def main(game, init_state, play_mode, headless, save_video):
+def main(game, init_state, play_mode, headless, rom_path, save_video):
     if play_mode == "human":
         emulator = get_emulator(
-            game=game, init_state=init_state, headless=False, save_video=save_video
+            game=game,
+            init_state=init_state,
+            gb_path=rom_path,
+            headless=False,
+            save_video=save_video,
         )
         emulator.human_play()
     else:
         if headless != False:
             headless = True
         emulator = get_emulator(
-            game=game, init_state=init_state, headless=headless, save_video=save_video
+            game=game,
+            init_state=init_state,
+            gb_path=rom_path,
+            headless=headless,
+            save_video=save_video,
         )
         emulator.random_play()
 
